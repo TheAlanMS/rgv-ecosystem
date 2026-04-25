@@ -77,6 +77,7 @@ export function MapPageContent({ actors, gaps, pillars }: MapPageContentProps) {
       <MapView
         view={view}
         actors={filteredActors}
+        gaps={visibleGaps}
         pillars={pillars}
         onClearAll={clearAll}
       />
@@ -113,16 +114,18 @@ function getMapViewMode(value: string | null): MapViewMode {
 function MapView({
   view,
   actors,
+  gaps,
   pillars,
   onClearAll,
 }: {
   view: MapViewMode;
   actors: readonly Actor[];
+  gaps: readonly Gap[];
   pillars: readonly Pillar[];
   onClearAll: () => void;
 }) {
   if (view === "map") {
-    return <EcosystemMap actors={actors} />;
+    return <EcosystemMap actors={actors} gaps={gaps} />;
   }
 
   if (view === "pillar") {

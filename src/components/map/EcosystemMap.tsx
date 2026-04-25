@@ -1,10 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { Actor } from "@/lib/types";
+import type { Actor, Gap } from "@/lib/types";
 
 interface EcosystemMapProps {
   actors: readonly Actor[];
+  gaps: readonly Gap[];
 }
 
 const LeafletEcosystemMap = dynamic(
@@ -20,6 +21,6 @@ const LeafletEcosystemMap = dynamic(
   },
 );
 
-export function EcosystemMap({ actors }: EcosystemMapProps) {
-  return <LeafletEcosystemMap actors={actors} />;
+export function EcosystemMap({ actors, gaps }: EcosystemMapProps) {
+  return <LeafletEcosystemMap actors={actors} gaps={gaps} />;
 }

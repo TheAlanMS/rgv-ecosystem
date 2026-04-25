@@ -9,5 +9,15 @@ export {
   getIntentsForRole,
 } from "./intents";
 export { ALL_GAPS } from "./gaps";
-export { COUNTY_DATA } from "./geography";
-export type { CountyInfo } from "./geography";
+export {
+  COUNTY_DATA,
+  getGeographicMapContext,
+  isOutsideRegionPartner,
+  isRgvMappableActor,
+} from "./geography";
+export type {
+  CountyInfo,
+  CountyMapContext,
+  GeographicMapContext,
+  RgvCounty,
+} from "./geography";
