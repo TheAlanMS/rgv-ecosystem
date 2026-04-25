@@ -6,7 +6,7 @@
 ## Overall
 
 ```
-Phase 2  [################----]  16 / 20 subphases
+Phase 2  [################----]  19 / 24 subphases
 ```
 
 ## 9.9 Remediation Gates
@@ -85,12 +85,12 @@ onboarding  Complete  3 / 3
 
 | Subphase | Status | Agent | Commit |
 |----------|--------|-------|--------|
-| p2-polish-1a-navigation | Not Started | - | - |
-| p2-polish-1b-touch-targets | Not Started | - | - |
-| p2-polish-1c-layouts | Not Started | - | - |
+| p2-polish-1a-navigation | Complete | Codex + explorer agents | n/a |
+| p2-polish-1b-touch-targets | Complete | Codex + explorer agents | n/a |
+| p2-polish-1c-layouts | Complete | Codex + explorer agents | n/a |
 
 ```
-polish  [--------------------]  0 / 3
+polish  Complete  3 / 3
 ```
 
 ## Testing (M7)
@@ -116,6 +116,7 @@ testing  [--------------------]  0 / 5
 | p2-map-1a/1b/2a/2b/3a | pass | pass | pass | not configured | pass |
 | p2-pillar-1a/2a | pass | pass | pass | not configured | pass |
 | p2-onboarding-1a/1b/2a | pass | pass | pass | not configured | pass |
+| p2-polish-1a/1b/1c | pass | pass | pass | not configured | pass |
 
 ## Notes
 
@@ -128,4 +129,8 @@ testing  [--------------------]  0 / 5
 - All 8 roles expose PRD-backed intent routes to journeys, filtered map views, or ecosystem health.
 - Actor map coordinates are city-center or representative coordinates until exact addresses are verified.
 - Starr and Willacy County actor-coverage gaps are explicit gap records.
+- Mobile navigation now collapses behind a hamburger menu and header search opens as a dismissible mobile overlay.
+- Interactive controls on Phase 2 paths now use 44px touch targets, including filters, sorting, map toggles, journey controls, onboarding, search CTAs, and map popup actions.
+- Journey steps stack on small screens and map/list controls use stable full-width mobile rows to reduce overflow risk at 320px.
+- Browser automation note: existing dev server detected at `http://localhost:3000`; Playwright CLI opened the route, but follow-up snapshot/tab commands timed out, so visual mobile verification should be repeated manually or after CLI session issues are resolved.
 - Test runner setup remains part of M7, so `npm test` is still unavailable.

@@ -16,7 +16,7 @@ export function NavLink({ href, children }: NavLinkProps) {
   return (
     <Link
       href={href}
-      className={`border-b-2 px-4 py-2.5 text-[13px] font-body transition-colors mb-[-1px] ${
+      className={`flex min-h-11 items-center border-b-2 px-4 text-[13px] font-body transition-colors mb-[-1px] ${
         isActive
           ? "text-gold border-gold font-medium"
           : "text-text-muted border-transparent hover:text-text-secondary"

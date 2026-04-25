@@ -64,7 +64,7 @@ export function MapPageContent({ actors, gaps, pillars }: MapPageContentProps) {
         <p className="text-xs text-text-muted">
           Showing {filteredActors.length} of {actors.length} actors
         </p>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="grid w-full grid-cols-1 gap-2 sm:w-auto sm:grid-cols-2 md:flex md:flex-wrap md:items-center">
           <SortControl
             sortField={sortConfig.field}
             sortDirection={sortConfig.direction}
@@ -151,7 +151,7 @@ function ActorList({
         <button
           type="button"
           onClick={onClearAll}
-          className="mt-4 min-h-10 rounded-lg border border-border2 px-4 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
+          className="mt-4 min-h-11 rounded-lg border border-border2 px-4 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
         >
           Clear filters
         </button>

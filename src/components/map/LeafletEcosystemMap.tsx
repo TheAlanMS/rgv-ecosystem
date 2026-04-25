@@ -19,10 +19,10 @@ export function LeafletEcosystemMap({ actors }: LeafletEcosystemMapProps) {
   const mappableActors = actors.filter((actor) => actor.coordinates);
 
   return (
-    <div className="overflow-hidden rounded-lg border border-border-default bg-surface">
+    <div className="w-full overflow-hidden rounded-lg border border-border-default bg-surface">
       <MapContainer
         center={RGV_CENTER}
-        className="h-[28rem] w-full md:h-[36rem]"
+        className="h-[22rem] w-full touch-pan-x touch-pan-y sm:h-[28rem] md:h-[36rem]"
         scrollWheelZoom={false}
         zoom={9}
       >

@@ -13,7 +13,7 @@ const LeafletEcosystemMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-[28rem] items-center justify-center rounded-lg border border-border-default bg-surface text-sm text-text-muted md:h-[36rem]">
+      <div className="flex h-[22rem] items-center justify-center rounded-lg border border-border-default bg-surface text-sm text-text-muted sm:h-[28rem] md:h-[36rem]">
         Loading map...
       </div>
     ),

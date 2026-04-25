@@ -80,14 +80,14 @@ export function OnboardingFlow({ roles }: OnboardingFlowProps) {
             <button
               type="button"
               onClick={() => setStep("role")}
-              className="min-h-10 rounded-lg border border-border2 px-3 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
+              className="min-h-11 rounded-lg border border-border2 px-3 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
             >
               Back
             </button>
           ) : null}
           <Link
             href="/map"
-            className="flex min-h-10 items-center rounded-lg border border-border2 px-3 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
+            className="flex min-h-11 items-center rounded-lg border border-border2 px-3 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
           >
             Skip, explore freely
           </Link>

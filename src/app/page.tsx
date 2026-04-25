@@ -26,16 +26,16 @@ export default function HomePage() {
             {pillarCount} pillars &middot; {actorCount} actors &middot; A
             community-owned map of the region&apos;s innovation infrastructure
           </p>
-          <div className="flex justify-center gap-3">
+          <div className="flex flex-col justify-center gap-3 sm:flex-row">
             <Link
               href="/map"
-              className="bg-gold text-bg font-heading text-[13px] font-semibold px-7 py-2.5 rounded-lg hover:bg-gold2 transition-colors tracking-wide"
+              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-gold px-7 text-[13px] font-semibold tracking-wide text-bg transition-colors hover:bg-gold2 font-heading"
             >
               Explore the Map
             </Link>
             <Link
               href="/journeys"
-              className="border border-border2 text-text-muted font-heading text-[13px] px-7 py-2.5 rounded-lg hover:text-text-primary hover:border-text-muted transition-colors"
+              className="inline-flex min-h-11 items-center justify-center rounded-lg border border-border2 px-7 text-[13px] text-text-muted transition-colors hover:border-text-muted hover:text-text-primary font-heading"
             >
               Find Your Path
             </Link>

@@ -37,12 +37,12 @@ export function JourneyView({ journey, role, pillarMap }: JourneyViewProps) {
       </p>
 
       {/* Step bar */}
-      <div className="flex rounded-[10px] overflow-hidden border border-border-default mb-0">
+      <div className="flex flex-col overflow-hidden rounded-[10px] border border-border-default md:flex-row">
         {journey.steps.map((step, i) => (
           <button
             key={step.base}
             onClick={() => setActiveStep(activeStep === i ? null : i)}
-            className={`flex-1 p-3 bg-surface border-r border-border-default last:border-r-0 cursor-pointer transition-colors text-left relative ${
+            className={`relative min-h-11 min-w-0 flex-1 cursor-pointer border-b border-border-default bg-surface p-3 text-left transition-colors last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 ${
               activeStep === i ? "bg-surface2" : "hover:bg-surface2"
             }`}
           >
@@ -58,7 +58,7 @@ export function JourneyView({ journey, role, pillarMap }: JourneyViewProps) {
                 return (
                   <span
                     key={pid}
-                    className="text-[10px] px-1.5 py-0.5 rounded-full bg-surface2 text-text-muted border border-border-default whitespace-nowrap"
+                    className="rounded-full border border-border-default bg-surface2 px-1.5 py-0.5 text-[10px] text-text-muted"
                   >
                     {p?.name ?? `Pillar ${pid}`}
                   </span>
@@ -95,16 +95,16 @@ export function JourneyView({ journey, role, pillarMap }: JourneyViewProps) {
       )}
 
       {/* Footer nav */}
-      <div className="flex justify-between mt-4 pt-3.5 border-t border-border-default">
+      <div className="mt-4 flex flex-col gap-2 border-t border-border-default pt-3.5 sm:flex-row sm:justify-between">
         <Link
           href="/journeys"
-          className="text-xs text-text-muted border border-border2 rounded-lg px-4 py-1.5 hover:text-text-primary hover:border-text-muted transition-colors"
+          className="inline-flex min-h-11 items-center justify-center rounded-lg border border-border2 px-4 text-xs text-text-muted transition-colors hover:border-text-muted hover:text-text-primary"
         >
           &larr; Change role
         </Link>
         <Link
           href="/map"
-          className="text-xs text-text-muted border border-border2 rounded-lg px-4 py-1.5 hover:text-text-primary hover:border-text-muted transition-colors"
+          className="inline-flex min-h-11 items-center justify-center rounded-lg border border-border2 px-4 text-xs text-text-muted transition-colors hover:border-text-muted hover:text-text-primary"
         >
           Explore full map &rarr;
         </Link>

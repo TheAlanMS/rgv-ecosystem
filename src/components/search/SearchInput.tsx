@@ -8,6 +8,8 @@ interface SearchInputProps {
   placeholder?: string;
   label?: string;
   compact?: boolean;
+  autoFocus?: boolean;
+  onDismiss?: () => void;
   onSubmit?: (value: string) => void;
 }
 
@@ -17,6 +19,8 @@ export function SearchInput({
   placeholder = "Search the ecosystem",
   label = "Search",
   compact = false,
+  autoFocus = false,
+  onDismiss,
   onSubmit,
 }: SearchInputProps) {
   const inputId = useId();
@@ -48,7 +52,7 @@ export function SearchInput({
       <div
         className={[
           "flex items-center gap-2 rounded-lg border border-border-default bg-surface2 px-3 transition-colors focus-within:border-accent",
-          compact ? "min-h-10" : "min-h-12",
+          compact ? "min-h-11" : "min-h-12",
         ].join(" ")}
       >
         <span className="text-sm text-text-muted" aria-hidden="true">
@@ -59,8 +63,9 @@ export function SearchInput({
           type="search"
           value={draftValue}
           placeholder={placeholder}
+          autoFocus={autoFocus}
           onChange={(event) => setDraftValue(event.target.value)}
-          className="min-w-0 flex-1 bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted"
+          className="min-h-11 min-w-0 flex-1 bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted"
         />
         {draftValue ? (
           <button
@@ -69,10 +74,20 @@ export function SearchInput({
               setDraftValue("");
               onChange("");
             }}
-            className="min-h-8 rounded-md border border-border2 px-2 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface hover:text-text-primary"
+            className="min-h-11 rounded-md border border-border2 px-3 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface hover:text-text-primary"
             aria-label="Clear search"
           >
             Clear
+          </button>
+        ) : null}
+        {onDismiss ? (
+          <button
+            type="button"
+            onClick={onDismiss}
+            className="min-h-11 rounded-md border border-border2 px-3 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface hover:text-text-primary"
+            aria-label="Close search"
+          >
+            Close
           </button>
         ) : null}
       </div>

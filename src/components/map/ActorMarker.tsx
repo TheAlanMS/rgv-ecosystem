@@ -32,11 +32,12 @@ export function ActorMarker({ actor }: ActorMarkerProps) {
   const pillarGroup = getPrimaryPillarGroup(actor);
   const color = GROUP_COLORS[pillarGroup];
   const size = STATUS_RADIUS[actor.status] * 2;
+  const touchSize = 44;
   const icon = L.divIcon({
     className: "ecosystem-marker",
     html: `<span style="background:${color}; width:${size}px; height:${size}px;"></span>`,
-    iconAnchor: [size / 2, size / 2],
-    iconSize: [size, size],
+    iconAnchor: [touchSize / 2, touchSize / 2],
+    iconSize: [touchSize, touchSize],
     popupAnchor: [0, -size / 2],
   });
 

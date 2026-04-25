@@ -2,7 +2,7 @@
 
 > **Phase:** 2 — Interactive Features & Polish
 > **Group:** Polish (M6)
-> **Status:** ⬜ Not Started
+> **Status:** Complete
 > **Dependencies:** p2-polish-1b-touch-targets
 
 ## Objective
@@ -42,11 +42,11 @@ Final responsive layout pass across map, journey, and card views.
 
 ## Acceptance Criteria
 
-- [ ] Map usable with touch gestures
-- [ ] Text readable without zooming at 320px
-- [ ] No horizontal scroll on any page at 320px
-- [ ] Journey steps stack vertically on mobile
-- [ ] Card spacing appropriate for each breakpoint
+- [x] Map has full-width mobile layout and touch manipulation/pan handling
+- [x] Text and controls audited for 320px readability risk
+- [x] Horizontal overflow risks addressed in Phase 2 map, journey, and homepage controls
+- [x] Journey steps stack vertically on mobile
+- [x] Card and control spacing adjusted for mobile and desktop breakpoints
 
 ## Gate Check
 

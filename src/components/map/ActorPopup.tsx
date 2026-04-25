@@ -29,7 +29,7 @@ export function ActorPopup({ actor }: ActorPopupProps) {
         ) : null}
         <Link
           href={`/actors/${actor.slug}`}
-          className="inline-flex min-h-9 items-center rounded-md border border-slate-500 px-3 text-xs font-semibold text-slate-50 transition-colors hover:border-slate-200 hover:bg-slate-800"
+          className="inline-flex min-h-11 items-center rounded-md border border-slate-500 px-3 text-xs font-semibold text-slate-50 transition-colors hover:border-slate-200 hover:bg-slate-800"
         >
           View profile
         </Link>

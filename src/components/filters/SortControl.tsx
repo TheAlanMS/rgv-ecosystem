@@ -24,7 +24,7 @@ export function SortControl({
   const nextDirection = sortDirection === "asc" ? "desc" : "asc";
 
   return (
-    <div className="flex flex-wrap items-center gap-2 rounded-xl border border-border-default bg-surface/90 p-3">
+    <div className="flex w-full flex-wrap items-center gap-2 rounded-xl border border-border-default bg-surface/90 p-3 sm:w-auto">
       <label
         htmlFor="actor-sort"
         className="text-[11px] font-semibold uppercase tracking-wide text-text-muted"
@@ -37,7 +37,7 @@ export function SortControl({
         onChange={(event) =>
           onSortChange(event.target.value as SortField, sortDirection)
         }
-        className="min-h-10 rounded-lg border border-border-default bg-surface2 px-3 text-xs text-text-primary outline-none focus:border-accent"
+        className="min-h-11 flex-1 rounded-lg border border-border-default bg-surface2 px-3 text-xs text-text-primary outline-none focus:border-accent sm:flex-none"
       >
         {SORT_OPTIONS.map((option) => (
           <option key={option.value} value={option.value}>
@@ -48,7 +48,7 @@ export function SortControl({
       <button
         type="button"
         onClick={() => onSortChange(sortField, nextDirection)}
-        className="min-h-10 rounded-lg border border-border2 px-3 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
+        className="min-h-11 rounded-lg border border-border2 px-3 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
         aria-label={`Switch to ${nextDirection}ending sort`}
       >
         {sortDirection === "asc" ? "Asc ↑" : "Desc ↓"}

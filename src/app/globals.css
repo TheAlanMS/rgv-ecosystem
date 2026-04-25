@@ -84,6 +84,15 @@ body {
   background: var(--bg);
   color: var(--text-primary);
   font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+button,
+a,
+select,
+summary,
+input {
+  touch-action: manipulation;
 }
 
 .ecosystem-marker {
@@ -92,6 +101,8 @@ body {
   border: 0;
   display: flex;
   justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .ecosystem-marker span {

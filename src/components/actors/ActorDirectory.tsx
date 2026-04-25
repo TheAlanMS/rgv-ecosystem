@@ -75,7 +75,7 @@ export function ActorDirectory({
           <button
             type="button"
             onClick={clearAll}
-            className="mt-4 min-h-10 rounded-lg border border-border2 px-4 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
+            className="mt-4 min-h-11 rounded-lg border border-border2 px-4 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
           >
             Clear filters
           </button>

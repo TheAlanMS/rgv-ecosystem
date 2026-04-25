@@ -2,7 +2,7 @@
 
 > **Phase:** 2 — Interactive Features & Polish
 > **Group:** Polish (M6)
-> **Status:** ⬜ Not Started
+> **Status:** Complete
 > **Dependencies:** All previous Phase 2 groups (filters, search, map, pillar, onboarding)
 > **Parallel with:** p2-polish-1b-touch-targets
 
@@ -34,10 +34,10 @@ Add mobile navigation and search overlay.
 
 ## Acceptance Criteria
 
-- [ ] Navigation collapses to hamburger at `sm:` breakpoint
-- [ ] Mobile menu opens/closes smoothly
-- [ ] Search overlay works on mobile
-- [ ] All navigation links accessible in mobile view
+- [x] Navigation collapses to hamburger at mobile breakpoint
+- [x] Mobile menu opens/closes by button, outside tap, Escape, and link click
+- [x] Search overlay works on mobile
+- [x] All navigation links accessible in mobile view
 
 ## Gate Check
 

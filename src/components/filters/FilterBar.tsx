@@ -89,7 +89,7 @@ export function FilterBar({
       aria-label="Filter actors"
     >
       <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+        <div className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           <FilterGroup
             label="Pillar"
             dimension="pillar"
@@ -143,7 +143,7 @@ export function FilterBar({
           <button
             type="button"
             onClick={onClearAll}
-            className="min-h-10 shrink-0 rounded-lg border border-border2 px-3 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
+            className="min-h-11 shrink-0 rounded-lg border border-border2 px-3 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
           >
             Clear all ({activeFilterCount})
           </button>
@@ -177,9 +177,9 @@ function FilterGroup<D extends FilterDimension>({
   const selectedValues = values as FilterOptionValue[];
 
   return (
-    <details className="group rounded-lg border border-border-default bg-surface2">
-      <summary className="flex min-h-10 cursor-pointer list-none items-center justify-between gap-2 px-3 text-xs font-semibold text-text-primary [&::-webkit-details-marker]:hidden">
-        <span>{label}</span>
+    <details className="group min-w-0 rounded-lg border border-border-default bg-surface2">
+      <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 px-3 text-xs font-semibold text-text-primary [&::-webkit-details-marker]:hidden">
+        <span className="min-w-0 truncate">{label}</span>
         <span className="flex items-center gap-1 text-text-muted">
           {count > 0 ? (
             <span className="rounded-full bg-accent px-1.5 py-0.5 text-[10px] text-ink">
@@ -195,13 +195,13 @@ function FilterGroup<D extends FilterDimension>({
             Locked to this page context.
           </p>
         ) : null}
-        <div className="max-h-56 overflow-y-auto">
+        <div className="max-h-64 overflow-y-auto">
           {options.map((option) => {
             const checked = selectedValues.includes(option.value);
             return (
               <label
                 key={String(option.value)}
-                className="flex min-h-9 cursor-pointer items-center gap-2 rounded-md px-1.5 text-[11px] text-text-secondary hover:bg-surface"
+                className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md px-2 text-xs leading-snug text-text-secondary hover:bg-surface"
               >
                 <input
                   type="checkbox"
@@ -213,9 +213,9 @@ function FilterGroup<D extends FilterDimension>({
                       : [...selectedValues, option.value];
                     onChange(dimension, nextValues as FilterValues<D>);
                   }}
-                  className="size-3.5 accent-accent"
+                  className="size-4 shrink-0 accent-accent"
                 />
-                {option.label}
+                <span className="min-w-0">{option.label}</span>
               </label>
             );
           })}

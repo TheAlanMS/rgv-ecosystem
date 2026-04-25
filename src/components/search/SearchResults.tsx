@@ -43,7 +43,7 @@ export function SearchResults({
         </p>
         <Link
           href="/submit"
-          className="mt-4 inline-flex min-h-10 items-center rounded-lg border border-border2 px-4 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
+          className="mt-4 inline-flex min-h-11 items-center rounded-lg border border-border2 px-4 text-xs font-semibold text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary"
         >
           Submit an actor
         </Link>

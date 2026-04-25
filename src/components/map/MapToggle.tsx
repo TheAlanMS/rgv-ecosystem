@@ -19,7 +19,7 @@ const OPTIONS: Array<{
 
 export function MapToggle({ value, onChange }: MapToggleProps) {
   return (
-    <div className="inline-flex rounded-lg border border-border-default bg-surface p-1">
+    <div className="inline-flex w-full rounded-lg border border-border-default bg-surface p-1 sm:w-auto">
       {OPTIONS.map(({ value: optionValue, label, icon }) => {
         const isActive = value === optionValue;
 
@@ -29,7 +29,7 @@ export function MapToggle({ value, onChange }: MapToggleProps) {
             type="button"
             aria-pressed={isActive}
             onClick={() => onChange(optionValue)}
-            className={`inline-flex min-h-10 items-center gap-2 rounded-md px-3 text-xs font-semibold transition-colors ${
+            className={`inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-md px-3 text-xs font-semibold transition-colors sm:flex-none ${
               isActive
                 ? "bg-surface2 text-text-primary"
                 : "text-text-muted hover:text-text-primary"
