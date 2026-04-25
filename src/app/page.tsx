@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Shell } from "@/components/layout/Shell";
+import { OnboardingFlow } from "@/components/onboarding/OnboardingFlow";
 import { PillarDiagnostic } from "@/components/pillars/PillarDiagnostic";
 import { getAllRoles } from "@/lib/queries/journeys";
 import { getActorCount } from "@/lib/queries/actors";
@@ -45,30 +46,8 @@ export default function HomePage() {
         <PillarDiagnostic />
 
         {/* Role entry */}
-        <div className="text-[10px] font-semibold text-text-muted tracking-widest uppercase font-heading mb-2.5 mt-8">
-          Enter the ecosystem
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-          {roles.map((role) => (
-            <Link
-              key={role.id}
-              href={`/journeys/${role.id}`}
-              className="bg-surface border border-border-default rounded-[10px] p-3 transition-colors hover:border-border2 hover:bg-surface2 text-center"
-            >
-              <div
-                className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold font-heading mx-auto mb-1.5"
-                style={{
-                  background: role.colors.bg,
-                  color: role.colors.fg,
-                }}
-              >
-                {role.initials}
-              </div>
-              <div className="text-[11px] font-medium text-text-primary font-heading">
-                {role.shortLabel}
-              </div>
-            </Link>
-          ))}
+        <div className="mt-8">
+          <OnboardingFlow roles={roles} />
         </div>
 
         {/* Quick links */}

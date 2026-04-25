@@ -6,7 +6,7 @@
 ## Overall
 
 ```
-Phase 2  [#############-------]  13 / 20 subphases
+Phase 2  [################----]  16 / 20 subphases
 ```
 
 ## 9.9 Remediation Gates
@@ -73,12 +73,12 @@ pillar  Complete  2 / 2
 
 | Subphase | Status | Agent | Commit |
 |----------|--------|-------|--------|
-| p2-onboarding-1a-data | Not Started | - | - |
-| p2-onboarding-1b-components | Not Started | - | - |
-| p2-onboarding-2a-integration | Not Started | - | - |
+| p2-onboarding-1a-data | Complete | Codex + explorer/worker agents | n/a |
+| p2-onboarding-1b-components | Complete | Codex + explorer/worker agents | n/a |
+| p2-onboarding-2a-integration | Complete | Codex + explorer/worker agents | n/a |
 
 ```
-onboarding  [--------------------]  0 / 3
+onboarding  Complete  3 / 3
 ```
 
 ## Polish (M6)
@@ -115,6 +115,7 @@ testing  [--------------------]  0 / 5
 | p2-search-1a/1b/2a | pass | pass | pass | not configured | pass |
 | p2-map-1a/1b/2a/2b/3a | pass | pass | pass | not configured | pass |
 | p2-pillar-1a/2a | pass | pass | pass | not configured | pass |
+| p2-onboarding-1a/1b/2a | pass | pass | pass | not configured | pass |
 
 ## Notes
 
@@ -123,6 +124,8 @@ testing  [--------------------]  0 / 5
 - Search and filters share URL state; filter changes preserve `q`.
 - `/map` now supports shared-filter list and geographic map views with clustered Leaflet markers.
 - `/map` now supports a third By Pillar view that reuses the shared filtered actor dataset.
+- Homepage role entry now uses a two-step role + intent onboarding flow.
+- All 8 roles expose PRD-backed intent routes to journeys, filtered map views, or ecosystem health.
 - Actor map coordinates are city-center or representative coordinates until exact addresses are verified.
 - Starr and Willacy County actor-coverage gaps are explicit gap records.
 - Test runner setup remains part of M7, so `npm test` is still unavailable.
