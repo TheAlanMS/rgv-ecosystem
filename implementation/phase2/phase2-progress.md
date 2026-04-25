@@ -6,7 +6,7 @@
 ## Overall
 
 ```
-Phase 2  [################----]  19 / 24 subphases
+Phase 2  [####################]  24 / 24 subphases
 ```
 
 ## 9.9 Remediation Gates
@@ -97,14 +97,14 @@ polish  Complete  3 / 3
 
 | Subphase | Status | Agent | Commit |
 |----------|--------|-------|--------|
-| p2-testing-1a-config | Not Started | - | - |
-| p2-testing-2a-data-tests | Not Started | - | - |
-| p2-testing-2b-query-tests | Not Started | - | - |
-| p2-testing-2c-util-tests | Not Started | - | - |
-| p2-testing-2d-component-tests | Not Started | - | - |
+| p2-testing-1a-config | Complete | Codex + explorer agents | n/a |
+| p2-testing-2a-data-tests | Complete | Codex + explorer agents | n/a |
+| p2-testing-2b-query-tests | Complete | Codex + explorer agents | n/a |
+| p2-testing-2c-util-tests | Complete | Codex + explorer agents | n/a |
+| p2-testing-2d-component-tests | Complete | Codex + explorer agents | n/a |
 
 ```
-testing  [--------------------]  0 / 5
+testing  Complete  5 / 5
 ```
 
 ## Gate Check Log
@@ -117,6 +117,7 @@ testing  [--------------------]  0 / 5
 | p2-pillar-1a/2a | pass | pass | pass | not configured | pass |
 | p2-onboarding-1a/1b/2a | pass | pass | pass | not configured | pass |
 | p2-polish-1a/1b/1c | pass | pass | pass | not configured | pass |
+| p2-testing-1a/2a/2b/2c/2d | pass | pass | pass | pass | pass |
 
 ## Notes
 
@@ -133,4 +134,5 @@ testing  [--------------------]  0 / 5
 - Interactive controls on Phase 2 paths now use 44px touch targets, including filters, sorting, map toggles, journey controls, onboarding, search CTAs, and map popup actions.
 - Journey steps stack on small screens and map/list controls use stable full-width mobile rows to reduce overflow risk at 320px.
 - Browser automation note: existing dev server detected at `http://localhost:3000`; Playwright CLI opened the route, but follow-up snapshot/tab commands timed out, so visual mobile verification should be repeated manually or after CLI session issues are resolved.
-- Test runner setup remains part of M7, so `npm test` is still unavailable.
+- Vitest is configured with jsdom, RTL, jest-dom matchers, coverage output, and `@/*` path alias support.
+- `npm test` covers seed data validation, query behavior, filter/search/slug utilities, and ActorCard/PillarCard smoke rendering.

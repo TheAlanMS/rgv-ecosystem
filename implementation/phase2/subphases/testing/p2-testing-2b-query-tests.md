@@ -2,7 +2,7 @@
 
 > **Phase:** 2 — Interactive Features & Polish
 > **Group:** Testing (M7)
-> **Status:** ⬜ Not Started
+> **Status:** Complete
 > **Dependencies:** p2-testing-1a-config
 > **Parallel with:** p2-testing-2a, p2-testing-2c, p2-testing-2d
 
@@ -35,9 +35,9 @@ Write tests for query functions.
 
 ## Acceptance Criteria
 
-- [ ] All query tests pass
-- [ ] Edge cases covered (no matches, invalid slug)
-- [ ] Return types match expected schemas
+- [x] All query tests pass
+- [x] Edge cases covered (no matches, invalid slug)
+- [x] Return types match expected schemas
 
 ## Gate Check
 

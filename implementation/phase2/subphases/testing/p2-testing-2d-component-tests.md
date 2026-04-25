@@ -2,7 +2,7 @@
 
 > **Phase:** 2 — Interactive Features & Polish
 > **Group:** Testing (M7)
-> **Status:** ⬜ Not Started
+> **Status:** Complete
 > **Dependencies:** p2-testing-1a-config
 > **Parallel with:** p2-testing-2a, p2-testing-2b, p2-testing-2c
 
@@ -31,10 +31,10 @@ Write component smoke tests for key UI components.
 
 ## Acceptance Criteria
 
-- [ ] Component smoke tests pass
-- [ ] Components render with sample data
-- [ ] No console errors during render
-- [ ] Tests run in CI-compatible mode (jsdom, no browser)
+- [x] Component smoke tests pass
+- [x] Components render with sample data
+- [x] No console errors during render
+- [x] Tests run in CI-compatible mode (jsdom, no browser)
 
 ## Gate Check
 

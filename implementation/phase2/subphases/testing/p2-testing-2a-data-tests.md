@@ -2,7 +2,7 @@
 
 > **Phase:** 2 — Interactive Features & Polish
 > **Group:** Testing (M7)
-> **Status:** ⬜ Not Started
+> **Status:** Complete
 > **Dependencies:** p2-testing-1a-config
 > **Parallel with:** p2-testing-2b, p2-testing-2c, p2-testing-2d
 
@@ -52,11 +52,11 @@ Write data validation tests verifying all seed data passes schemas.
 
 ## Acceptance Criteria
 
-- [ ] All data validation tests pass
-- [ ] Zero invalid actors, pillars, journeys
-- [ ] Geography mapping is complete
-- [ ] Zero duplicate actor ids or slugs
-- [ ] Coordinates and county representation pass the 9.9 remediation checks
+- [x] All data validation tests pass
+- [x] Zero invalid actors, pillars, journeys
+- [x] Geography mapping is complete
+- [x] Zero duplicate actor ids or slugs
+- [x] Coordinates and county representation pass the 9.9 remediation checks
 
 ## Gate Check
 

@@ -2,7 +2,7 @@
 
 > **Phase:** 2 — Interactive Features & Polish
 > **Group:** Testing (M7)
-> **Status:** ⬜ Not Started
+> **Status:** Complete
 > **Dependencies:** p2-testing-1a-config
 > **Parallel with:** p2-testing-2a, p2-testing-2b, p2-testing-2d
 
@@ -41,10 +41,10 @@ Write tests for filter, search, and slug utility functions.
 
 ## Acceptance Criteria
 
-- [ ] All utility tests pass
-- [ ] Edge cases covered
-- [ ] Filter AND logic verified
-- [ ] Search scoring verified
+- [x] All utility tests pass
+- [x] Edge cases covered
+- [x] Filter AND logic verified
+- [x] Search scoring verified
 
 ## Gate Check
 

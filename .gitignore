@@ -7,6 +7,7 @@ out/
 
 # Build
 build/
+coverage/
 *.tsbuildinfo
 
 # Environment

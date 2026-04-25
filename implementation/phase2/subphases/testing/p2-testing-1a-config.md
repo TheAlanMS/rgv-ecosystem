@@ -2,7 +2,7 @@
 
 > **Phase:** 2 — Interactive Features & Polish
 > **Group:** Testing (M7)
-> **Status:** ⬜ Not Started
+> **Status:** Complete
 > **Dependencies:** p2-polish-1c-layouts
 
 ## Objective
@@ -32,10 +32,10 @@ Install and configure Vitest with React Testing Library.
 
 ## Acceptance Criteria
 
-- [ ] `npm test` runs without errors (even with 0 test files)
-- [ ] Path aliases resolve correctly in test environment
-- [ ] jsdom environment available for component tests
-- [ ] Coverage reporting configured
+- [x] `npm test` runs without errors
+- [x] Path aliases resolve correctly in test environment
+- [x] jsdom environment available for component tests
+- [x] Coverage reporting configured
 
 ## Gate Check
 
