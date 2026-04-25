@@ -6,7 +6,7 @@
 ## Overall
 
 ```
-Phase 2  [###########---------]  11 / 20 subphases
+Phase 2  [#############-------]  13 / 20 subphases
 ```
 
 ## 9.9 Remediation Gates
@@ -62,11 +62,11 @@ map  Complete  5 / 5
 
 | Subphase | Status | Agent | Commit |
 |----------|--------|-------|--------|
-| p2-pillar-1a-accordion | Not Started | - | - |
-| p2-pillar-2a-integration | Not Started | - | - |
+| p2-pillar-1a-accordion | Complete | Codex + explorer agent | n/a |
+| p2-pillar-2a-integration | Complete | Codex + explorer agent | n/a |
 
 ```
-pillar  [--------------------]  0 / 2
+pillar  Complete  2 / 2
 ```
 
 ## Onboarding (M5)
@@ -114,6 +114,7 @@ testing  [--------------------]  0 / 5
 | p2-filters-1a/1b/2a | pass | pass | pass | not configured | pass |
 | p2-search-1a/1b/2a | pass | pass | pass | not configured | pass |
 | p2-map-1a/1b/2a/2b/3a | pass | pass | pass | not configured | pass |
+| p2-pillar-1a/2a | pass | pass | pass | not configured | pass |
 
 ## Notes
 
@@ -121,6 +122,7 @@ testing  [--------------------]  0 / 5
 - `/search` suppresses blank-query results and shows prompt text, per integration acceptance criteria.
 - Search and filters share URL state; filter changes preserve `q`.
 - `/map` now supports shared-filter list and geographic map views with clustered Leaflet markers.
+- `/map` now supports a third By Pillar view that reuses the shared filtered actor dataset.
 - Actor map coordinates are city-center or representative coordinates until exact addresses are verified.
 - Starr and Willacy County actor-coverage gaps are explicit gap records.
 - Test runner setup remains part of M7, so `npm test` is still unavailable.

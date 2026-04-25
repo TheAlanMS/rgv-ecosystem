@@ -1,6 +1,6 @@
 "use client";
 
-export type MapViewMode = "list" | "map";
+export type MapViewMode = "list" | "map" | "pillar";
 
 interface MapToggleProps {
   value: MapViewMode;
@@ -10,10 +10,11 @@ interface MapToggleProps {
 const OPTIONS: Array<{
   value: MapViewMode;
   label: string;
-  icon: "list" | "map";
+  icon: "list" | "map" | "pillar";
 }> = [
   { value: "list", label: "List", icon: "list" },
   { value: "map", label: "Map", icon: "map" },
+  { value: "pillar", label: "By Pillar", icon: "pillar" },
 ];
 
 export function MapToggle({ value, onChange }: MapToggleProps) {
@@ -43,7 +44,7 @@ export function MapToggle({ value, onChange }: MapToggleProps) {
   );
 }
 
-function ToggleIcon({ icon }: { icon: "list" | "map" }) {
+function ToggleIcon({ icon }: { icon: "list" | "map" | "pillar" }) {
   if (icon === "map") {
     return (
       <svg
@@ -59,6 +60,27 @@ function ToggleIcon({ icon }: { icon: "list" | "map" }) {
         <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" />
         <path d="M9 3v15" />
         <path d="M15 6v15" />
+      </svg>
+    );
+  }
+
+  if (icon === "pillar") {
+    return (
+      <svg
+        aria-hidden="true"
+        className="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path d="M4 5h16" />
+        <path d="M4 12h16" />
+        <path d="M4 19h16" />
+        <path d="m8 8 2-3 2 3" />
+        <path d="m14 15 2 3 2-3" />
       </svg>
     );
   }

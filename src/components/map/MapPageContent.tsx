@@ -3,9 +3,10 @@
 import { ActorCard } from "@/components/actors/ActorCard";
 import { FilterBar } from "@/components/filters/FilterBar";
 import { SortControl } from "@/components/filters/SortControl";
+import { PillarAccordion } from "@/components/pillars/PillarAccordion";
 import { GapCard } from "@/components/ui/GapCard";
 import { useFilters } from "@/hooks/useFilters";
-import type { Actor, Gap } from "@/lib/types";
+import type { Actor, Gap, Pillar } from "@/lib/types";
 import { filterActors, sortActors } from "@/lib/utils/filters";
 import { EcosystemMap } from "./EcosystemMap";
 import { MapToggle } from "./MapToggle";
@@ -15,13 +16,14 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 interface MapPageContentProps {
   actors: readonly Actor[];
   gaps: readonly Gap[];
+  pillars: readonly Pillar[];
 }
 
-export function MapPageContent({ actors, gaps }: MapPageContentProps) {
+export function MapPageContent({ actors, gaps, pillars }: MapPageContentProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const view = searchParams.get("view") === "map" ? "map" : "list";
+  const view = getMapViewMode(searchParams.get("view"));
   const {
     filters,
     sortConfig,
@@ -40,10 +42,10 @@ export function MapPageContent({ actors, gaps }: MapPageContentProps) {
 
   function setView(nextView: MapViewMode) {
     const params = new URLSearchParams(searchParams);
-    if (nextView === "map") {
-      params.set("view", "map");
-    } else {
+    if (nextView === "list") {
       params.delete("view");
+    } else {
+      params.set("view", nextView);
     }
     const query = params.toString();
     router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
@@ -72,11 +74,12 @@ export function MapPageContent({ actors, gaps }: MapPageContentProps) {
         </div>
       </div>
 
-      {view === "map" ? (
-        <EcosystemMap actors={filteredActors} />
-      ) : (
-        <ActorList actors={filteredActors} onClearAll={clearAll} />
-      )}
+      <MapView
+        view={view}
+        actors={filteredActors}
+        pillars={pillars}
+        onClearAll={clearAll}
+      />
 
       {visibleGaps.length > 0 ? (
         <section className="space-y-2 pt-2" aria-labelledby="map-gap-heading">
@@ -100,6 +103,33 @@ export function MapPageContent({ actors, gaps }: MapPageContentProps) {
       ) : null}
     </div>
   );
+}
+
+function getMapViewMode(value: string | null): MapViewMode {
+  if (value === "map" || value === "pillar") return value;
+  return "list";
+}
+
+function MapView({
+  view,
+  actors,
+  pillars,
+  onClearAll,
+}: {
+  view: MapViewMode;
+  actors: readonly Actor[];
+  pillars: readonly Pillar[];
+  onClearAll: () => void;
+}) {
+  if (view === "map") {
+    return <EcosystemMap actors={actors} />;
+  }
+
+  if (view === "pillar") {
+    return <PillarAccordion pillars={pillars} actors={actors} />;
+  }
+
+  return <ActorList actors={actors} onClearAll={onClearAll} />;
 }
 
 function ActorList({
