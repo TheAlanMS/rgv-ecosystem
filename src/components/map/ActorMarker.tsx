@@ -25,7 +25,7 @@ const STATUS_RADIUS: Record<Actor["status"], number> = {
 };
 
 export function ActorMarker({ actor }: ActorMarkerProps) {
-  if (!actor.coordinates) {
+  if (!actor.coordinates || actor.county === "OutsideRGV") {
     return null;
   }
 

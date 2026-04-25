@@ -101,7 +101,8 @@ export function SearchResults({
               <GapCard key={gap.id} className="opacity-100">
                 <p className="text-sm text-text-secondary">{gap.description}</p>
                 <p className="mt-2 text-[11px] text-text-muted">
-                  {gap.county} County · Pillar {gap.pillar} · {gap.status}
+                  {gap.county} County &middot; Pillar {gap.pillar} &middot;{" "}
+                  {gap.status}
                 </p>
               </GapCard>
             ))}

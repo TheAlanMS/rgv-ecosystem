@@ -6,7 +6,8 @@
 ## Overall
 
 ```
-Phase 2  [####################]  24 / 24 subphases
+Phase 2 implementation  [####################]  24 / 24 subphases delivered
+Phase 2 closure status  Partial - map context, marker accessibility, and visual QA remain
 ```
 
 ## 9.9 Remediation Gates
@@ -29,7 +30,7 @@ Before marking Phase 2 complete, confirm the remediation gates in `implementatio
 | p2-filters-2a-integration | Complete | Codex | n/a |
 
 ```
-filters  Complete  3 / 3
+filters  Delivered  3 / 3
 ```
 
 ## Search (M2)
@@ -41,7 +42,7 @@ filters  Complete  3 / 3
 | p2-search-2a-integration | Complete | Codex + explorer agents | n/a |
 
 ```
-search  Complete  3 / 3
+search  Delivered  3 / 3
 ```
 
 ## Map (M3)
@@ -55,7 +56,7 @@ search  Complete  3 / 3
 | p2-map-3a-integration | Complete | Codex + explorer agent | n/a |
 
 ```
-map  Complete  5 / 5
+map  Delivered  5 / 5
 ```
 
 ## Pillar (M4)
@@ -66,7 +67,7 @@ map  Complete  5 / 5
 | p2-pillar-2a-integration | Complete | Codex + explorer agent | n/a |
 
 ```
-pillar  Complete  2 / 2
+pillar  Delivered  2 / 2
 ```
 
 ## Onboarding (M5)
@@ -78,7 +79,7 @@ pillar  Complete  2 / 2
 | p2-onboarding-2a-integration | Complete | Codex + explorer/worker agents | n/a |
 
 ```
-onboarding  Complete  3 / 3
+onboarding  Delivered  3 / 3
 ```
 
 ## Polish (M6)
@@ -90,7 +91,7 @@ onboarding  Complete  3 / 3
 | p2-polish-1c-layouts | Complete | Codex + explorer agents | n/a |
 
 ```
-polish  Complete  3 / 3
+polish  Delivered  3 / 3
 ```
 
 ## Testing (M7)
@@ -104,7 +105,7 @@ polish  Complete  3 / 3
 | p2-testing-2d-component-tests | Complete | Codex + explorer agents | n/a |
 
 ```
-testing  Complete  5 / 5
+testing  Delivered  5 / 5
 ```
 
 ## Gate Check Log
@@ -118,6 +119,18 @@ testing  Complete  5 / 5
 | p2-onboarding-1a/1b/2a | pass | pass | pass | not configured | pass |
 | p2-polish-1a/1b/1c | pass | pass | pass | not configured | pass |
 | p2-testing-1a/2a/2b/2c/2d | pass | pass | pass | pass | pass |
+
+## Closure Status
+
+| Area | Status | Evidence / remaining work |
+|------|--------|---------------------------|
+| Implementation subphases | Pass | All 24 planned Phase 2 subphases were delivered. |
+| Automated validation | Pass | Typecheck, lint, tests, build, and coverage passed in the Phase 2 audit. |
+| Product success criteria | Partial | The reconciled Pass/Partial/Open table lives in `implementation/phase2/phase2-implementation.md`. |
+| Browser desktop smoke checks | Open | Routes are ready for validation, but this pass was not completed in Batch C. |
+| Mobile visual QA at 320px | Open | Prior Playwright snapshot/tab commands timed out; overflow and overlay behavior still need a real browser pass. |
+| Geographic trust hardening | Partial | Gap search, role-route guardrails, and outside-RGV marker policy are closed; county/gap map context and marker accessibility remain release work. |
+| Gap search | Pass | Actor, pillar, and gap records are included in search results and covered by regression tests. |
 
 ## Notes
 
@@ -133,6 +146,6 @@ testing  Complete  5 / 5
 - Mobile navigation now collapses behind a hamburger menu and header search opens as a dismissible mobile overlay.
 - Interactive controls on Phase 2 paths now use 44px touch targets, including filters, sorting, map toggles, journey controls, onboarding, search CTAs, and map popup actions.
 - Journey steps stack on small screens and map/list controls use stable full-width mobile rows to reduce overflow risk at 320px.
-- Browser automation note: existing dev server detected at `http://localhost:3000`; Playwright CLI opened the route, but follow-up snapshot/tab commands timed out, so visual mobile verification should be repeated manually or after CLI session issues are resolved.
+- Browser automation note: Batch C attempted to start/check a local dev server on `127.0.0.1:3002`, but the route was not reachable from the shell. Existing local node processes also caused `localhost:3000` checks to time out. Browser and mobile visual verification remains Open release work.
 - Vitest is configured with jsdom, RTL, jest-dom matchers, coverage output, and `@/*` path alias support.
 - `npm test` covers seed data validation, query behavior, filter/search/slug utilities, and ActorCard/PillarCard smoke rendering.

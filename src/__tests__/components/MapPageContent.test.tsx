@@ -12,6 +12,24 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("MapPageContent", () => {
+  it("keeps outside-region partners visible in the list view", () => {
+    const outsideRegionActor = ALL_ACTORS.find(
+      (actor) => actor.county === "OutsideRGV",
+    );
+
+    expect(outsideRegionActor).toBeDefined();
+
+    render(
+      <MapPageContent
+        actors={ALL_ACTORS}
+        gaps={ALL_GAPS}
+        pillars={ALL_PILLARS}
+      />,
+    );
+
+    expect(screen.getByText(outsideRegionActor?.name ?? "")).toBeInTheDocument();
+  });
+
   it("renders explicit Starr and Willacy gap context on the map page", () => {
     render(
       <MapPageContent

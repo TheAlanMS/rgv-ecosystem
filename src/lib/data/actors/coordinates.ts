@@ -11,8 +11,6 @@ const CITY_COORDINATES: Record<string, Actor["coordinates"]> = {
   Weslaco: { lat: 26.1595, lng: -97.9908 },
 };
 
-const OUTSIDE_RGV_CITIES = new Set(["Austin", "San Antonio", "Washington"]);
-
 export function withActorCoordinates<T extends Actor>(actors: readonly T[]): T[] {
   return actors.map((actor) => {
     if (actor.coordinates) {
@@ -28,9 +26,8 @@ export function withActorCoordinates<T extends Actor>(actors: readonly T[]): T[]
     return {
       ...actor,
       coordinates,
-      coordinateSource: OUTSIDE_RGV_CITIES.has(actor.city)
-        ? "representative"
-        : "city-center",
+      coordinateSource:
+        actor.county === "OutsideRGV" ? "representative" : "city-center",
     };
   });
 }

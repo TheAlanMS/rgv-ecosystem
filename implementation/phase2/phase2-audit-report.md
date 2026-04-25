@@ -6,11 +6,11 @@ Scope: `implementation/phase2/phase2-implementation.md`, `implementation/phase2/
 
 ## Executive readout
 
-Phase 2 is functionally implemented and the automated gates are clean. The repo now has URL-backed filters, ranked search, list/map/by-pillar map views, role + intent onboarding, a mobile navigation pass, and a Vitest suite.
+Phase 2 is functionally implemented and the automated gates are clean. The repo now has URL-backed filters, ranked actor/pillar/gap search, list/map/by-pillar map views, role + intent onboarding with route relevance tests, outside-RGV map separation, a mobile navigation pass, and a Vitest suite.
 
-I would not yet call Phase 2 release-complete against the product promise. The highest-risk gaps are geographic honesty and first-class gap visibility: the map renders clustered actor markers, but it does not render county context or gap overlays, and outside-RGV actors are counted as mapped even though their markers are outside the fixed RGV viewport. Search also promises gap discovery in copy but only searches actors and pillars.
+I would not yet call Phase 2 release-complete against the full product promise. The remaining hardening gaps are narrower: visual QA is intentionally deferred, and the map still needs stronger county/gap geographic context plus marker accessibility work before the geographic surface fully earns the trust claims in the PRD.
 
-Recommended decision: mark Phase 2 as conditionally complete for engineering gates, but keep it open for a short hardening pass before using it as the baseline for later phases.
+Recommended decision: treat hardening items 1-3 as complete after the 2026-04-25 closeout pass, then finish hardening items 4-5 before changing Phase 2 from Partial to Complete. Visual QA can remain a separate deferred release check if product leadership accepts that risk.
 
 ## Validation results
 
@@ -20,24 +20,34 @@ All automated validation passed after rerunning through Windows `.cmd` shims bec
 | --- | --- | --- |
 | Typecheck | `cmd /c npx.cmd tsc --noEmit` | Pass |
 | Lint | `cmd /c npm.cmd run lint` | Pass |
-| Unit tests | `cmd /c npm.cmd test` | Pass, 11 files / 35 tests |
+| Unit tests | `cmd /c npm.cmd test` | Pass, 14 files / 52 tests after hardening items 1-3 |
 | Build | `cmd /c npm.cmd run build` | Pass, 82 static pages generated |
 | Coverage | `cmd /c npm.cmd run test:coverage` | Pass, 90.96% statements, 77.04% branches, 94.02% functions, 91.35% lines |
 
 Manual browser and 320px visual overflow validation were not rerun in this audit. The Phase 2 progress tracker already notes Playwright snapshot/tab commands timed out during the implementation pass.
+
+## Hardening closeout tracker
+
+| Item | Status | Evidence / remaining work |
+| --- | --- | --- |
+| 1. Gap search integration | Complete | `searchGaps`, `/search` gap wiring, `SearchResults` gap rendering, utility tests, and `SearchResults` gap-only regression coverage are in place. |
+| 2. Role + intent relevance tests | Complete | `intents.test.ts` validates exposed onboarding intents, destination rules, strict map query params, non-empty actor/gap results, and selected-role journey routing. |
+| 3. Outside-RGV map handling | Complete | `getGeographicMapContext` separates RGV markers from outside-region partners, `LeafletEcosystemMap` plots only RGV actors, `ActorMarker` defensively refuses `OutsideRGV` actors, and regression tests preserve list visibility. |
+| 4. County/gap map context | Open | County summary context exists, but open gaps still need a stronger geographic treatment such as county markers, overlays, or checked-in county geometry. |
+| 5. Marker accessibility | Open | Marker color/size encoding still needs a legend and non-color affordance before the accessible marker claim should be marked Pass. |
 
 ## Area assessment
 
 | Area | Assessment | Notes |
 | --- | --- | --- |
 | Filters | Green | Shared filter state is URL-backed and covers pillar, county, status, org type, stage, and pillar group. |
-| Search | Yellow | Actor and pillar search are implemented, ranked, and routed, but gap search is missing despite product copy and PRD intent around first-class gaps. |
-| Map | Yellow/Red | List/map/pillar views exist and share actor filters. Geographic view lacks county context and gap overlays, and outside-RGV markers create misleading mapped counts. |
+| Search | Green | Actor, pillar, and gap search are implemented, ranked, routed, rendered, and covered by utility/component tests. |
+| Map | Yellow | List/map/pillar views exist and share actor filters. Outside-RGV actors are separated from RGV map markers; geographic gap overlays and marker accessibility remain open. |
 | Pillar view | Green | By-pillar view reuses filtered actors through `PillarAccordion`; pillar detail pages use locked filters. |
-| Onboarding | Yellow | All 8 roles have intent routes, but route relevance is not behavior-tested. |
+| Onboarding | Green | All 8 roles have intent routes, and route relevance/parseability is guarded by data tests. |
 | Polish | Yellow | Touch target classes are broadly present, but mobile overflow/runtime checks are not proven by this audit. |
-| Testing | Yellow | Automated suite passes and coverage is good, but route-critical client surfaces are under-tested. |
-| Documentation | Yellow | `phase2-progress.md` says 24 / 24 complete while `phase2-implementation.md` and many subphase checklists still show unchecked or stale status. |
+| Testing | Yellow/Green | Automated suite passes and now covers the main hardening items; browser/mobile visual QA remains deferred. |
+| Documentation | Green | Phase closure docs now separate delivered implementation from remaining hardening and visual QA work. |
 
 ## Findings and proposed solutions
 
@@ -60,76 +70,74 @@ Proposed solution:
 4. Add tests that verify Starr and Willacy gaps are available to the map component even when there are no active actors.
 5. Add a manual browser checklist for `/map?view=map`, `/map?county=Starr&view=map`, and `/map?county=Willacy&view=map`.
 
-### P0: Outside-RGV actors are counted as mapped but are not usable in the RGV viewport
+### P0: Outside-RGV actors are counted as mapped but are not usable in the RGV viewport - closed in hardening item 3
 
 Evidence:
-- `src/lib/data/actors/coordinates.ts:14` treats Austin, San Antonio, and Washington as outside-RGV cities.
-- `src/components/map/LeafletEcosystemMap.tsx:19` maps every actor with coordinates.
-- There are 6 `OutsideRGV` actor records in the seed data.
-- The map is centered on the RGV at zoom 9, so Austin, San Antonio, and Washington markers are outside the useful initial map context.
+- Original audit finding: outside-region actors could be counted like normal mapped records even though Austin, San Antonio, and Washington are outside the useful RGV viewport.
+- `getGeographicMapContext` now partitions actors into RGV marker candidates and outside-region partners.
+- `LeafletEcosystemMap` renders only RGV actors as map markers and reports outside-region partners separately.
+- `ActorMarker` now has a defensive `OutsideRGV` guard if a future caller bypasses the map-context partition.
 
 Impact:
-- The footer says it is showing all mapped actors, but some are not visible in the intended regional viewport.
-- Users may assume those actors are missing or that the map count is inaccurate.
-- This conflicts with the Phase 2 criterion that documented exceptions should be rendered as non-map list records.
+- This hardening pass removes the misleading RGV marker count risk.
+- Outside-region partners remain available in list/pillar contexts instead of being plotted as regional map markers.
 
-Proposed solution:
-1. Partition actors into `regionalActors` and `outsideRegionActors` in the map view.
-2. Render only RGV actors as geographic markers by default.
-3. Show outside-region partners in a clear non-map list below the map with their city and "outside-region partner" metadata.
-4. Update copy from "Showing N mapped actors" to show separate regional and outside-region counts.
-5. Add a test that `OutsideRGV` records are not silently counted as RGV map markers.
+Closure:
+1. Actors are partitioned through `getGeographicMapContext`.
+2. Only RGV actors are rendered as geographic markers.
+3. Outside-region partners are counted separately in map copy and remain visible in list views.
+4. Tests prove outside-region records are not silently treated as RGV markers.
 
-### P1: Search copy promises gap discovery, but gaps are not searched
+### P1: Search copy promised gap discovery before gaps were searched - closed in hardening item 1
 
 Evidence:
-- `src/app/search/page.tsx:17` says users can search "gaps across the Rio Grande Valley."
-- `src/components/search/SearchPageContent.tsx:49-50` only calls `searchActors` and `searchPillars`.
-- `src/lib/utils/search.ts:10-20` only exposes actor and pillar search utilities.
+- Original audit finding: search promised gap discovery but only searched actors and pillars.
+- `searchGaps` indexes gap ids, descriptions, counties, status, source metadata, pillar ids, and linked pillar metadata.
+- `/search` passes `ALL_GAPS` into `SearchPageContent`.
+- `SearchResults` renders a dedicated gap section and treats gap-only matches as valid results.
 
 Impact:
-- Users looking for "Starr", "Willacy", "angel network", or "CRM" may miss first-class gap records unless they know to visit `/map` or `/ecosystem-health`.
-- This weakens the PRD goal of making gaps and underserved geographies visible.
+- Users can find first-class gap records through normal search flows.
+- Known gap queries such as Starr, Willacy, angel network, and shared CRM are covered by tests.
 
-Proposed solution:
-1. Add `searchGaps(query, gaps)` to `src/lib/utils/search.ts`.
-2. Pass `ALL_GAPS` into the search page.
-3. Add a "Gaps" section to `SearchResults`, using `GapCard`.
-4. Add tests for searching Starr, Willacy, and known gap descriptions.
+Closure:
+1. `searchGaps(query, gaps)` is implemented.
+2. `ALL_GAPS` is passed into the search page.
+3. `SearchResults` renders a `Gaps` section with `GapCard`.
+4. Utility and component tests cover known gap queries and gap-only rendered results.
 
-### P1: Role + intent onboarding routes exist, but route relevance is not guarded by tests
+### P1: Role + intent onboarding routes needed relevance tests - closed in hardening item 2
 
 Evidence:
-- `src/lib/data/intents.ts:74-183` defines routes for all 8 roles.
-- The file validates shape with Zod at `src/lib/data/intents.ts:220-229`, but there are no tests in `src/__tests__` covering role-intent route completeness, filter parseability, or non-empty filtered results.
+- Original audit finding: role-intent routes existed, but relevance was not guarded beyond Zod shape validation.
+- `src/__tests__/data/intents.test.ts` now covers route schema, known surfaces, map route actor/gap relevance, strict filter parsing, destination rules, and selected-role journey routing.
 
 Impact:
-- Future route or filter changes can silently break onboarding relevance while typecheck and build still pass.
-- The success criterion "Every role + intent route lands on a relevant filtered view" is subjective unless encoded as tests.
+- Future route or filter changes that silently break onboarding relevance should now fail tests.
+- The success criterion is grounded in data-contract tests instead of remaining subjective.
 
-Proposed solution:
-1. Add `src/__tests__/data/intents.test.ts`.
-2. Assert every role has at least the expected minimum number of intents.
-3. For `/map?...` routes, parse search params into filter dimensions and assert they produce either non-empty actor results or an explicitly documented gap/diagnostic route.
-4. For `/journeys/[role]` routes, assert the role exists in journey data.
-5. Keep the route `rationale` field and use it as required documentation in tests.
+Closure:
+1. `src/__tests__/data/intents.test.ts` exists and now covers exposed onboarding intents.
+2. `/map?...` routes are strictly parsed and must produce actor or explicit gap matches.
+3. `/journeys/[role]` routes must target the selected role's known journey.
+4. Intent-specific destination rules are tested.
 
-### P1: Documentation status is inconsistent with implementation status
+### P1: Documentation status is inconsistent with implementation status - closed in Batch C
 
 Evidence:
-- `implementation/phase2/phase2-progress.md:6-107` marks Phase 2 as 24 / 24 complete.
-- `implementation/phase2/phase2-implementation.md:3` still says "Not Started."
-- `implementation/phase2/phase2-implementation.md:96-111` still has unchecked success criteria, including criteria that are actually implemented and criteria that remain incomplete.
-- Several subphase docs still show stale "Not Started" status even when their progress tracker rows are complete.
+- Original audit finding: `implementation/phase2/phase2-progress.md:6-107` marked Phase 2 as 24 / 24 complete while `implementation/phase2/phase2-implementation.md` still used pre-work status and checkbox criteria.
+- Batch C updated `phase2-implementation.md` to use a Partial closure status and a Pass/Partial/Open evidence table.
+- Batch C updated `phase2-progress.md` to separate delivered implementation progress from Open release work.
+- Some subphase-level task files may still preserve historical checklist format; the Phase 2 closure source of truth is now the implementation/progress/audit trio.
 
 Impact:
 - New contributors cannot tell whether unchecked items are stale docs or actual product gaps.
 - This increases planning risk for Phase 3+ because the status artifact is not reliable.
 
-Proposed solution:
-1. Update `phase2-implementation.md` with a final status of "Conditionally Complete / Hardening Required."
-2. Convert each success criterion to Pass, Partial, or Open with a one-line evidence note.
-3. Update subphase status headers or add a single audit appendix that supersedes stale subphase checklists.
+Closure:
+1. `phase2-implementation.md` now records Phase 2 as Partial - implementation delivered, hardening required.
+2. Each Phase 2 success criterion now has Pass, Partial, or Open status with a one-line evidence note.
+3. `phase2-progress.md` now includes a closure-status appendix that supersedes stale subphase checklists.
 
 ### P2: Map marker accessibility is not yet strong enough for the "accessible marker colors" claim
 
@@ -170,15 +178,15 @@ Proposed solution:
 | Filter state shared by all `/map` views and persisted in URL params | Pass | `useFilters` and `view` state preserve URL params. |
 | Filters cover pillar, player type, county, stage served, and status | Pass | Filter dimensions include pillar, org type, county, stage, status, and pillar group. |
 | Search is global with dedicated `/search` route | Pass | Header search and `/search` route exist. |
-| Search results are ranked/grouped with no-result submit CTA | Pass for actors/pillars, partial overall | Gap records are not searched. |
+| Search results are ranked/grouped with no-result submit CTA | Pass | Actor, pillar, and gap results are searched and grouped; no-result CTA still appears only when all groups are empty. |
 | Homepage uses two-step role + intent onboarding for all 8 roles | Pass | `OnboardingFlow` and `ROLE_INTENT_ROUTES` cover 8 roles. |
-| Every role + intent route lands on a relevant filtered view | Partial | Routes exist, but relevance is not tested. |
-| 100% actors have city-level coordinates or documented non-map exceptions | Partial | Coordinates exist, but outside-RGV records are rendered as map markers rather than non-map exceptions. |
-| Geographic view uses Leaflet/OSM, clustering, county context, accessible marker colors | Partial | Leaflet/OSM/clustering exist; county context and stronger accessibility are missing. |
-| Gap records remain visible in list, map, by-pillar, and health contexts | Partial | Gap cards appear on `/map` and health page; gaps are not rendered geographically and are not searchable. |
+| Every role + intent route lands on a relevant filtered view | Pass | Routes exist and are guarded by strict relevance/parseability tests. |
+| 100% actors have city-level coordinates or documented non-map exceptions | Pass | Coordinates exist; outside-RGV records are separated from RGV markers and remain visible in non-map list contexts. |
+| Geographic view uses Leaflet/OSM, clustering, county context, accessible marker colors | Partial | Leaflet/OSM/clustering and county summary context exist; gap overlays and stronger marker accessibility remain. |
+| Gap records remain visible in list, map, by-pillar, and health contexts | Partial | Gap cards appear on `/map` and health, and gaps are searchable; geographic gap overlays remain open. |
 | Starr and Willacy gaps explicitly visible | Pass with caveat | Gap records exist and show in `/map` cards/health; geographic visualization is missing. |
 | Mobile touch targets and no 320px overflow | Partial | Classes suggest 44px targets; browser verification was not completed. |
-| Vitest covers data, queries, filters, search, slug, geography, key components | Pass with caveat | Coverage exists; route-critical client workflows need tests. |
+| Vitest covers data, queries, filters, search, slug, geography, key components | Pass with caveat | Coverage exists and now includes gap search rendering, route guardrails, and outside-RGV map handling; visual QA remains manual/deferred. |
 | Lint, typecheck, build, test pass | Pass | Verified in this audit. |
 
 ## Recommended hardening plan
@@ -195,10 +203,10 @@ Files likely to change:
 - New map/gap component tests
 
 Acceptance:
-- RGV markers and outside-region partners are counted separately.
-- Starr and Willacy gap context is visible in the geographic map view.
-- County context appears in the map view.
-- Tests prove outside-region records are not silently treated as RGV markers.
+- RGV markers and outside-region partners are counted separately. Completed in hardening item 3.
+- Starr and Willacy gap context is visible in the geographic map view. Open for hardening item 4 as a stronger geographic treatment.
+- County context appears in the map view. Partially complete through county summaries; open for hardening item 4 if overlays/markers are required.
+- Tests prove outside-region records are not silently treated as RGV markers. Completed in hardening item 3.
 
 ### Batch B: Gap search and route guardrails
 
@@ -211,9 +219,9 @@ Files likely to change:
 - New `src/__tests__/data/intents.test.ts`
 
 Acceptance:
-- Search returns actors, pillars, and gaps.
-- Known gap queries return expected gap records.
-- Every role-intent route is tested for shape and relevance.
+- Search returns actors, pillars, and gaps. Completed in hardening item 1.
+- Known gap queries return expected gap records. Completed in hardening item 1.
+- Every role-intent route is tested for shape and relevance. Completed in hardening item 2.
 
 ### Batch C: Documentation closure and visual QA
 
@@ -226,9 +234,13 @@ Acceptance:
 - Phase 2 docs use Pass/Partial/Open status, not stale checkboxes.
 - Browser/mobile smoke checks are either completed or explicitly listed as remaining release work.
 
+Batch C result, 2026-04-25:
+- `phase2-implementation.md` now records Phase 2 as Partial, replaces stale success-criterion checkboxes with Pass/Partial/Open evidence, and lists remaining release work.
+- `phase2-progress.md` now separates delivered implementation progress from closure status and marks browser/mobile visual QA plus remaining geographic trust hardening as Open release work.
+- Browser/mobile smoke checks were not completed in Batch C. A local dev server check against `127.0.0.1:3002` failed to connect, and existing `localhost:3000` checks timed out, so visual QA remains explicitly Open.
+
 ## CTO verdict
 
 The engineering team delivered the bulk of Phase 2 and established a working validation foundation. The code is reasonably modular: filters are separated into a hook and pure utility layer, search is pure and testable, map rendering is isolated behind dynamic import, and seed data has schema validation.
 
 The product risk is not basic correctness; it is trust. A map product must be especially careful about what is visible, counted, and spatially implied. Before Phase 2 is treated as complete, close the gaps around county context, gap geography, outside-region actor handling, and search coverage for gaps.
-

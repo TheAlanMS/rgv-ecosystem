@@ -47,6 +47,19 @@ describe("geography seed data", () => {
         (actor) => actor.coordinateSource === "representative",
       ),
     ).toBe(true);
+    expect(
+      context.rgvActors.some((actor) =>
+        context.outsideRegionActors.some((outsideActor) => outsideActor.id === actor.id),
+      ),
+    ).toBe(false);
+    expect(
+      ALL_ACTORS.some(
+        (actor) =>
+          actor.county === "OutsideRGV" &&
+          Boolean(actor.coordinates) &&
+          actor.coordinateSource === "representative",
+      ),
+    ).toBe(true);
   });
 
   it("keeps Starr and Willacy gap context visible in map county summaries", () => {

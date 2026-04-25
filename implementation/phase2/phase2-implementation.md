@@ -1,8 +1,8 @@
 # Phase 2 — Interactive Features & Polish
 
-> **Status:** ⬜ Not Started
-> **Started:** —
-> **Completed:** —
+> **Status:** Partial - implementation delivered, hardening required
+> **Started:** 2026-04-23
+> **Closed for Batch C audit:** 2026-04-25
 > **Executor:** Multi-agent
 
 ## Objective
@@ -13,15 +13,15 @@ Add client-side interactivity to the ecosystem platform: filtering, search, geog
 
 Phase 2 is the highest-leverage MVP phase. It turns the current static directory into the PRD-required navigable ecosystem map.
 
-Current blockers this phase must close:
+Current blockers this phase targeted:
 
-- `/map` is currently a static card grid, not a filterable map/list product surface.
-- Search is implemented with a dedicated `/search` route, header entry point, ranked actor and pillar results, and filter interop.
-- Role navigation is static and does not support the PRD's role + intent flow.
-- Actor coordinates are absent, so geographic map execution is blocked until the data audit completes.
-- No test suite exists.
+- `/map` needed to become a filterable list/map/by-pillar product surface.
+- Search needed a dedicated `/search` route, header entry point, ranked results, and filter interop.
+- Role navigation needed to support the PRD's role + intent flow.
+- Actor coordinates and gap geography needed intentional handling.
+- A test suite needed to cover data, queries, filters, search, and component smoke behavior.
 
-This phase is not complete until a first-time user can start from the homepage, choose a role and intent or search directly, land on a filtered view, switch between list/map/pillar views, and find a relevant actor or visible gap without needing instructions.
+Batch C closure records Phase 2 as product-partial rather than fully complete. A first-time user can start from the homepage, choose a role and intent or search directly, land on a filtered view, and switch between list/map/pillar views. The 2026-04-25 hardening pass closed searchable gaps, route-relevance tests, and outside-RGV map handling. Remaining hardening work is concentrated in county/gap map context, marker accessibility, and completed browser/mobile visual smoke checks.
 
 ## Prerequisites
 
@@ -95,20 +95,31 @@ Batch 11: [testing-2a] [testing-2b] [testing-2c] [testing-2d]
 
 ## Phase 2 Success Criteria
 
-- [ ] `/map` supports list view, geographic map view, and by-pillar view.
-- [ ] Filter state is shared by all `/map` views and persisted in URL search params.
-- [ ] Filters cover pillar, player type, county, stage served, and status.
-- [x] Search is available from all pages and has a dedicated `/search` route.
-- [x] Search results are ranked and grouped, with a no-result submit CTA.
-- [ ] Homepage uses two-step role + intent onboarding for all 8 roles.
-- [ ] Every role + intent route lands on a relevant filtered view.
-- [ ] 100% of actors have city-level coordinates, or documented exceptions are rendered as non-map list records.
-- [ ] Geographic view uses Leaflet/OpenStreetMap, marker clustering, county context, and accessible marker colors.
-- [ ] Gap records remain visible in list, map, by-pillar, and health contexts.
-- [ ] Starr and Willacy County gaps are explicitly visible, even where no active actors exist.
-- [ ] All interactive controls meet mobile touch target expectations and do not create horizontal overflow at 320px.
-- [ ] Vitest covers data validation, queries, filters, search, slug utilities, geography, and smoke rendering of key components.
-- [ ] `npm run lint`, `npx tsc --noEmit`, `npm run build`, and `npm test` pass.
+| Criterion | Status | Evidence / remaining work |
+|-----------|--------|---------------------------|
+| `/map` supports list view, geographic map view, and by-pillar view. | Pass | Implemented through `MapToggle` and `MapPageContent`. |
+| Filter state is shared by all `/map` views and persisted in URL search params. | Pass | `useFilters` and view state preserve URL params. |
+| Filters cover pillar, player type, county, stage served, and status. | Pass | Filter dimensions include pillar, org type, county, stage, status, and pillar group. |
+| Search is available from all pages and has a dedicated `/search` route. | Pass | Header search and `/search` route are implemented. |
+| Search results are ranked and grouped, with a no-result submit CTA. | Pass | Actor, pillar, and gap search works; no-result CTA appears only when all groups are empty. |
+| Homepage uses two-step role + intent onboarding for all 8 roles. | Pass | `OnboardingFlow` and `ROLE_INTENT_ROUTES` cover all 8 roles. |
+| Every role + intent route lands on a relevant filtered view. | Pass | Routes are guarded by strict shape, destination, filter parseability, and actor/gap relevance tests. |
+| 100% of actors have city-level coordinates, or documented exceptions are rendered as non-map list records. | Pass | Coordinates exist; outside-RGV records are separated from RGV map markers and remain visible in non-map list contexts. |
+| Geographic view uses Leaflet/OpenStreetMap, marker clustering, county context, and accessible marker colors. | Partial | Leaflet, OSM, clustering, and county summary context are implemented; geographic gap overlays and stronger marker accessibility remain. |
+| Gap records remain visible in list, map, by-pillar, and health contexts. | Partial | Gap cards appear on `/map` and health, and gaps are searchable; geographic gap overlays remain. |
+| Starr and Willacy County gaps are explicitly visible, even where no active actors exist. | Pass | Gap records exist and are surfaced in `/map` cards and ecosystem health, with geographic visualization still tracked above. |
+| All interactive controls meet mobile touch target expectations and do not create horizontal overflow at 320px. | Partial | Touch-target/layout classes were updated; browser/mobile visual smoke verification remains release work. |
+| Vitest covers data validation, queries, filters, search, slug utilities, geography, and smoke rendering of key components. | Pass | Automated suite covers these layers; route-critical client workflow tests remain recommended hardening. |
+| `npm run lint`, `npx tsc --noEmit`, `npm run build`, and `npm test` pass. | Pass | Verified in the Phase 2 audit on 2026-04-25. |
+
+## Remaining Release Work
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Browser smoke checks for `/`, `/search?q=capital`, `/map`, `/map?view=map`, `/map?view=pillars`, representative `/journeys/[role]`, and `/ecosystem-health`. | Open | Needed to close runtime/browser confidence beyond static and unit gates. |
+| Mobile 320px visual overflow pass for navigation, search overlay, map view toggles, filters, onboarding, journey steps, and gap cards. | Open | Prior Playwright snapshot/tab commands timed out during implementation; repeat manually or with stable Playwright CLI session. |
+| County/gap map context. | Open | Product-trust hardening remains for geographic gap overlays or equivalent county-level map treatment. |
+| Marker accessibility. | Open | Add a visible legend and non-color marker affordance before marking the accessible marker claim Pass. |
 
 ## Scope Control
 
