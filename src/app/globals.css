@@ -85,3 +85,24 @@ body {
   color: var(--text-primary);
   font-family: var(--font-body);
 }
+
+.ecosystem-marker {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.ecosystem-marker span {
+  border: 2px solid #f8fafc;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  display: block;
+}
+
+.ecosystem-popup .leaflet-popup-content-wrapper,
+.ecosystem-popup .leaflet-popup-tip {
+  background: #111827;
+  color: #f8fafc;
+}

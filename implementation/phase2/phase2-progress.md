@@ -6,7 +6,7 @@
 ## Overall
 
 ```
-Phase 2  [######--------------]  6 / 20 subphases
+Phase 2  [###########---------]  11 / 20 subphases
 ```
 
 ## 9.9 Remediation Gates
@@ -48,14 +48,14 @@ search  Complete  3 / 3
 
 | Subphase | Status | Agent | Commit |
 |----------|--------|-------|--------|
-| p2-map-1a-dependencies | Not Started | - | - |
-| p2-map-1b-markers | Not Started | - | - |
-| p2-map-2a-clustering | Not Started | - | - |
-| p2-map-2b-data-audit | Not Started | - | - |
-| p2-map-3a-integration | Not Started | - | - |
+| p2-map-1a-dependencies | Complete | Codex + explorer agent | n/a |
+| p2-map-1b-markers | Complete | Codex + explorer agent | n/a |
+| p2-map-2a-clustering | Complete | Codex + explorer agent | n/a |
+| p2-map-2b-data-audit | Complete | Codex + explorer agent | n/a |
+| p2-map-3a-integration | Complete | Codex + explorer agent | n/a |
 
 ```
-map  [--------------------]  0 / 5
+map  Complete  5 / 5
 ```
 
 ## Pillar (M4)
@@ -113,10 +113,14 @@ testing  [--------------------]  0 / 5
 |----------|-----|------|-------|------|-------|
 | p2-filters-1a/1b/2a | pass | pass | pass | not configured | pass |
 | p2-search-1a/1b/2a | pass | pass | pass | not configured | pass |
+| p2-map-1a/1b/2a/2b/3a | pass | pass | pass | not configured | pass |
 
 ## Notes
 
 - Search now uses a pure utility layer and preserves empty-query semantics at the utility boundary.
 - `/search` suppresses blank-query results and shows prompt text, per integration acceptance criteria.
 - Search and filters share URL state; filter changes preserve `q`.
+- `/map` now supports shared-filter list and geographic map views with clustered Leaflet markers.
+- Actor map coordinates are city-center or representative coordinates until exact addresses are verified.
+- Starr and Willacy County actor-coverage gaps are explicit gap records.
 - Test runner setup remains part of M7, so `npm test` is still unavailable.

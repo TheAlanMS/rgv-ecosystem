@@ -1,6 +1,7 @@
 import type { Actor } from "@/lib/types";
+import { withActorCoordinates } from "./coordinates";
 
-export const PILLAR_04_ACTORS: Actor[] = [
+export const PILLAR_04_ACTORS: Actor[] = withActorCoordinates([
   {
     id: "actor-utrgv",
     name: "UTRGV",
@@ -178,4 +179,4 @@ export const PILLAR_04_ACTORS: Actor[] = [
     verifiedBy: "system",
     communitySubmitted: false,
   },
-];
+]);

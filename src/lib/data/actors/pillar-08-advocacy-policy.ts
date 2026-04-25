@@ -1,6 +1,7 @@
 import type { Actor } from "@/lib/types";
+import { withActorCoordinates } from "./coordinates";
 
-export const PILLAR_08_ACTORS: Actor[] = [
+export const PILLAR_08_ACTORS: Actor[] = withActorCoordinates([
   {
     id: "actor-bedc",
     name: "Brownsville Economic Development Council (BEDC)",
@@ -155,4 +156,4 @@ export const PILLAR_08_ACTORS: Actor[] = [
     verifiedBy: "system",
     communitySubmitted: false,
   },
-];
+]);

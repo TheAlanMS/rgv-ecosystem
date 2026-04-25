@@ -63,6 +63,26 @@ const gaps: Gap[] = [
     dateFlagged: "2026-04-22",
     status: "Open",
   },
+  {
+    id: "gap-starr-county-actor-coverage",
+    pillar: 9,
+    county: "Starr",
+    description:
+      "No active Starr County ecosystem actors are currently represented in the directory. Coverage should be treated as an explicit data and outreach gap, not as absence of need.",
+    flaggedBy: "system",
+    dateFlagged: "2026-04-25",
+    status: "Open",
+  },
+  {
+    id: "gap-willacy-county-actor-coverage",
+    pillar: 9,
+    county: "Willacy",
+    description:
+      "No active Willacy County ecosystem actors are currently represented in the directory. Coverage should remain visible in filters, map contexts, and health reporting.",
+    flaggedBy: "system",
+    dateFlagged: "2026-04-25",
+    status: "Open",
+  },
 ];
 
 z.array(GapSchema).parse(gaps);

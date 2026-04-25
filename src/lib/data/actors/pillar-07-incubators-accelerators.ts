@@ -1,6 +1,7 @@
 import type { Actor } from "@/lib/types";
+import { withActorCoordinates } from "./coordinates";
 
-export const PILLAR_07_ACTORS: Actor[] = [
+export const PILLAR_07_ACTORS: Actor[] = withActorCoordinates([
   {
     id: "actor-ebridge-center-bcic",
     name: "eBridge Center / BCIC",
@@ -70,4 +71,4 @@ export const PILLAR_07_ACTORS: Actor[] = [
     verifiedBy: "system",
     communitySubmitted: false,
   },
-];
+]);

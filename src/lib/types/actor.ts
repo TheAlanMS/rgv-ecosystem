@@ -6,6 +6,8 @@ const CoordinatesSchema = z.object({
   lng: z.number(),
 });
 
+const CoordinateSourceSchema = z.enum(["exact", "city-center", "representative"]);
+
 export const ActorSchema = z
   .object({
     // Required
@@ -30,6 +32,7 @@ export const ActorSchema = z
     contactEmail: z.string().email().optional(),
     industryFocus: z.array(z.string()).optional(),
     coordinates: CoordinatesSchema.optional(),
+    coordinateSource: CoordinateSourceSchema.optional(),
     rgvConnection: z.string().optional(),
 
     // System

@@ -1,6 +1,7 @@
 import type { Actor } from "@/lib/types";
+import { withActorCoordinates } from "./coordinates";
 
-export const PILLAR_01_ACTORS: Actor[] = [
+export const PILLAR_01_ACTORS: Actor[] = withActorCoordinates([
   {
     id: "actor-spacex-starbase",
     name: "SpaceX / Starbase",
@@ -177,4 +178,4 @@ export const PILLAR_01_ACTORS: Actor[] = [
     verifiedBy: "system",
     communitySubmitted: false,
   },
-];
+]);

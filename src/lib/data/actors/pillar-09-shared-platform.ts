@@ -1,6 +1,7 @@
 import type { Actor } from "@/lib/types";
+import { withActorCoordinates } from "./coordinates";
 
-export const PILLAR_09_ACTORS: Actor[] = [
+export const PILLAR_09_ACTORS: Actor[] = withActorCoordinates([
   {
     id: "actor-rgv-ecosystem-map",
     name: "RGV Ecosystem Map",
@@ -95,4 +96,4 @@ export const PILLAR_09_ACTORS: Actor[] = [
     verifiedBy: "system",
     communitySubmitted: false,
   },
-];
+]);
