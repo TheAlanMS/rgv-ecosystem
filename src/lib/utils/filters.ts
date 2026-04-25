@@ -2,6 +2,7 @@ import { ALL_PILLARS } from "@/lib/data/pillars";
 import type {
   Actor,
   County,
+  Gap,
   OrgType,
   PillarGroup,
   Stage,
@@ -89,6 +90,27 @@ export function filterActors(
       matchesOrgType &&
       matchesStage
     );
+  });
+}
+
+export function filterGaps(gaps: readonly Gap[], filters: FilterState): Gap[] {
+  const pillarIdsFromGroups = new Set(
+    ALL_PILLARS.filter((pillar) => filters.pillarGroup.includes(pillar.group)).map(
+      (pillar) => pillar.id,
+    ),
+  );
+
+  return gaps.filter((gap) => {
+    const matchesPillar =
+      filters.pillar.length === 0 || filters.pillar.includes(gap.pillar);
+
+    const matchesPillarGroup =
+      filters.pillarGroup.length === 0 || pillarIdsFromGroups.has(gap.pillar);
+
+    const matchesCounty =
+      filters.county.length === 0 || filters.county.includes(gap.county);
+
+    return matchesPillar && matchesPillarGroup && matchesCounty;
   });
 }
 

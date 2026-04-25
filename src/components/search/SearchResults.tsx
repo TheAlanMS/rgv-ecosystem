@@ -1,20 +1,25 @@
 import Link from "next/link";
 import { ActorCard } from "@/components/actors/ActorCard";
 import { PillarCard } from "@/components/pillars/PillarCard";
-import type { Actor, Pillar } from "@/lib/types";
+import { GapCard } from "@/components/ui/GapCard";
+import type { Actor, Gap, Pillar } from "@/lib/types";
 
 interface SearchResultsProps {
   query: string;
   actors: readonly Actor[];
+  gaps: readonly Gap[];
   pillars: readonly Pillar[];
   totalActorCount: number;
+  totalGapCount: number;
 }
 
 export function SearchResults({
   query,
   actors,
+  gaps,
   pillars,
   totalActorCount,
+  totalGapCount,
 }: SearchResultsProps) {
   const normalizedQuery = query.trim();
 
@@ -26,13 +31,13 @@ export function SearchResults({
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">
           Find organizations, ecosystem pillars, support offerings, founder stages,
-          counties, and service populations.
+          counties, service populations, and documented gaps.
         </p>
       </div>
     );
   }
 
-  if (actors.length === 0 && pillars.length === 0) {
+  if (actors.length === 0 && gaps.length === 0 && pillars.length === 0) {
     return (
       <div className="rounded-xl border border-dashed border-border2 bg-surface p-6 text-center">
         <h2 className="font-heading text-base font-semibold text-text-primary">
@@ -76,6 +81,34 @@ export function SearchResults({
         ) : (
           <div className="rounded-xl border border-dashed border-border2 bg-surface p-5 text-sm text-text-muted">
             No actors match this search within the active filters.
+          </div>
+        )}
+      </section>
+
+      <section className="space-y-2" aria-labelledby="gap-results-heading">
+        <h2
+          id="gap-results-heading"
+          className="font-heading text-base font-semibold text-text-primary"
+        >
+          Gaps ({gaps.length})
+        </h2>
+        <p className="text-xs text-text-muted">
+          Showing {gaps.length} of {totalGapCount} documented gaps after search and filters.
+        </p>
+        {gaps.length > 0 ? (
+          <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2">
+            {gaps.map((gap) => (
+              <GapCard key={gap.id} className="opacity-100">
+                <p className="text-sm text-text-secondary">{gap.description}</p>
+                <p className="mt-2 text-[11px] text-text-muted">
+                  {gap.county} County · Pillar {gap.pillar} · {gap.status}
+                </p>
+              </GapCard>
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-xl border border-dashed border-border2 bg-surface p-5 text-sm text-text-muted">
+            No documented gaps match this search within the active filters.
           </div>
         )}
       </section>

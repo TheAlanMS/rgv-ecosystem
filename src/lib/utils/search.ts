@@ -1,5 +1,5 @@
 import { ALL_PILLARS } from "@/lib/data/pillars";
-import type { Actor, Pillar } from "@/lib/types";
+import type { Actor, Gap, Pillar } from "@/lib/types";
 
 interface ScoredResult<T> {
   item: T;
@@ -25,6 +25,16 @@ export function searchPillars(query: string, pillars: readonly Pillar[]): Pillar
   }
 
   return scoreAndSort(pillars, terms, getPillarSearchFields);
+}
+
+export function searchGaps(query: string, gaps: readonly Gap[]): Gap[] {
+  const terms = tokenizeQuery(query);
+
+  if (terms.length === 0) {
+    return [...gaps];
+  }
+
+  return scoreAndSort(gaps, terms, getGapSearchFields);
 }
 
 function scoreAndSort<T>(
@@ -97,6 +107,28 @@ function getPillarSearchFields(pillar: Pillar): string[] {
     pillar.capacity,
     pillar.group,
     pillar.status,
+  ];
+}
+
+function getGapSearchFields(gap: Gap): string[] {
+  const pillar = ALL_PILLARS.find((item) => item.id === gap.pillar);
+
+  return [
+    gap.id,
+    gap.description,
+    gap.county,
+    gap.status,
+    gap.flaggedBy,
+    `Pillar ${gap.pillar}`,
+    pillar
+      ? [
+          pillar.name,
+          pillar.capacity,
+          pillar.group,
+          pillar.description,
+          pillar.status,
+        ].join(" ")
+      : "",
   ];
 }
 

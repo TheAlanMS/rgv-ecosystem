@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { ALL_ACTORS, ALL_PILLARS } from "@/lib/data";
+import { ALL_ACTORS, ALL_GAPS, ALL_PILLARS } from "@/lib/data";
 import type { Actor } from "@/lib/types";
-import { searchActors, searchPillars } from "@/lib/utils/search";
+import { searchActors, searchGaps, searchPillars } from "@/lib/utils/search";
 
 const searchFixtures: Actor[] = [
   {
@@ -51,6 +51,7 @@ const searchFixtures: Actor[] = [
 describe("search utilities", () => {
   it("returns all records for an empty query", () => {
     expect(searchActors("  ", ALL_ACTORS)).toEqual(ALL_ACTORS);
+    expect(searchGaps("  ", ALL_GAPS)).toEqual(ALL_GAPS);
     expect(searchPillars("", ALL_PILLARS)).toEqual(ALL_PILLARS);
   });
 
@@ -69,6 +70,21 @@ describe("search utilities", () => {
   it("searches pillars by name and metadata", () => {
     expect(searchPillars("governance", ALL_PILLARS)[0]?.slug).toBe(
       "governance-accountability",
+    );
+  });
+
+  it("searches gaps by county, known descriptions, and pillar metadata", () => {
+    expect(searchGaps("Starr", ALL_GAPS)[0]?.id).toBe(
+      "gap-starr-county-actor-coverage",
+    );
+    expect(searchGaps("Willacy", ALL_GAPS)[0]?.id).toBe(
+      "gap-willacy-county-actor-coverage",
+    );
+    expect(searchGaps("angel network", ALL_GAPS)[0]?.id).toBe(
+      "gap-local-angel-networks",
+    );
+    expect(searchGaps("shared CRM", ALL_GAPS)[0]?.id).toBe(
+      "gap-shared-crm-intake",
     );
   });
 });

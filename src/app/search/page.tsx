@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Shell } from "@/components/layout/Shell";
 import { SearchPageContent } from "@/components/search/SearchPageContent";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { ALL_GAPS } from "@/lib/data/gaps";
 import { getAllActors } from "@/lib/queries/actors";
 import { getAllPillars } from "@/lib/queries/pillars";
 
@@ -17,7 +18,7 @@ export default function SearchPage() {
           subtitle="Find organizations, ecosystem pillars, services, counties, and gaps across the Rio Grande Valley."
         />
         <Suspense fallback={<SearchFallback />}>
-          <SearchPageContent actors={actors} pillars={pillars} />
+          <SearchPageContent actors={actors} gaps={ALL_GAPS} pillars={pillars} />
         </Suspense>
       </Shell>
     </main>

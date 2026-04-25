@@ -6,16 +6,21 @@ import { FilterBar } from "@/components/filters/FilterBar";
 import { SearchInput } from "@/components/search/SearchInput";
 import { SearchResults } from "@/components/search/SearchResults";
 import { useFilters } from "@/hooks/useFilters";
-import { filterActors, sortActors } from "@/lib/utils/filters";
-import { searchActors, searchPillars } from "@/lib/utils/search";
-import type { Actor, Pillar } from "@/lib/types";
+import { filterActors, filterGaps, sortActors } from "@/lib/utils/filters";
+import { searchActors, searchGaps, searchPillars } from "@/lib/utils/search";
+import type { Actor, Gap, Pillar } from "@/lib/types";
 
 interface SearchPageContentProps {
   actors: readonly Actor[];
+  gaps: readonly Gap[];
   pillars: readonly Pillar[];
 }
 
-export function SearchPageContent({ actors, pillars }: SearchPageContentProps) {
+export function SearchPageContent({
+  actors,
+  gaps,
+  pillars,
+}: SearchPageContentProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -46,7 +51,9 @@ export function SearchPageContent({ actors, pillars }: SearchPageContentProps) {
   );
 
   const filteredActors = filterActors(actors, filters);
+  const filteredGaps = filterGaps(gaps, filters);
   const actorResults = sortActors(searchActors(query, filteredActors), sortConfig);
+  const gapResults = searchGaps(query, filteredGaps);
   const pillarResults = searchPillars(query, pillars);
 
   return (
@@ -66,8 +73,10 @@ export function SearchPageContent({ actors, pillars }: SearchPageContentProps) {
       <SearchResults
         query={query}
         actors={actorResults}
+        gaps={gapResults}
         pillars={pillarResults}
         totalActorCount={actors.length}
+        totalGapCount={gaps.length}
       />
     </div>
   );
