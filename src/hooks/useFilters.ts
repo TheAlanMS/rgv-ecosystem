@@ -49,11 +49,16 @@ export function useFilters(options: UseFiltersOptions = {}) {
 
   const commitState = useCallback(
     (nextFilters: FilterState, nextSort: SortConfig) => {
-      const params = createParams(nextFilters, nextSort, lockedFilters);
+      const params = createParams(
+        nextFilters,
+        nextSort,
+        lockedFilters,
+        searchParams,
+      );
       const query = params.toString();
       router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
     },
-    [lockedFilters, pathname, router],
+    [lockedFilters, pathname, router, searchParams],
   );
 
   const setFilter = useCallback(
@@ -146,9 +151,12 @@ function createParams(
   filters: FilterState,
   sortConfig: SortConfig,
   lockedFilters: Partial<FilterState>,
+  currentParams: URLSearchParams,
 ): URLSearchParams {
-  const params = new URLSearchParams();
+  const params = new URLSearchParams(currentParams);
   const visibleFilters = removeLockedFilters(filters, lockedFilters);
+
+  clearManagedParams(params);
 
   appendList(params, "pillar", visibleFilters.pillar.map(String));
   appendList(params, "county", visibleFilters.county);
@@ -165,6 +173,19 @@ function createParams(
   }
 
   return params;
+}
+
+function clearManagedParams(params: URLSearchParams) {
+  [
+    "pillar",
+    "county",
+    "status",
+    "orgType",
+    "stage",
+    "pillarGroup",
+    "sort",
+    "dir",
+  ].forEach((key) => params.delete(key));
 }
 
 function removeLockedFilters(

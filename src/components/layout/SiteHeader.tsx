@@ -1,5 +1,6 @@
 import { Shell } from "./Shell";
 import { NavLink } from "./NavLink";
+import { HeaderSearch } from "@/components/search/HeaderSearch";
 
 export function SiteHeader() {
   return (
@@ -19,13 +20,17 @@ export function SiteHeader() {
             Open Source &middot; 2026
           </div>
         </div>
-        <nav className="flex gap-0.5">
-          <NavLink href="/map">Cardinal Map</NavLink>
-          <NavLink href="/pillars">Pillars</NavLink>
-          <NavLink href="/journeys">My Journey</NavLink>
-          <NavLink href="/ecosystem-health">Health</NavLink>
-          <NavLink href="/governance">Governance</NavLink>
-        </nav>
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <nav className="flex flex-wrap gap-0.5">
+            <NavLink href="/map">Cardinal Map</NavLink>
+            <NavLink href="/search">Search</NavLink>
+            <NavLink href="/pillars">Pillars</NavLink>
+            <NavLink href="/journeys">My Journey</NavLink>
+            <NavLink href="/ecosystem-health">Health</NavLink>
+            <NavLink href="/governance">Governance</NavLink>
+          </nav>
+          <HeaderSearch />
+        </div>
       </Shell>
     </header>
   );

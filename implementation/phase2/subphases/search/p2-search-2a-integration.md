@@ -1,32 +1,35 @@
 # p2-search-2a-integration
 
-> **Phase:** 2 — Interactive Features & Polish
+> **Phase:** 2 - Interactive Features & Polish
 > **Group:** Search (M2)
-> **Status:** ⬜ Not Started
+> **Status:** Complete
 > **Dependencies:** p2-search-1a-utilities, p2-search-1b-components
 
 ## Objective
 
-Create the /search page, add search to the site header, and wire search with filters.
+Create the `/search` page, add search to the site header, and wire search with filters.
 
 ## Tasks
 
 ### T1: Search page
 - **File:** `src/app/search/page.tsx`
-- **Create** search results page
-  - SearchInput at top
-  - SearchResults below
-  - FilterBar integration (search narrows within active filters)
-  - URL persistence: `/search?q=...`
+- **Created** search results page:
+  - SearchInput at top.
+  - SearchResults below.
+  - FilterBar integration.
+  - URL persistence with `/search?q=...`.
 
 ### T2: Header search
-- **File:** `src/components/layout/SiteHeader.tsx` (modify)
-  - Add compact SearchInput to navigation bar
-  - On submit/enter, navigate to `/search?q=...`
+- **File:** `src/components/layout/SiteHeader.tsx`
+- **Modified** header navigation:
+  - Added compact search input.
+  - Added Search nav item.
+  - Submit/Enter routes to `/search?q=...`.
 
 ### T3: Search + filter interop
-- Search narrows within active filters, or vice versa
-- Combined URL: `/search?q=tech&county=Cameron`
+- **File:** `src/hooks/useFilters.ts`
+- **Modified** filter URL updates to preserve unrelated params, including `q`.
+- Combined URLs such as `/search?q=tech&county=Cameron` remain stable while filters change.
 
 ## Files
 
@@ -34,18 +37,21 @@ Create the /search page, add search to the site header, and wire search with fil
 |--------|------|-----------|
 | Create | `src/app/search/page.tsx` | Yes |
 | Modify | `src/components/layout/SiteHeader.tsx` | Yes |
+| Modify | `src/hooks/useFilters.ts` | Shared |
 
 ## Acceptance Criteria
 
-- [ ] Typing in header search navigates to `/search?q=...`
-- [ ] Results grouped: Actors first, then Pillars
-- [ ] Empty query shows prompt text, not empty results
-- [ ] Search query persists in URL (shareable)
-- [ ] Results use existing ActorCard and PillarCard components
-- [ ] Search combines with filters if both active
+- [x] Typing in header search navigates to `/search?q=...`
+- [x] Results grouped: Actors first, then Pillars
+- [x] Empty query shows prompt text, not empty results
+- [x] Search query persists in URL (shareable)
+- [x] Results use existing ActorCard and PillarCard components
+- [x] Search combines with filters if both active
 
 ## Gate Check
 
 ```bash
 npx tsc --noEmit && npm run lint && npm run build
 ```
+
+Passed on 2026-04-25 using `cmd /c npx tsc --noEmit`, `cmd /c npm run lint`, and `cmd /c npm run build`.

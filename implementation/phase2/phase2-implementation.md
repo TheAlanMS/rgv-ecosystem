@@ -16,7 +16,7 @@ Phase 2 is the highest-leverage MVP phase. It turns the current static directory
 Current blockers this phase must close:
 
 - `/map` is currently a static card grid, not a filterable map/list product surface.
-- Search is absent.
+- Search is implemented with a dedicated `/search` route, header entry point, ranked actor and pillar results, and filter interop.
 - Role navigation is static and does not support the PRD's role + intent flow.
 - Actor coordinates are absent, so geographic map execution is blocked until the data audit completes.
 - No test suite exists.
@@ -98,8 +98,8 @@ Batch 11: [testing-2a] [testing-2b] [testing-2c] [testing-2d]
 - [ ] `/map` supports list view, geographic map view, and by-pillar view.
 - [ ] Filter state is shared by all `/map` views and persisted in URL search params.
 - [ ] Filters cover pillar, player type, county, stage served, and status.
-- [ ] Search is available from all pages and has a dedicated `/search` route.
-- [ ] Search results are ranked and grouped, with a no-result submit CTA.
+- [x] Search is available from all pages and has a dedicated `/search` route.
+- [x] Search results are ranked and grouped, with a no-result submit CTA.
 - [ ] Homepage uses two-step role + intent onboarding for all 8 roles.
 - [ ] Every role + intent route lands on a relevant filtered view.
 - [ ] 100% of actors have city-level coordinates, or documented exceptions are rendered as non-map list records.
