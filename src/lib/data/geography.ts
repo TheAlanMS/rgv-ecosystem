@@ -6,6 +6,10 @@ export interface CountyInfo {
   id: RgvCounty;
   name: string;
   cities: readonly string[];
+  centroid: {
+    lat: number;
+    lng: number;
+  };
 }
 
 export const COUNTY_DATA: readonly CountyInfo[] = [
@@ -20,6 +24,7 @@ export const COUNTY_DATA: readonly CountyInfo[] = [
       "Boca Chica",
       "South Padre Island",
     ],
+    centroid: { lat: 26.129, lng: -97.484 },
   },
   {
     id: "Hidalgo",
@@ -34,16 +39,19 @@ export const COUNTY_DATA: readonly CountyInfo[] = [
       "Alamo",
       "Mercedes",
     ],
+    centroid: { lat: 26.397, lng: -98.18 },
   },
   {
     id: "Starr",
     name: "Starr County",
     cities: ["Rio Grande City", "Roma"],
+    centroid: { lat: 26.562, lng: -98.747 },
   },
   {
     id: "Willacy",
     name: "Willacy County",
     cities: ["Raymondville", "Lyford"],
+    centroid: { lat: 26.481, lng: -97.592 },
   },
 ];
 
@@ -51,9 +59,15 @@ const RGV_COUNTIES = new Set<County>(["Cameron", "Hidalgo", "Starr", "Willacy"])
 
 export interface CountyMapContext {
   county: RgvCounty;
+  countyName: string;
+  centroid: {
+    lat: number;
+    lng: number;
+  };
   actorCount: number;
   gapCount: number;
   openGapCount: number;
+  openGaps: Gap[];
 }
 
 export interface GeographicMapContext {
@@ -74,12 +88,16 @@ export function getGeographicMapContext(
     outsideRegionActors,
     counties: COUNTY_DATA.map((county) => {
       const countyGaps = gaps.filter((gap) => gap.county === county.id);
+      const openGaps = countyGaps.filter((gap) => gap.status === "Open");
 
       return {
         county: county.id,
+        countyName: county.name,
+        centroid: county.centroid,
         actorCount: actors.filter((actor) => actor.county === county.id).length,
         gapCount: countyGaps.length,
-        openGapCount: countyGaps.filter((gap) => gap.status === "Open").length,
+        openGapCount: openGaps.length,
+        openGaps,
       };
     }),
   };

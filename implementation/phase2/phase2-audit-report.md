@@ -33,8 +33,8 @@ Manual browser and 320px visual overflow validation were not rerun in this audit
 | 1. Gap search integration | Complete | `searchGaps`, `/search` gap wiring, `SearchResults` gap rendering, utility tests, and `SearchResults` gap-only regression coverage are in place. |
 | 2. Role + intent relevance tests | Complete | `intents.test.ts` validates exposed onboarding intents, destination rules, strict map query params, non-empty actor/gap results, and selected-role journey routing. |
 | 3. Outside-RGV map handling | Complete | `getGeographicMapContext` separates RGV markers from outside-region partners, `LeafletEcosystemMap` plots only RGV actors, `ActorMarker` defensively refuses `OutsideRGV` actors, and regression tests preserve list visibility. |
-| 4. County/gap map context | Open | County summary context exists, but open gaps still need a stronger geographic treatment such as county markers, overlays, or checked-in county geometry. |
-| 5. Marker accessibility | Open | Marker color/size encoding still needs a legend and non-color affordance before the accessible marker claim should be marked Pass. |
+| 4. County/gap map context | Complete | County summaries now include centroid metadata and open gap lists; the geographic map renders numbered county centroid markers for open gaps. |
+| 5. Marker accessibility | Complete | The map now has visible actor/status/gap legends, and actor status uses border style in addition to marker size. |
 
 ## Area assessment
 
@@ -42,7 +42,7 @@ Manual browser and 320px visual overflow validation were not rerun in this audit
 | --- | --- | --- |
 | Filters | Green | Shared filter state is URL-backed and covers pillar, county, status, org type, stage, and pillar group. |
 | Search | Green | Actor, pillar, and gap search are implemented, ranked, routed, rendered, and covered by utility/component tests. |
-| Map | Yellow | List/map/pillar views exist and share actor filters. Outside-RGV actors are separated from RGV map markers; geographic gap overlays and marker accessibility remain open. |
+| Map | Green | List/map/pillar views exist and share actor filters. Outside-RGV actors are separated from RGV map markers; county-level open-gap markers and marker accessibility legends are in place. |
 | Pillar view | Green | By-pillar view reuses filtered actors through `PillarAccordion`; pillar detail pages use locked filters. |
 | Onboarding | Green | All 8 roles have intent routes, and route relevance/parseability is guarded by data tests. |
 | Polish | Yellow | Touch target classes are broadly present, but mobile overflow/runtime checks are not proven by this audit. |
@@ -182,8 +182,8 @@ Proposed solution:
 | Homepage uses two-step role + intent onboarding for all 8 roles | Pass | `OnboardingFlow` and `ROLE_INTENT_ROUTES` cover 8 roles. |
 | Every role + intent route lands on a relevant filtered view | Pass | Routes exist and are guarded by strict relevance/parseability tests. |
 | 100% actors have city-level coordinates or documented non-map exceptions | Pass | Coordinates exist; outside-RGV records are separated from RGV markers and remain visible in non-map list contexts. |
-| Geographic view uses Leaflet/OSM, clustering, county context, accessible marker colors | Partial | Leaflet/OSM/clustering and county summary context exist; gap overlays and stronger marker accessibility remain. |
-| Gap records remain visible in list, map, by-pillar, and health contexts | Partial | Gap cards appear on `/map` and health, and gaps are searchable; geographic gap overlays remain open. |
+| Geographic view uses Leaflet/OSM, clustering, county context, accessible marker colors | Pass | Leaflet/OSM/clustering, county summaries, numbered county gap markers, visible legends, and non-color status border styles are implemented. |
+| Gap records remain visible in list, map, by-pillar, and health contexts | Pass | Gap cards appear on `/map` and health, gaps are searchable, and open gaps render as county centroid markers in the geographic map view. |
 | Starr and Willacy gaps explicitly visible | Pass with caveat | Gap records exist and show in `/map` cards/health; geographic visualization is missing. |
 | Mobile touch targets and no 320px overflow | Partial | Classes suggest 44px targets; browser verification was not completed. |
 | Vitest covers data, queries, filters, search, slug, geography, key components | Pass with caveat | Coverage exists and now includes gap search rendering, route guardrails, and outside-RGV map handling; visual QA remains manual/deferred. |

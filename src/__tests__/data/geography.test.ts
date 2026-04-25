@@ -70,6 +70,14 @@ describe("geography seed data", () => {
 
       expect(county).toBeDefined();
       expect(county?.openGapCount).toBeGreaterThan(0);
+      expect(county?.centroid.lat).toEqual(expect.any(Number));
+      expect(county?.centroid.lng).toEqual(expect.any(Number));
+      expect(county?.openGaps.length).toBe(county?.openGapCount);
+      expect(
+        county?.openGaps.every(
+          (gap) => gap.county === countyName && gap.status === "Open",
+        ),
+      ).toBe(true);
     }
   });
 });

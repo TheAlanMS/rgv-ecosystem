@@ -7,7 +7,7 @@
 
 ```
 Phase 2 implementation  [####################]  24 / 24 subphases delivered
-Phase 2 closure status  Partial - map context, marker accessibility, and visual QA remain
+Phase 2 closure status  Partial - browser/mobile visual QA remains
 ```
 
 ## 9.9 Remediation Gates
@@ -129,7 +129,7 @@ testing  Delivered  5 / 5
 | Product success criteria | Partial | The reconciled Pass/Partial/Open table lives in `implementation/phase2/phase2-implementation.md`. |
 | Browser desktop smoke checks | Open | Routes are ready for validation, but this pass was not completed in Batch C. |
 | Mobile visual QA at 320px | Open | Prior Playwright snapshot/tab commands timed out; overflow and overlay behavior still need a real browser pass. |
-| Geographic trust hardening | Partial | Gap search, role-route guardrails, and outside-RGV marker policy are closed; county/gap map context and marker accessibility remain release work. |
+| Geographic trust hardening | Pass | Gap search, role-route guardrails, outside-RGV marker policy, county-level gap markers, and marker accessibility are closed. |
 | Gap search | Pass | Actor, pillar, and gap records are included in search results and covered by regression tests. |
 
 ## Notes
@@ -143,6 +143,8 @@ testing  Delivered  5 / 5
 - All 8 roles expose PRD-backed intent routes to journeys, filtered map views, or ecosystem health.
 - Actor map coordinates are city-center or representative coordinates until exact addresses are verified.
 - Starr and Willacy County actor-coverage gaps are explicit gap records.
+- Open county gaps now render as numbered centroid markers in the geographic map view, with copy clarifying they are county-level context rather than exact gap locations.
+- Map legends now explain actor pillar-group colors, status border styles, and county gap markers so status is not conveyed by color/size alone.
 - Mobile navigation now collapses behind a hamburger menu and header search opens as a dismissible mobile overlay.
 - Interactive controls on Phase 2 paths now use 44px touch targets, including filters, sorting, map toggles, journey controls, onboarding, search CTAs, and map popup actions.
 - Journey steps stack on small screens and map/list controls use stable full-width mobile rows to reduce overflow risk at 320px.

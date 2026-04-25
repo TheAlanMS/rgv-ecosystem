@@ -112,6 +112,34 @@ input {
   display: block;
 }
 
+.ecosystem-gap-marker {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.ecosystem-gap-marker span {
+  align-items: center;
+  background: var(--terra);
+  border: 2px dashed #f8fafc;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  color: #f8fafc;
+  display: flex;
+  font-size: 0.75rem;
+  font-weight: 700;
+  justify-content: center;
+  transform: rotate(45deg);
+}
+
+.ecosystem-gap-marker b {
+  display: block;
+  transform: rotate(-45deg);
+}
+
 .ecosystem-popup .leaflet-popup-content-wrapper,
 .ecosystem-popup .leaflet-popup-tip {
   background: #111827;

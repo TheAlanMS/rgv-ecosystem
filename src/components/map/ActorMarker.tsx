@@ -24,6 +24,13 @@ const STATUS_RADIUS: Record<Actor["status"], number> = {
   Inactive: 5,
 };
 
+const STATUS_PATTERN: Record<Actor["status"], string> = {
+  Active: "solid",
+  Emerging: "double",
+  Gap: "dashed",
+  Inactive: "dotted",
+};
+
 export function ActorMarker({ actor }: ActorMarkerProps) {
   if (!actor.coordinates || actor.county === "OutsideRGV") {
     return null;
@@ -35,7 +42,7 @@ export function ActorMarker({ actor }: ActorMarkerProps) {
   const touchSize = 44;
   const icon = L.divIcon({
     className: "ecosystem-marker",
-    html: `<span style="background:${color}; width:${size}px; height:${size}px;"></span>`,
+    html: `<span aria-hidden="true" style="background:${color}; border-style:${STATUS_PATTERN[actor.status]}; width:${size}px; height:${size}px;"></span>`,
     iconAnchor: [touchSize / 2, touchSize / 2],
     iconSize: [touchSize, touchSize],
     popupAnchor: [0, -size / 2],

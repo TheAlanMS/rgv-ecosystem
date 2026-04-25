@@ -1,6 +1,6 @@
 # Phase 2 — Interactive Features & Polish
 
-> **Status:** Partial - implementation delivered, hardening required
+> **Status:** Partial - implementation delivered, visual QA required
 > **Started:** 2026-04-23
 > **Closed for Batch C audit:** 2026-04-25
 > **Executor:** Multi-agent
@@ -21,7 +21,7 @@ Current blockers this phase targeted:
 - Actor coordinates and gap geography needed intentional handling.
 - A test suite needed to cover data, queries, filters, search, and component smoke behavior.
 
-Batch C closure records Phase 2 as product-partial rather than fully complete. A first-time user can start from the homepage, choose a role and intent or search directly, land on a filtered view, and switch between list/map/pillar views. The 2026-04-25 hardening pass closed searchable gaps, route-relevance tests, and outside-RGV map handling. Remaining hardening work is concentrated in county/gap map context, marker accessibility, and completed browser/mobile visual smoke checks.
+Batch C closure records Phase 2 as product-partial rather than fully complete. A first-time user can start from the homepage, choose a role and intent or search directly, land on a filtered view, and switch between list/map/pillar views. The 2026-04-25 hardening pass closed searchable gaps, route-relevance tests, outside-RGV map handling, county-level gap markers, and marker accessibility. Remaining release work is concentrated in completed browser/mobile visual smoke checks.
 
 ## Prerequisites
 
@@ -105,9 +105,9 @@ Batch 11: [testing-2a] [testing-2b] [testing-2c] [testing-2d]
 | Homepage uses two-step role + intent onboarding for all 8 roles. | Pass | `OnboardingFlow` and `ROLE_INTENT_ROUTES` cover all 8 roles. |
 | Every role + intent route lands on a relevant filtered view. | Pass | Routes are guarded by strict shape, destination, filter parseability, and actor/gap relevance tests. |
 | 100% of actors have city-level coordinates, or documented exceptions are rendered as non-map list records. | Pass | Coordinates exist; outside-RGV records are separated from RGV map markers and remain visible in non-map list contexts. |
-| Geographic view uses Leaflet/OpenStreetMap, marker clustering, county context, and accessible marker colors. | Partial | Leaflet, OSM, clustering, and county summary context are implemented; geographic gap overlays and stronger marker accessibility remain. |
-| Gap records remain visible in list, map, by-pillar, and health contexts. | Partial | Gap cards appear on `/map` and health, and gaps are searchable; geographic gap overlays remain. |
-| Starr and Willacy County gaps are explicitly visible, even where no active actors exist. | Pass | Gap records exist and are surfaced in `/map` cards and ecosystem health, with geographic visualization still tracked above. |
+| Geographic view uses Leaflet/OpenStreetMap, marker clustering, county context, and accessible marker colors. | Pass | Leaflet, OSM, clustering, county summaries, county-level open-gap markers, visible legends, and non-color status border styles are implemented. |
+| Gap records remain visible in list, map, by-pillar, and health contexts. | Pass | Gap cards appear on `/map` and health, gaps are searchable, and open county gaps render as numbered centroid markers in the geographic map view. |
+| Starr and Willacy County gaps are explicitly visible, even where no active actors exist. | Pass | Gap records exist and are surfaced in `/map` cards, ecosystem health, and county centroid markers in the geographic map view. |
 | All interactive controls meet mobile touch target expectations and do not create horizontal overflow at 320px. | Partial | Touch-target/layout classes were updated; browser/mobile visual smoke verification remains release work. |
 | Vitest covers data validation, queries, filters, search, slug utilities, geography, and smoke rendering of key components. | Pass | Automated suite covers these layers; route-critical client workflow tests remain recommended hardening. |
 | `npm run lint`, `npx tsc --noEmit`, `npm run build`, and `npm test` pass. | Pass | Verified in the Phase 2 audit on 2026-04-25. |
@@ -118,8 +118,8 @@ Batch 11: [testing-2a] [testing-2b] [testing-2c] [testing-2d]
 |------|--------|-------|
 | Browser smoke checks for `/`, `/search?q=capital`, `/map`, `/map?view=map`, `/map?view=pillars`, representative `/journeys/[role]`, and `/ecosystem-health`. | Open | Needed to close runtime/browser confidence beyond static and unit gates. |
 | Mobile 320px visual overflow pass for navigation, search overlay, map view toggles, filters, onboarding, journey steps, and gap cards. | Open | Prior Playwright snapshot/tab commands timed out during implementation; repeat manually or with stable Playwright CLI session. |
-| County/gap map context. | Open | Product-trust hardening remains for geographic gap overlays or equivalent county-level map treatment. |
-| Marker accessibility. | Open | Add a visible legend and non-color marker affordance before marking the accessible marker claim Pass. |
+| County/gap map context. | Complete | Open gaps render as numbered county centroid markers and county summaries retain actor/gap counts without implying address-level precision. |
+| Marker accessibility. | Complete | Visible legends explain pillar-group colors, status border styles, and county gap markers; actor status is no longer encoded only by color/size. |
 
 ## Scope Control
 
