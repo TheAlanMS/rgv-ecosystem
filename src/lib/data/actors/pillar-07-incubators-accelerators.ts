@@ -1,0 +1,73 @@
+import type { Actor } from "@/lib/types";
+
+export const PILLAR_07_ACTORS: Actor[] = [
+  {
+    id: "actor-ebridge-center-bcic",
+    name: "eBridge Center / BCIC",
+    slug: "ebridge-center-bcic",
+    orgType: "Incubator",
+    pillars: [7],
+    city: "Brownsville",
+    county: "Cameron",
+    description:
+      "The eBridge Center (Brownsville Community Improvement Corporation) is a business incubator offering affordable office space, mentoring, and startup programming in downtown Brownsville.",
+    whatTheyOffer: [
+      "Subsidized office and coworking space",
+      "Startup incubation programs",
+      "Business mentoring and technical assistance",
+    ],
+    whoTheyServe: ["Founders", "Students"],
+    status: "Active",
+    stagesServed: ["Idea", "PreSeed"],
+    dateAdded: "2026-04-22",
+    lastVerified: "2026-04-22",
+    verifiedBy: "system",
+    communitySubmitted: false,
+  },
+  {
+    id: "actor-utrgv-innovation-hub-cite",
+    name: "UTRGV Innovation Hub / CITE",
+    slug: "utrgv-innovation-hub-cite",
+    orgType: "Incubator",
+    pillars: [7],
+    city: "Edinburg",
+    county: "Hidalgo",
+    description:
+      "The UTRGV Center for Innovation and Commercialization (CITE) supports faculty and student startups through technology transfer, prototyping labs, and I-Corps programming.",
+    whatTheyOffer: [
+      "Technology transfer and IP commercialization",
+      "Prototyping labs and maker spaces",
+      "NSF I-Corps and lean-startup training",
+    ],
+    whoTheyServe: ["Founders", "Students", "Educators"],
+    status: "Active",
+    stagesServed: ["Idea", "PreSeed"],
+    dateAdded: "2026-04-22",
+    lastVerified: "2026-04-22",
+    verifiedBy: "system",
+    communitySubmitted: false,
+  },
+  {
+    id: "actor-stc-entrepreneurship-center",
+    name: "STC Entrepreneurship Center",
+    slug: "stc-entrepreneurship-center",
+    orgType: "Incubator",
+    pillars: [7],
+    city: "McAllen",
+    county: "Hidalgo",
+    description:
+      "The South Texas College Entrepreneurship Center provides micro-enterprise training, startup workshops, and student venture competitions for aspiring entrepreneurs.",
+    whatTheyOffer: [
+      "Micro-enterprise training programs",
+      "Student venture pitch competitions",
+      "Startup workshops and bootcamps",
+    ],
+    whoTheyServe: ["Founders", "Students"],
+    status: "Active",
+    stagesServed: ["Idea", "PreSeed"],
+    dateAdded: "2026-04-22",
+    lastVerified: "2026-04-22",
+    verifiedBy: "system",
+    communitySubmitted: false,
+  },
+];

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RGV Innovation Ecosystem — Cardinal Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c1810;--surface:#111f16;--surface2:#172419;--border:#1f3328;--border2:#2a4437;
+  --gold:#d4a84b;--gold2:#f0c96a;--green:#3d9e66;--green2:#52c484;
+  --terra:#c4583a;--terra2:#e07050;
+  --text:#f0ece0;--text2:#a8b8a0;--text3:#607868;
+  --info:#4a9ed4;--warn:#d4a84b;--danger:#c45838;--success:#3d9e66;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+
+/* LAYOUT */
+.shell{max-width:980px;margin:0 auto;padding:0 20px}
+
+/* HEADER */
+.site-header{padding:24px 0 0;border-bottom:1px solid var(--border)}
+.header-inner{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:16px}
+.site-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--gold);letter-spacing:-.02em}
+.site-sub{font-size:12px;color:var(--text3);margin-top:3px;font-weight:400;letter-spacing:.02em}
+.header-badge{font-size:10px;font-weight:500;background:var(--surface2);border:1px solid var(--border2);color:var(--text3);padding:4px 10px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase}
+
+/* NAV */
+.nav{display:flex;gap:2px;padding-bottom:0}
+.nav-btn{background:none;border:none;border-bottom:2px solid transparent;padding:10px 18px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text3);cursor:pointer;margin-bottom:-1px;font-weight:400;transition:color .15s,border-color .15s;letter-spacing:.01em}
+.nav-btn:hover{color:var(--text2)}
+.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold);font-weight:500}
+
+/* MAIN */
+.main{padding:28px 0 60px}
+
+/* DIAGNOSTIC */
+.diag{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:24px}
+.diag-label{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;font-family:'Syne',sans-serif}
+.diag-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.diag-cell{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.dc-label{font-size:10px;color:var(--text3);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.dc-val{font-size:12px;color:var(--text);line-height:1.4;font-weight:400}
+.dc-gap .dc-label{color:var(--terra2)}
+
+/* LEGEND */
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.leg{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text3)}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* MAP GRID */
+.map-flow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
+.map-infra{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.sec-header{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;font-family:'Syne',sans-serif;padding:0 2px}
+
+/* PILLAR CARD */
+.pc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:10px;cursor:pointer;transition:border-color .15s,background .15s;position:relative}
+.pc:last-child{margin-bottom:0}
+.pc:hover{border-color:var(--border2);background:var(--surface2)}
+.pc.active{border-color:var(--gold);background:var(--surface2)}
+.pc-num{font-size:10px;color:var(--text3);font-weight:600;font-family:'Syne',sans-serif;margin-bottom:3px;letter-spacing:.06em}
+.pc-name{font-size:13px;font-weight:500;color:var(--text);line-height:1.3;margin-bottom:3px;font-family:'Syne',sans-serif}
+.pc-cap{font-size:11px;color:var(--text3);margin-bottom:8px}
+.pc-foot{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.tag{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:100px;letter-spacing:.03em}
+.tag-supply{background:rgba(74,158,212,.15);color:#6db8e4;border:1px solid rgba(74,158,212,.25)}
+.tag-engine{background:rgba(61,158,102,.15);color:#52c484;border:1px solid rgba(61,158,102,.25)}
+.tag-demand{background:rgba(212,168,75,.15);color:#e8c070;border:1px solid rgba(212,168,75,.25)}
+.tag-infra{background:rgba(96,120,104,.2);color:var(--text3);border:1px solid var(--border2)}
+.tag-gap{background:rgba(196,88,56,.18);color:#e07060;border:1px solid rgba(196,88,56,.3);font-size:10px;padding:2px 7px;border-radius:100px;font-weight:500}
+.act-ct{font-size:10px;color:var(--text3)}
+
+/* DETAIL PANEL */
+.detail{background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:18px 20px;margin-top:14px}
+.det-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.det-title{font-size:15px;font-weight:600;color:var(--text);font-family:'Syne',sans-serif}
+.det-cap{font-size:12px;color:var(--text3);margin-top:3px}
+.close-btn{background:var(--surface2);border:1px solid var(--border2);color:var(--text3);font-size:11px;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:color .15s,border-color .15s}
+.close-btn:hover{color:var(--text);border-color:var(--border2)}
+.actors-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.actor{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;transition:border-color .15s}
+.actor:hover{border-color:var(--border2)}
+.actor.is-gap{border-style:dashed;opacity:.65}
+.actor.is-proposed{border-color:rgba(212,168,75,.4)}
+.a-name{font-size:12px;font-weight:500;color:var(--text);line-height:1.3}
+.a-gap-label{font-size:10px;font-weight:600;color:var(--terra2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.a-new-label{font-size:10px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.a-meta{font-size:10px;color:var(--text3);margin-top:3px}
+
+/* ROLES SCREEN */
+.screen-header{margin-bottom:24px}
+.screen-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:5px}
+.screen-sub{font-size:13px;color:var(--text3);line-height:1.5}
+.roles-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;transition:border-color .15s,background .15s}
+.rc:hover{border-color:var(--border2);background:var(--surface2)}
+.rc.sel{border-color:var(--gold);background:rgba(212,168,75,.06)}
+.r-init{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;font-family:'Syne',sans-serif;letter-spacing:0}
+.r-label{font-size:13px;font-weight:500;color:var(--text);font-family:'Syne',sans-serif}
+.r-desc{font-size:11px;color:var(--text3);margin-top:3px;line-height:1.4}
+.role-cta{margin-top:20px;text-align:center}
+.cta-btn{background:var(--gold);color:#0c1810;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;padding:10px 28px;border:none;border-radius:8px;cursor:pointer;transition:background .15s;letter-spacing:.02em}
+.cta-btn:hover{background:var(--gold2)}
+
+/* PATH SCREEN */
+.path-steps{display:flex;gap:0;margin:20px 0 0;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.ps{flex:1;padding:12px 10px;background:var(--surface);border-right:1px solid var(--border);cursor:pointer;transition:background .15s}
+.ps:last-child{border-right:none}
+.ps:hover,.ps.sel{background:var(--surface2)}
+.ps.sel{position:relative}
+.ps.sel::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold)}
+.ps-base{font-size:10px;font-weight:600;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;font-family:'Syne',sans-serif}
+.ps-act{font-size:11px;font-weight:500;color:var(--text);line-height:1.35}
+.ps-chips{display:flex;gap:3px;margin-top:6px;flex-wrap:wrap}
+.ps-chip{font-size:10px;padding:2px 6px;border-radius:100px;background:var(--surface2);color:var(--text3);border:1px solid var(--border);white-space:nowrap}
+.step-detail{background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:16px 18px;margin-top:12px}
+.sd-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-family:'Syne',sans-serif}
+.sd-tip{font-size:13px;color:var(--text2);line-height:1.7}
+.pillar-links{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.plink{padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:border-color .15s}
+.plink:hover{border-color:var(--border2)}
+.pl-num{font-size:10px;font-weight:600;margin-bottom:3px;font-family:'Syne',sans-serif}
+.pl-name{font-size:12px;font-weight:500;color:var(--text);margin-bottom:2px;font-family:'Syne',sans-serif}
+.pl-cap{font-size:11px;color:var(--text3)}
+.pl-ct{font-size:10px;color:var(--text3);margin-top:4px;opacity:.7}
+.path-footer{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:space-between}
+.ghost-btn{background:none;border:1px solid var(--border2);color:var(--text3);font-size:12px;padding:7px 16px;border-radius:7px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:color .15s,border-color .15s}
+.ghost-btn:hover{color:var(--text);border-color:var(--text3)}
+.no-role{text-align:center;padding:40px 20px;color:var(--text3);font-size:13px}
+.hint{font-size:11px;color:var(--text3);text-align:center;padding:12px 0;opacity:.7}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .map-flow,.map-infra,.diag-row,.roles-grid,.actors-grid,.pillar-links{grid-template-columns:1fr}
+  .path-steps{flex-direction:column}
+  .ps{border-right:none;border-bottom:1px solid var(--border)}
+  .ps:last-child{border-bottom:none}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <div class="site-title">RGV Innovation Ecosystem</div>
+        <div class="site-sub">Cardinal Map &mdash; Rio Grande City &rarr; Brownsville &middot; I2E Framework</div>
+      </div>
+      <div class="header-badge">Open Source &middot; 2026</div>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn active" onclick="nav('map')">Cardinal Map</button>
+      <button class="nav-btn" onclick="nav('roles')">Enter the Ecosystem</button>
+      <button class="nav-btn" onclick="nav('path')">My Path</button>
+    </nav>
+  </header>
+
+  <main class="main" id="main-content"></main>
+</div>
+
+<script>
+const PILLARS = [
+  {id:1,name:"Innovation Customers",cap:"Demand & Adoption",group:"demand",
+   actors:[
+    {n:"SpaceX / Starbase",t:"Corporate",c:"Boca Chica"},
+    {n:"DHR Health System",t:"Healthcare",c:"McAllen / Edinburg"},
+    {n:"Valley Baptist Medical Center",t:"Healthcare",c:"Brownsville / Harlingen"},
+    {n:"UTRGV (as institutional buyer)",t:"University",c:"Edinburg / Brownsville"},
+    {n:"City of Brownsville",t:"Municipal Government",c:"Brownsville"},
+    {n:"City of McAllen",t:"Municipal Government",c:"McAllen"},
+    {n:"BISD / HISD / MCISD",t:"K-12 Institutions",c:"RGV-wide"},
+    {n:"CBP / Border Operations",t:"Federal Agency",c:"RGV-wide"},
+  ]},
+  {id:2,name:"Talent Pool",cap:"Build & Execute",group:"supply",
+   actors:[
+    {n:"UTRGV Graduates",t:"University Talent",c:"RGV-wide"},
+    {n:"South Texas College Alumni",t:"Community College Talent",c:"McAllen / Weslaco"},
+    {n:"TSTC Graduates",t:"Technical College Talent",c:"Harlingen"},
+    {n:"FLI Cohort Alumni",t:"Accelerator Alumni",c:"Brownsville"},
+    {n:"Diaspora / Returning Talent",t:"Informal Pipeline",c:"RGV-wide",gap:true},
+    {n:"Binational Engineers (RGV / Matamoros)",t:"Binational Talent",c:"RGV–Matamoros",gap:true},
+  ]},
+  {id:3,name:"Capital Providers",cap:"Risk & Growth Capital",group:"demand",
+   actors:[
+    {n:"EDA Federal Grants",t:"Federal Grant",c:"National"},
+    {n:"USDA Rural Development",t:"Federal Grant",c:"RGV-wide"},
+    {n:"SBA Loan Programs",t:"Debt Capital",c:"RGV-wide"},
+    {n:"IBC Bank / Lone Star National Bank",t:"Regional Banking",c:"RGV-wide"},
+    {n:"Generations Federal Credit Union",t:"CDFI / Banking",c:"RGV-wide"},
+    {n:"TX Workforce Commission Grants",t:"State Grant",c:"Statewide"},
+    {n:"Local Angel Networks (informal)",t:"Angel Capital",c:"McAllen / Brownsville",gap:true},
+  ]},
+  {id:4,name:"Education & Pipelines",cap:"Talent Development",group:"supply",
+   actors:[
+    {n:"UTRGV",t:"R1 University",c:"Edinburg / Brownsville"},
+    {n:"South Texas College",t:"Community College",c:"McAllen / Weslaco"},
+    {n:"Texas State Technical College",t:"Technical College",c:"Harlingen"},
+    {n:"IDEA Public Schools",t:"Charter K-12",c:"RGV-wide"},
+    {n:"Harmony Public Schools",t:"Charter K-12",c:"RGV-wide"},
+    {n:"FLI — Frontera Leadership Institute",t:"EDO / Accelerator",c:"Brownsville"},
+    {n:"BISD / HISD CTE Programs",t:"Public K-12 CTE",c:"RGV-wide"},
+    {n:"RGV SBDC Network",t:"Training Program",c:"RGV-wide"},
+  ]},
+  {id:5,name:"Professional Services",cap:"Friction Removal",group:"engine",
+   actors:[
+    {n:"RGV SBDC",t:"Business Advisory",c:"RGV-wide"},
+    {n:"Regional CPA / Accounting Firms",t:"Accounting",c:"RGV-wide"},
+    {n:"IP / Corporate Law Firms",t:"Legal",c:"McAllen / Brownsville"},
+    {n:"Texas RioGrande Legal Aid",t:"Legal Aid",c:"RGV-wide"},
+    {n:"Workforce Solutions RGV",t:"HR / Workforce",c:"RGV-wide"},
+  ]},
+  {id:6,name:"Communities & Peer Groups",cap:"Trust & Reputation",group:"supply",
+   actors:[
+    {n:"RGV Chamber of Commerce",t:"Chamber",c:"RGV-wide"},
+    {n:"Brownsville Chamber",t:"Chamber",c:"Brownsville"},
+    {n:"McAllen Chamber",t:"Chamber",c:"McAllen"},
+    {n:"Valley Hispanic Chamber",t:"Chamber",c:"RGV-wide"},
+    {n:"1909 Community",t:"Coworking / Network",c:"McAllen"},
+    {n:"Valley Young Professionals",t:"Professional Network",c:"RGV-wide"},
+    {n:"FLI Ambassador Program",t:"Leadership Network",c:"Brownsville"},
+    {n:"Women's Business Center RGV",t:"Network / Program",c:"RGV-wide"},
+  ]},
+  {id:7,name:"Incubators & Accelerators",cap:"Company Formation",group:"engine",
+   actors:[
+    {n:"eBridge Center / BCIC",t:"Incubator",c:"Brownsville"},
+    {n:"FLI — Frontera Leadership Institute",t:"Accelerator",c:"Brownsville"},
+    {n:"UTRGV Innovation Hub / CITE",t:"University Incubator",c:"Edinburg"},
+    {n:"STC Entrepreneurship Center",t:"CC Program",c:"McAllen"},
+    {n:"1909 McAllen",t:"Coworking / Accelerator",c:"McAllen"},
+    {n:"RGV SBDC",t:"Advisory Program",c:"RGV-wide"},
+  ]},
+  {id:8,name:"Advocacy & Policy",cap:"Permission & Unblocking",group:"infra",
+   actors:[
+    {n:"BEDC — Brownsville Economic Dev. Corp",t:"EDC",c:"Brownsville"},
+    {n:"MEDC — McAllen Economic Dev. Corp",t:"EDC",c:"McAllen"},
+    {n:"RGVEDA",t:"Regional Alliance",c:"RGV-wide"},
+    {n:"Cameron County",t:"County Government",c:"Brownsville"},
+    {n:"Hidalgo County",t:"County Government",c:"Edinburg"},
+    {n:"TX Economic Development Office",t:"State Agency",c:"Austin"},
+    {n:"U.S. Congressional Offices (Dist. 15 / 34)",t:"Federal",c:"RGV-wide"},
+  ]},
+  {id:9,name:"Shared Operating Platform",cap:"Memory & Coordination",group:"infra",
+   actors:[
+    {n:"RGV Ecosystem Map (this platform)",t:"Proposed Platform",c:"RGV-wide",proposed:true},
+    {n:"LinkedIn / RGV Informal Groups",t:"Informal Network",c:"RGV-wide"},
+    {n:"Shared CRM / Intake System",t:"Infrastructure Gap",c:"—",gap:true},
+    {n:"Cross-org Outcome Tracking",t:"Infrastructure Gap",c:"—",gap:true},
+  ]},
+  {id:10,name:"Governance & Accountability",cap:"Standards & Outcomes",group:"infra",
+   actors:[
+    {n:"BEDC / MEDC",t:"Economic Dev. Corp",c:"RGV-wide"},
+    {n:"RGVEDA",t:"Regional Alliance",c:"RGV-wide"},
+    {n:"UTRGV / STC Boards",t:"Institution",c:"RGV-wide"},
+    {n:"City Councils (Brownsville, McAllen, etc.)",t:"Local Government",c:"RGV-wide"},
+    {n:"County Commissioners Courts",t:"County Government",c:"RGV-wide"},
+  ]},
+];
+
+const ROLES = [
+  {id:"startup",init:"F",ibg:"rgba(212,168,75,.18)",icol:"#e8c070",label:"Startup / Founder",desc:"Building a venture or product"},
+  {id:"student",init:"B",ibg:"rgba(74,158,212,.18)",icol:"#6db8e4",label:"Student / Builder",desc:"Learning and entering the ecosystem"},
+  {id:"investor",init:"$",ibg:"rgba(61,158,102,.18)",icol:"#52c484",label:"Investor / Funder",desc:"Deploying capital or grants"},
+  {id:"educator",init:"E",ibg:"rgba(74,158,212,.18)",icol:"#6db8e4",label:"Educator / University",desc:"Developing talent and knowledge"},
+  {id:"edo",init:"ED",ibg:"rgba(96,120,104,.25)",icol:"#a8b8a0",label:"EDO / Ecosystem Builder",desc:"Building the ecosystem itself"},
+  {id:"corporate",init:"C",ibg:"rgba(212,168,75,.18)",icol:"#e8c070",label:"Corporate / Buyer",desc:"Seeking innovation partners"},
+  {id:"service",init:"SP",ibg:"rgba(96,120,104,.25)",icol:"#a8b8a0",label:"Service Provider",desc:"Supporting ventures with expertise"},
+  {id:"policy",init:"G",ibg:"rgba(96,120,104,.25)",icol:"#a8b8a0",label:"Policy / Government",desc:"Creating enabling conditions"},
+];
+
+const PATHS = {
+  startup:{title:"Founder's Journey",steps:[
+    {base:"1st Base",label:"Get educated & connected",pillars:[4,6],tip:"Find a program that fits where you are — FLI, eBridge, STC, or UTRGV. Join a peer community. Build your foundation before you pitch anyone anything. The community you find here is your safety net and your first feedback loop."},
+    {base:"2nd Base",label:"Build & get supported",pillars:[7,5],tip:"Enter an accelerator or incubator. Access legal, financial, and advisory support to sharpen your model. eBridge and FLI are Brownsville anchors; 1909 and STC serve McAllen. Stage-appropriate support matters — too much too soon creates dependency, too little leaves you stuck."},
+    {base:"3rd Base",label:"Raise capital & build your team",pillars:[3,2],tip:"Access EDA grants, SBA programs, and SBDC resources before you go anywhere near equity. Start recruiting from UTRGV, STC, and TSTC. Local angel networks are emerging — build relationships with potential investors long before you need a check."},
+    {base:"Home Plate",label:"Land customers & scale",pillars:[1,8],tip:"Land your first institutional customer — SpaceX, DHR Health, a city contract, a school district pilot. Then engage BEDC, MEDC, and your congressional office to unlock larger procurement and policy opportunities. One anchor customer changes everything."},
+  ]},
+  student:{title:"Builder's Entry Path",steps:[
+    {base:"1st Base",label:"Learn & find your people",pillars:[4,6],tip:"UTRGV, STC, TSTC, and FLI are your starting points. Don't just take classes — join communities. Valley Young Professionals and the FLI Ambassador Program connect you to people who are building real things right now."},
+    {base:"2nd Base",label:"Build real things",pillars:[7,2],tip:"Join an accelerator or innovation program. Work alongside other builders. FLI and UTRGV's Innovation Hub both offer real project environments where you ship something before you graduate."},
+    {base:"3rd Base",label:"Professionalize & get funded",pillars:[5,3],tip:"Access SBDC advising and legal/financial support early. Apply for grants, competitions, and workforce programs. TX Workforce Commission and EDA have tracks that apply to emerging builders — you don't have to wait until you have a company."},
+    {base:"Home Plate",label:"Launch & lead from the front",pillars:[1,10],tip:"Find real customers. Land a pilot with an institution or local business. Then mentor someone coming up behind you — that's how ecosystems regenerate. Leadership in this ecosystem is about what you give back, not just what you build."},
+  ]},
+  investor:{title:"Capital Deployer's Path",steps:[
+    {base:"1st Base",label:"Map the full system first",pillars:[9,10],tip:"Use the shared platform and understand governance structures before you deploy. Know who sets standards and who's accountable. The RGV lacks a formal investor coordination layer — your presence here helps create one. That's leverage."},
+    {base:"2nd Base",label:"Source the pipeline",pillars:[7,4],tip:"Connect with eBridge, FLI, UTRGV's Innovation Hub, and STC to find companies at the right stage. These programs are your deal flow infrastructure — treat them accordingly and invest in their health."},
+    {base:"3rd Base",label:"Evaluate talent depth & diligence",pillars:[2,5],tip:"Assess the talent pool behind each venture. Engage regional CPAs and legal firms with startup experience. The talent base is growing — verify depth, not just founder brilliance. Teams survive pivots; solo founders often don't."},
+    {base:"Home Plate",label:"Deploy & become a regional anchor",pillars:[1,8],tip:"Connect portfolio companies to innovation customers like SpaceX, DHR, and city governments. Engage BEDC, MEDC, and congressional offices to open procurement doors. Anchor investors in the RGV become ecosystem builders by default."},
+  ]},
+  educator:{title:"Educator's Alignment Path",steps:[
+    {base:"1st Base",label:"See the whole system first",pillars:[9,10],tip:"Understand real ecosystem demand signals before designing curriculum. Know what SpaceX, DHR, the cities, and growing local ventures actually need from graduates — not just what credentialing bodies require."},
+    {base:"2nd Base",label:"Connect programs to market",pillars:[6,7],tip:"Partner with accelerators and embed faculty and students in real community and market contexts. FLI, eBridge, and 1909 are natural co-design partners. Curriculum that's co-designed with the ecosystem produces graduates the ecosystem actually hires."},
+    {base:"3rd Base",label:"Align outcomes to real demand",pillars:[1,2],tip:"Build curriculum toward customer needs and talent gaps. Create pathways that end in real jobs, contracts, and ventures — not just credentials. SpaceX, DHR, and growing ventures need specific skills that you can help develop."},
+    {base:"Home Plate",label:"Advocate & sustain your programs",pillars:[3,8],tip:"Leverage EDA, USDA, and TWC funding to sustain pipelines long-term. Be present and vocal at the BEDC, MEDC, and RGVEDA policy table. Your data on graduate outcomes is the ecosystem's most credible evidence for continued investment."},
+  ]},
+  edo:{title:"Ecosystem Builder's Path",steps:[
+    {base:"1st Base",label:"Map it before you build it",pillars:[9,10],tip:"Build shared platforms and accountability structures before programming. Establish who's responsible for what across the region. You cannot steward what you cannot see — and the RGV's primary bottleneck is coordination, not energy or talent."},
+    {base:"2nd Base",label:"Enable pipelines & policy",pillars:[4,8],tip:"Align UTRGV, STC, and TSTC to real demand. Create enabling conditions at the BEDC, MEDC, and county level. Education and policy alignment are your highest-leverage moves — everything else builds on them."},
+    {base:"3rd Base",label:"Activate programs & community",pillars:[7,6],tip:"Fund and support eBridge, FLI, and 1909. Cultivate trust networks between actors across the ecosystem. The chambers, young professionals, and peer groups are your connective tissue — invest in them."},
+    {base:"Home Plate",label:"Drive demand & attract capital",pillars:[1,3],tip:"Actively recruit innovation customers to the RGV. Build relationships with EDA, angel networks, and venture funds who can see the region's potential. Make outcomes visible publicly — that's your best tool for attracting more of the same."},
+  ]},
+  corporate:{title:"Innovation Buyer's Path",steps:[
+    {base:"1st Base",label:"Map who builds what",pillars:[9,10],tip:"Understand the ecosystem before you reach out to anyone. Know the governance structures, credentialing systems, and which programs produce the talent and ventures you need. Approaching the RGV without this map creates friction on both sides."},
+    {base:"2nd Base",label:"Source talent & venture partners",pillars:[7,2],tip:"Connect with eBridge, FLI, UTRGV, and STC to find venture partners and talent pipelines. These programs know who's ready and can do the first filter for you. Treat them as partners, not vendors."},
+    {base:"3rd Base",label:"Navigate policy & contracting",pillars:[8,5],tip:"Understand incentive programs from BEDC, MEDC, and county offices. Know compliance requirements and contracting pathways specific to the RGV. Use regional legal and accounting firms who know the terrain — they'll save you months."},
+    {base:"Home Plate",label:"Pilot, adopt & anchor the region",pillars:[1,3],tip:"Pilot solutions from local ventures. Then become a capital anchor — invest in the ecosystem that feeds your pipeline. SpaceX's presence in Boca Chica already demonstrated what one anchor customer can do for an entire regional ecosystem."},
+  ]},
+  service:{title:"Service Provider's Path",steps:[
+    {base:"1st Base",label:"Show up before you pitch",pillars:[6,9],tip:"Join the chambers, Valley Young Professionals, and FLI's community. Get listed on the ecosystem map. Earn trust by being present and useful long before you ask for business. The RGV ecosystem rewards consistent, visible contribution."},
+    {base:"2nd Base",label:"Embed in programs",pillars:[7,4],tip:"Become a trusted resource inside FLI, eBridge, and UTRGV's programs. Be useful without being extractive — stage-appropriate service is the whole game. Over-servicing early-stage founders creates dependency, not growth."},
+    {base:"3rd Base",label:"Serve founders & enterprises",pillars:[2,1],tip:"Support founders at the right stage. Build relationships with the enterprise clients — SpaceX, DHR, the city governments — who need your expertise at scale. The two sides of the market require very different engagement approaches."},
+    {base:"Home Plate",label:"Sustain & grow with the ecosystem",pillars:[10,3],tip:"Meet governance and ethical standards set by RGVEDA and BEDC/MEDC. Build capital relationships that help your practice grow alongside the region. Your long-term success is structurally tied to the ecosystem's health."},
+  ]},
+  policy:{title:"Policy Leader's Path",steps:[
+    {base:"1st Base",label:"Diagnose the system honestly",pillars:[9,10],tip:"Understand what's working and what structural barriers exist before you write policy. Map the gaps — especially in capital, platform infrastructure, and coordination. Evidence-based diagnosis is what separates ecosystem policy from political signaling."},
+    {base:"2nd Base",label:"Enable pipelines & remove barriers",pillars:[8,4],tip:"Create policy incentives for talent development and education. Work with UTRGV, STC, TSTC, and FLI to remove friction between learning and earning. Workforce development policy that doesn't connect to real ecosystem demand is wasted."},
+    {base:"3rd Base",label:"Catalyze capital & programs",pillars:[7,3],tip:"Fund incubators and accelerators. Use EDA, USDA, and TWC programs to attract patient capital. Remove the structural friction points that keep money from reaching founders — especially first-generation entrepreneurs from underrepresented communities."},
+    {base:"Home Plate",label:"Connect demand & celebrate impact",pillars:[1,6],tip:"Connect innovation customers to local ventures through active brokerage — not passive waiting. Then celebrate outcomes publicly with the chambers and community. What gets celebrated publicly gets replicated. That's the ecosystem flywheel in action."},
+  ]},
+};
+
+const GC = {
+  supply: {tagClass:"tag-supply",color:"#6db8e4"},
+  engine: {tagClass:"tag-engine",color:"#52c484"},
+  demand: {tagClass:"tag-demand",color:"#e8c070"},
+  infra:  {tagClass:"tag-infra", color:"#a8b8a0"},
+};
+
+let ST = {screen:"map", role:null, pillar:null, step:null};
+
+function byId(id){ return PILLARS.find(p=>p.id===id); }
+
+function pillarCard(p){
+  const gc = GC[p.group];
+  const gapCt = p.actors.filter(a=>a.gap).length;
+  const cls = ST.pillar===p.id ? " active" : "";
+  return `<div class="pc${cls}" onclick="selPillar(${p.id})">
+    <div class="pc-num">Pillar ${p.id}</div>
+    <div class="pc-name">${p.name}</div>
+    <div class="pc-cap">${p.cap}</div>
+    <div class="pc-foot">
+      <span class="tag ${gc.tagClass}">${p.group.charAt(0).toUpperCase()+p.group.slice(1)}</span>
+      ${gapCt>0?`<span class="tag-gap">${gapCt} gap${gapCt>1?"s":""}</span>`:""}
+      <span class="act-ct">${p.actors.length} actors</span>
+    </div>
+  </div>`;
+}
+
+function detailPanel(){
+  if(!ST.pillar) return "";
+  const p = byId(ST.pillar);
+  const gc = GC[p.group];
+  return `<div class="detail" id="dpanel">
+    <div class="det-top">
+      <div>
+        <div class="det-title" style="color:${gc.color}">Pillar ${p.id}: ${p.name}</div>
+        <div class="det-cap">${p.cap}</div>
+      </div>
+      <button class="close-btn" onclick="selPillar(null)">Close</button>
+    </div>
+    <div class="actors-grid">
+      ${p.actors.map(a=>`<div class="actor${a.gap?" is-gap":""}${a.proposed?" is-proposed":""}">
+        ${a.gap?'<div class="a-gap-label">Gap</div>':''}
+        ${a.proposed?'<div class="a-new-label">Proposed</div>':''}
+        <div class="a-name">${a.n}</div>
+        <div class="a-meta">${a.t} &middot; ${a.c}</div>
+      </div>`).join("")}
+    </div>
+  </div>`;
+}
+
+function renderMap(){
+  const sup = PILLARS.filter(p=>p.group==="supply");
+  const eng = PILLARS.filter(p=>p.group==="engine");
+  const dem = PILLARS.filter(p=>p.group==="demand");
+  const inf = PILLARS.filter(p=>p.group==="infra");
+  return `
+    <div class="diag">
+      <div class="diag-label">Ecosystem Diagnostic &mdash; RGV 2026</div>
+      <div class="diag-row">
+        <div class="diag-cell">
+          <div class="dc-label">Strong pillars</div>
+          <div class="dc-val">Education, Communities, Customers, Policy, Accelerators</div>
+        </div>
+        <div class="diag-cell dc-gap">
+          <div class="dc-label">Critical gaps</div>
+          <div class="dc-val">Formal angel/venture capital &middot; Shared coordination platform &middot; PSP depth</div>
+        </div>
+        <div class="diag-cell">
+          <div class="dc-label">Primary bottleneck</div>
+          <div class="dc-val">Capital infrastructure + ecosystem coordination layer</div>
+        </div>
+      </div>
+    </div>
+    <div class="legend">
+      <div class="leg"><span class="leg-dot" style="background:rgba(74,158,212,.6)"></span>Supply side</div>
+      <div class="leg"><span class="leg-dot" style="background:rgba(61,158,102,.6)"></span>The engine</div>
+      <div class="leg"><span class="leg-dot" style="background:rgba(212,168,75,.6)"></span>Demand side</div>
+      <div class="leg"><span class="leg-dot" style="background:rgba(96,120,104,.5)"></span>Infrastructure</div>
+      <div class="leg" style="margin-left:4px;font-size:10px">Dashed border = gap &nbsp;&middot;&nbsp; Click any pillar to see actors</div>
+    </div>
+    <div class="map-flow">
+      <div><div class="sec-header">Supply &rarr;</div>${sup.map(pillarCard).join("")}</div>
+      <div><div class="sec-header">Engine &rarr;</div>${eng.map(pillarCard).join("")}</div>
+      <div><div class="sec-header">&larr; Demand</div>${dem.map(pillarCard).join("")}</div>
+    </div>
+    <div class="sec-header" style="margin-bottom:10px">Ecosystem Infrastructure (foundation layer)</div>
+    <div class="map-infra">${inf.map(pillarCard).join("")}</div>
+    ${detailPanel()}
+  `;
+}
+
+function renderRoles(){
+  const sel = ST.role ? ROLES.find(r=>r.id===ST.role) : null;
+  return `
+    <div class="screen-header">
+      <div class="screen-title">Find your place in the ecosystem</div>
+      <div class="screen-sub">Select your role to see how you fit, what you need, and who you should connect with across the RGV.</div>
+    </div>
+    <div class="roles-grid">
+      ${ROLES.map(r=>`<div class="rc${ST.role===r.id?" sel":""}" onclick="selRole('${r.id}')">
+        <div class="r-init" style="background:${r.ibg};color:${r.icol}">${r.init}</div>
+        <div>
+          <div class="r-label">${r.label}</div>
+          <div class="r-desc">${r.desc}</div>
+        </div>
+      </div>`).join("")}
+    </div>
+    ${sel?`<div class="role-cta">
+      <button class="cta-btn" onclick="nav('path')">See my path as ${sel.label} &rarr;</button>
+    </div>`:""}
+  `;
+}
+
+function renderPath(){
+  if(!ST.role) return `
+    <div class="no-role">
+      <div class="screen-title" style="margin-bottom:8px">My Path</div>
+      <div style="margin-bottom:20px;font-size:13px;color:var(--text3)">Select your role first to see your personalized ecosystem journey.</div>
+      <button class="cta-btn" onclick="nav('roles')">Select your role &rarr;</button>
+    </div>`;
+  const role = ROLES.find(r=>r.id===ST.role);
+  const path = PATHS[ST.role];
+  const active = ST.step!==null ? path.steps[ST.step] : null;
+  return `
+    <div class="screen-header">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <div class="r-init" style="width:28px;height:28px;font-size:11px;background:${role.ibg};color:${role.icol}">${role.init}</div>
+        <span style="font-size:12px;color:var(--text3)">${role.label}</span>
+      </div>
+      <div class="screen-title">${path.title}</div>
+      <div class="screen-sub">Your four-base progression through the RGV ecosystem — from foundation to full impact. Click each base to see your strategy.</div>
+    </div>
+    <div class="path-steps">
+      ${path.steps.map((s,i)=>`<div class="ps${ST.step===i?" sel":""}" onclick="selStep(${i})">
+        <div class="ps-base">${s.base}</div>
+        <div class="ps-act">${s.label}</div>
+        <div class="ps-chips">
+          ${s.pillars.map(pid=>`<span class="ps-chip">${byId(pid).name}</span>`).join("")}
+        </div>
+      </div>`).join("")}
+    </div>
+    ${active?`
+    <div class="step-detail">
+      <div class="sd-label">${active.base} &mdash; Strategy</div>
+      <div class="sd-tip">${active.tip}</div>
+      <div class="pillar-links">
+        ${active.pillars.map(pid=>{
+          const p=byId(pid);
+          const gc=GC[p.group];
+          return`<div class="plink" onclick="nav('map');setTimeout(()=>selPillar(${p.id}),60)">
+            <div class="pl-num" style="color:${gc.color}">Pillar ${p.id}</div>
+            <div class="pl-name">${p.name}</div>
+            <div class="pl-cap">${p.cap}</div>
+            <div class="pl-ct">${p.actors.length} actors mapped &rarr;</div>
+          </div>`;
+        }).join("")}
+      </div>
+    </div>
+    `:`<div class="hint">Click any base above to reveal your strategy</div>`}
+    <div class="path-footer">
+      <button class="ghost-btn" onclick="nav('roles')">&larr; Change role</button>
+      <button class="ghost-btn" onclick="nav('map')">Explore full map &rarr;</button>
+    </div>
+  `;
+}
+
+function setActiveNav(screen){
+  document.querySelectorAll('.nav-btn').forEach((btn,i)=>{
+    const screens=['map','roles','path'];
+    btn.classList.toggle('active', screens[i]===screen);
+  });
+}
+
+function render(){
+  let html = "";
+  if(ST.screen==="map") html = renderMap();
+  else if(ST.screen==="roles") html = renderRoles();
+  else if(ST.screen==="path") html = renderPath();
+  document.getElementById("main-content").innerHTML = html;
+  setActiveNav(ST.screen);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function nav(s){
+  ST.screen=s;
+  if(s!=="map") ST.pillar=null;
+  if(s!=="path") ST.step=null;
+  render();
+}
+
+function selPillar(id){
+  ST.pillar = ST.pillar===id ? null : id;
+  render();
+  if(ST.pillar){
+    setTimeout(()=>{
+      const panel = document.getElementById("dpanel");
+      if(panel) panel.scrollIntoView({behavior:"smooth",block:"nearest"});
+    },60);
+  }
+}
+
+function selRole(id){
+  ST.role = ST.role===id ? null : id;
+  render();
+}
+
+function selStep(i){
+  ST.step = ST.step===i ? null : i;
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

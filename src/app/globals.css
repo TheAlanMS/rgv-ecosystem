@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* ── Design Tokens ── */
+/* Sourced from rgv-ecosystem-map.html reference */
+
+:root {
+  /* Backgrounds */
+  --bg: #0c1810;
+  --surface: #111f16;
+  --surface2: #172419;
+
+  /* Borders */
+  --border: #1f3328;
+  --border2: #2a4437;
+
+  /* Accent */
+  --gold: #d4a84b;
+  --gold2: #f0c96a;
+
+  /* Ecosystem */
+  --green: #3d9e66;
+  --green2: #52c484;
+  --terra: #c4583a;
+  --terra2: #e07050;
+
+  /* Text hierarchy */
+  --text-primary: #f0ece0;
+  --text-secondary: #a8b8a0;
+  --text-muted: #607868;
+
+  /* Semantic */
+  --info: #4a9ed4;
+  --warn: #d4a84b;
+  --danger: #c45838;
+  --success: #3d9e66;
+
+  /* Pillar group colors */
+  --supply-bg: rgba(74, 158, 212, 0.15);
+  --supply-fg: #6db8e4;
+  --supply-border: rgba(74, 158, 212, 0.25);
+
+  --engine-bg: rgba(61, 158, 102, 0.15);
+  --engine-fg: #52c484;
+  --engine-border: rgba(61, 158, 102, 0.25);
+
+  --demand-bg: rgba(212, 168, 75, 0.15);
+  --demand-fg: #e8c070;
+  --demand-border: rgba(212, 168, 75, 0.25);
+
+  --infra-bg: rgba(96, 120, 104, 0.2);
+  --infra-fg: #a8b8a0;
+  --infra-border: rgba(96, 120, 104, 0.35);
+
+  --gap-bg: rgba(196, 88, 56, 0.18);
+  --gap-fg: #e07060;
+  --gap-border: rgba(196, 88, 56, 0.3);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-border-default: var(--border);
+  --color-border2: var(--border2);
+  --color-gold: var(--gold);
+  --color-gold2: var(--gold2);
+  --color-green: var(--green);
+  --color-green2: var(--green2);
+  --color-terra: var(--terra);
+  --color-terra2: var(--terra2);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-info: var(--info);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+
+  --font-heading: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}

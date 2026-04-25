@@ -1,0 +1,70 @@
+import type { Actor } from "@/lib/types";
+
+export const PILLAR_10_ACTORS: Actor[] = [
+  {
+    id: "actor-utrgv-stc-boards",
+    name: "UTRGV / STC Boards",
+    slug: "utrgv-stc-boards",
+    orgType: "Government",
+    pillars: [10],
+    city: "Edinburg",
+    county: "Hidalgo",
+    description:
+      "The governing boards of UTRGV and South Texas College set strategic direction, approve budgets, and oversee accountability for the region's two largest higher-education institutions.",
+    whatTheyOffer: [
+      "Higher-education strategic governance",
+      "Budget oversight and resource allocation",
+      "Institutional accountability frameworks",
+    ],
+    whoTheyServe: ["Educators", "Students", "Policy leaders"],
+    status: "Active",
+    dateAdded: "2026-04-22",
+    lastVerified: "2026-04-22",
+    verifiedBy: "system",
+    communitySubmitted: false,
+  },
+  {
+    id: "actor-city-councils-brownsville-mcallen",
+    name: "City Councils (Brownsville, McAllen, etc.)",
+    slug: "city-councils-brownsville-mcallen",
+    orgType: "Government",
+    pillars: [10],
+    city: "Brownsville",
+    county: "Cameron",
+    description:
+      "City councils in Brownsville, McAllen, and other RGV municipalities approve economic-development incentives, zoning changes, and public spending that shape the local innovation climate.",
+    whatTheyOffer: [
+      "Municipal policy and zoning decisions",
+      "Economic development incentive approvals",
+      "Public budget and spending oversight",
+    ],
+    whoTheyServe: ["Founders", "Policy leaders", "EDOs"],
+    status: "Active",
+    dateAdded: "2026-04-22",
+    lastVerified: "2026-04-22",
+    verifiedBy: "system",
+    communitySubmitted: false,
+  },
+  {
+    id: "actor-county-commissioners-courts",
+    name: "County Commissioners Courts",
+    slug: "county-commissioners-courts",
+    orgType: "Government",
+    pillars: [10],
+    city: "Edinburg",
+    county: "Hidalgo",
+    description:
+      "County Commissioners Courts in Cameron and Hidalgo counties govern county tax rates, infrastructure bonds, and intergovernmental agreements that affect ecosystem-wide accountability.",
+    whatTheyOffer: [
+      "County tax-rate governance",
+      "Infrastructure bond approvals",
+      "Intergovernmental agreements and oversight",
+    ],
+    whoTheyServe: ["Policy leaders", "EDOs", "Founders"],
+    status: "Active",
+    dateAdded: "2026-04-22",
+    lastVerified: "2026-04-22",
+    verifiedBy: "system",
+    communitySubmitted: false,
+  },
+];
