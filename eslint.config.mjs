@@ -13,6 +13,9 @@ const eslintConfig = defineConfig([
     "build/**",
     "coverage/**",
     "next-env.d.ts",
+    // Playwright test files (compiled by Playwright's own esbuild, not ESLint)
+    "tests/**",
+    "playwright.config.ts",
   ]),
 ]);
 
