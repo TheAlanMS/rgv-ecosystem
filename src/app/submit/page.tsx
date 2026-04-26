@@ -1,5 +1,6 @@
 import { Shell } from "@/components/layout/Shell";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { SubmitForm } from "@/components/forms/SubmitForm";
 
 export default function SubmitPage() {
   return (
@@ -25,6 +26,10 @@ export default function SubmitPage() {
           />
         </div>
 
+        <div className="mb-8">
+          <SubmitForm />
+        </div>
+
         <div className="bg-surface border border-border-default rounded-[10px] p-5">
           <h2 className="font-heading text-sm font-semibold text-text-primary mb-2">
             How submissions work
@@ -48,10 +53,6 @@ export default function SubmitPage() {
               you receive a clear explanation and alternative suggestions.
             </li>
           </ol>
-          <p className="text-xs text-text-muted mt-4">
-            Submission forms are coming in a future update. For now, email
-            submissions to the FLI team directly.
-          </p>
         </div>
       </Shell>
     </main>

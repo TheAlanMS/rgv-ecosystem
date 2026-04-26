@@ -20,6 +20,7 @@ import type * as health from "../health.js";
 import type * as importSeedData from "../importSeedData.js";
 import type * as journeys from "../journeys.js";
 import type * as pillars from "../pillars.js";
+import type * as submissions from "../submissions.js";
 
 const fullApi: ApiFromModules<{
   actors: typeof actors;
@@ -28,6 +29,7 @@ const fullApi: ApiFromModules<{
   importSeedData: typeof importSeedData;
   journeys: typeof journeys;
   pillars: typeof pillars;
+  submissions: typeof submissions;
 }> = anyApi as any;
 
 export const api: FilterApi<

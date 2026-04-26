@@ -2,7 +2,7 @@
 
 > **Phase:** 3 - Backend & Persistence
 > **Group:** API
-> **Status:** Not Started
+> **Status:** Completed
 > **Dependencies:** p3-database-3a-validation-bridge
 
 ## Objective
@@ -21,12 +21,12 @@ Create the submission API endpoint for community-submitted actors, corrections, 
 
 ## Acceptance Criteria
 
-- [ ] New listing, correction, and gap flag payloads have discriminated Zod schemas.
-- [ ] Invalid payloads return typed 400 responses with field-level errors.
-- [ ] Valid payloads create pending submissions only.
-- [ ] Public API response never includes submitter email beyond the submitter's own confirmation response.
-- [ ] Rate limiting prevents obvious spam without blocking normal users.
-- [ ] Submission records include audit-ready timestamps.
+- [x] New listing, correction, and gap flag payloads have discriminated Zod schemas.
+- [x] Invalid payloads return typed 400 responses with field-level errors.
+- [x] Valid payloads create pending submissions only.
+- [x] Public API response never includes submitter email beyond the submitter's own confirmation response.
+- [x] Rate limiting prevents obvious spam without blocking normal users.
+- [x] Submission records include audit-ready timestamps.
 
 ## Preliminary Files
 

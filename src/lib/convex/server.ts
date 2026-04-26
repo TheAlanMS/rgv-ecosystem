@@ -1,6 +1,7 @@
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../../../convex/_generated/api";
 import type { County, GapStatus, PillarGroup, Status } from "@/lib/types";
+import type { CreateSubmissionInput } from "@/lib/types/submission";
 import {
   mapActorDocument,
   mapActorDocuments,
@@ -25,6 +26,20 @@ export async function getConvexActors(limit?: number) {
   return mapActorDocuments(
     await getConvexClient().query(api.actors.list, { limit }),
   );
+}
+
+export async function getConvexActorsPage(filters: {
+  county?: County;
+  status?: Status;
+  pillarGroup?: PillarGroup;
+  limit?: number;
+  offset?: number;
+}) {
+  const page = await getConvexClient().query(api.actors.listFiltered, filters);
+  return {
+    ...page,
+    items: mapActorDocuments(page.items),
+  };
 }
 
 export async function getConvexActorBySlug(slug: string) {
@@ -121,4 +136,10 @@ export async function getConvexJourneyByRole(roleId: string) {
 
 export async function getConvexHealthMetrics() {
   return await getConvexClient().query(api.health.metrics, {});
+}
+
+export async function createConvexSubmission(submission: CreateSubmissionInput) {
+  return await getConvexClient().mutation(api.submissions.create, {
+    submission,
+  });
 }

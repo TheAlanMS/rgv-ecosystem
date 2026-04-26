@@ -6,7 +6,7 @@
 ## Overall
 
 ```text
-Phase 3  #########-----------  5 / 11 subphases
+Phase 3  ###############-----  8 / 11 subphases
 ```
 
 ## Database
@@ -27,12 +27,12 @@ database  ####################  5 / 5
 
 | Subphase | Status | Agent | Commit |
 |----------|--------|-------|--------|
-| p3-api-1a-route-handlers | Not Started | - | - |
-| p3-api-1b-submission-api | Not Started | - | - |
-| p3-api-2a-submit-form | Not Started | - | - |
+| p3-api-1a-route-handlers | Completed | Codex + Banach | - |
+| p3-api-1b-submission-api | Completed | Codex + Franklin | - |
+| p3-api-2a-submit-form | Completed | Codex + Franklin | - |
 
 ```text
-api  --------------------  0 / 3
+api  ####################  3 / 3
 ```
 
 ## Auth

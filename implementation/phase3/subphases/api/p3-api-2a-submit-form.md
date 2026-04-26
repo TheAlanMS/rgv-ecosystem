@@ -1,8 +1,8 @@
 # p3-api-2a-submit-form
 
-> **Phase:** 3 — Backend & Persistence
+> **Phase:** 3 - Backend & Persistence
 > **Group:** API
-> **Status:** ⬜ Not Started
+> **Status:** Completed
 > **Dependencies:** p3-api-1a-route-handlers, p3-api-1b-submission-api
 
 ## Objective
@@ -22,13 +22,13 @@ Wire the existing /submit page to the submission API with actual form fields and
 
 ## Acceptance Criteria
 
-- [ ] `/submit` no longer says submission forms are coming later.
-- [ ] Users can choose new listing, correction, or gap flag.
-- [ ] Required fields match the PRD submission and correction workflows.
-- [ ] Client and server validation share schemas or equivalent field rules.
-- [ ] Success state confirms that submission is under review, not published.
-- [ ] Error state is actionable and does not lose user-entered data.
-- [ ] Submitter email is labeled as private and not published.
+- [x] `/submit` no longer says submission forms are coming later.
+- [x] Users can choose new listing, correction, or gap flag.
+- [x] Required fields match the PRD submission and correction workflows.
+- [x] Client and server validation share schemas or equivalent field rules.
+- [x] Success state confirms that submission is under review, not published.
+- [x] Error state is actionable and does not lose user-entered data.
+- [x] Submitter email is labeled as private and not published.
 
 ## Preliminary Files
 

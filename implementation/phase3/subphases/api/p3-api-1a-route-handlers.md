@@ -2,7 +2,7 @@
 
 > **Phase:** 3 - Backend & Persistence
 > **Group:** API
-> **Status:** Not Started
+> **Status:** Completed
 > **Dependencies:** p3-database-3a-validation-bridge
 
 ## Objective
@@ -20,11 +20,11 @@ Create public Next.js Route Handlers for actors and pillars with pagination and 
 
 ## Acceptance Criteria
 
-- [ ] Public responses are typed and bounded.
-- [ ] Invalid filters return typed 400 responses.
-- [ ] Missing records return typed 404 responses.
-- [ ] Route handlers do not duplicate Convex query logic.
-- [ ] Public responses contain only validated public fields.
+- [x] Public responses are typed and bounded.
+- [x] Invalid filters return typed 400 responses.
+- [x] Missing records return typed 404 responses.
+- [x] Route handlers do not duplicate Convex query logic.
+- [x] Public responses contain only validated public fields.
 
 ## Preliminary Files
 
