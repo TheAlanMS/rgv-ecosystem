@@ -102,7 +102,7 @@ The pattern: **sequential at the subphase level, parallel within each subphase.*
 | Phase 1-2 (pre-tests) | `npx tsc --noEmit && npm run lint && npm run build` | After each subphase |
 | Phase 2 (after M7) | `npx tsc --noEmit && npm run lint && npm run build && npm test` | After each subphase |
 | Phase 3+ | `npx tsc --noEmit && npm run lint && npm run build && npm test` | After each subphase |
-| Phase 3 (database) | Add `npx prisma validate && npx prisma generate` | After database subphases |
+| Phase 3 (database) | Add `npx convex codegen`; run `npx convex dev` during active Convex development to push functions/schema and inspect logs | After database subphases |
 | Any phase (final) | Full gate + manual verification | After last subphase |
 
 **Rule**: Gate failure stops execution. Fix before advancing. Never skip or `--force`.
@@ -145,7 +145,7 @@ All planning docs use: **`p{phase}-{group}-{sequence}-{description}.md`**
 p1-types-1a-enums-and-schemas.md    ← Phase 1, types, first task group, enums/schemas
 p2-filters-1a-infrastructure.md     ← Phase 2, filters, first task group, infrastructure
 p2-map-2b-data-audit.md             ← Phase 2, map, second batch task B, data audit
-p3-database-1a-prisma-init.md       ← Phase 3, database, first task group, Prisma init
+p3-database-1a-convex-init.md       ← Phase 3, database, first task group, Convex init
 p6-partners-2a-admin-ui.md          ← Phase 6, partners, second batch task A, admin UI
 ```
 

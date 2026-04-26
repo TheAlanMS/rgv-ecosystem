@@ -1,20 +1,30 @@
 # p3-api-1a-route-handlers
 
-> **Phase:** 3 — Backend & Persistence
+> **Phase:** 3 - Backend & Persistence
 > **Group:** API
-> **Status:** ⬜ Not Started
+> **Status:** Not Started
 > **Dependencies:** p3-database-3a-validation-bridge
 
 ## Objective
 
-Create Next.js Route Handlers for actors and pillars with pagination and filtering.
+Create public Next.js Route Handlers for actors and pillars with pagination and filtering. Route handlers should delegate persistence reads to Convex queries or validated Convex-backed server helpers.
 
 ## Scope
 
-- `GET /api/actors` — list with pagination, filtering by county/status/pillarGroup
-- `GET /api/actors/[slug]` — single actor by slug
-- `GET /api/pillars` — list all pillars
-- `GET /api/pillars/[slug]` — single pillar with related actors
+- `GET /api/actors` - list with pagination, filtering by county/status/pillarGroup
+- `GET /api/actors/[slug]` - single actor by slug
+- `GET /api/pillars` - list all pillars
+- `GET /api/pillars/[slug]` - single pillar with related actors
+- Responses use the Zod validation bridge before returning public data
+- Private submission fields are never exposed through public route handlers
+
+## Acceptance Criteria
+
+- [ ] Public responses are typed and bounded.
+- [ ] Invalid filters return typed 400 responses.
+- [ ] Missing records return typed 404 responses.
+- [ ] Route handlers do not duplicate Convex query logic.
+- [ ] Public responses contain only validated public fields.
 
 ## Preliminary Files
 

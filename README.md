@@ -64,7 +64,7 @@ The PRD should be treated as the source of truth for product requirements. The H
 - React Server Components where useful
 - Tailwind CSS or a clean component styling system
 - Zod for schema validation
-- PostgreSQL or Supabase for structured actor data
+- Convex for structured actor data, submissions, moderation workflows, and backend functions
 - Map layer for geography view
 - MDX or CMS-backed content for governance and pillar education pages
 - Test suite covering data contracts, filtering logic, and role-based journeys

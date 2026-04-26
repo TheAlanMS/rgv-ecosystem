@@ -1,23 +1,23 @@
 # p3-api-1b-submission-api
 
-> **Phase:** 3 — Backend & Persistence
+> **Phase:** 3 - Backend & Persistence
 > **Group:** API
-> **Status:** ⬜ Not Started
+> **Status:** Not Started
 > **Dependencies:** p3-database-3a-validation-bridge
 
 ## Objective
 
-Create the submission API endpoint for community-submitted actors, corrections, and gap flags.
+Create the submission API endpoint for community-submitted actors, corrections, and gap flags. The endpoint should validate HTTP payloads and call Convex mutations for persistence.
 
 ## Scope
 
 - `POST /api/submissions` with Zod validation
-- Submission model in Prisma: type, data, status (pending), submitter name/email, timestamps
+- Convex submission table: type, payload, status (pending), submitter name/email, timestamps
 - Supported submission types: new listing, correction, gap flag
 - Store submitter email privately; never expose it through public read APIs
 - Status values: pending, needs_more_info, approved, declined, published
-- Basic rate limiting (IP-based, in-memory for V1)
-- Define SubmissionSchema
+- Basic rate limiting (IP-based, in-memory for V1 unless Convex-side throttling is added)
+- Define `SubmissionSchema`
 
 ## Acceptance Criteria
 
@@ -34,6 +34,7 @@ Create the submission API endpoint for community-submitted actors, corrections, 
 |--------|------|
 | Create | `src/app/api/submissions/route.ts` |
 | Create | `src/lib/types/submission.ts` |
-| Modify | `prisma/schema.prisma` |
+| Modify | `convex/schema.ts` |
+| Create | `convex/submissions.ts` |
 
 ## Detailed task breakdown to be completed at phase start.

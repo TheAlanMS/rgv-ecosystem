@@ -1,13 +1,30 @@
-# Phase 3 — Backend & Persistence
+# Phase 3 - Backend & Persistence
 
-> **Status:** ⬜ Not Started
-> **Started:** —
-> **Completed:** —
+> **Status:** Not Started
+> **Started:** -
+> **Completed:** -
 > **Executor:** TBD
 
 ## Objective
 
-Migrate from static seed data to a persistent database layer with Prisma + PostgreSQL, add API route handlers for CRUD operations, create a functional submission system, and implement basic authentication for admin/moderator access.
+Migrate from static seed data to a Convex backend and database, add typed server functions for reads and writes, expose bounded public HTTP/API surfaces where needed, create a functional submission system, and implement basic admin/moderator authentication.
+
+## Architecture Decision
+
+Phase 3 now uses **Convex backend + Convex database** instead of Prisma + PostgreSQL.
+
+Convex is the system of record for persisted Phase 3 data. The existing Zod schemas remain the product-facing validation contract so the app can continue to prove that database-backed actors, pillars, gaps, roles, and journeys match the Phase 1/2 data model.
+
+Target backend shape:
+
+```text
+Next.js app
+  -> Convex React/server clients
+  -> Convex queries, mutations, actions, and HTTP actions
+  -> Convex database
+```
+
+Next.js route handlers may still exist for public HTTP compatibility, CSV/JSON export, or form boundaries, but they should call Convex functions instead of owning persistence logic.
 
 ## 9.9 Remediation Focus
 
@@ -20,43 +37,46 @@ Current blockers this phase must close:
 - There is no API contract for actors, pillars, gaps, submissions, or corrections.
 - There is no persistence-backed audit path for community input.
 
-The target state is a small, typed backend that preserves the Phase 1/2 data contracts while enabling public submission workflows and admin review in Phase 4.
+The target state is a small, typed Convex backend that preserves the Phase 1/2 data contracts while enabling public submission workflows and admin review in Phase 4.
 
 ## Prerequisites
 
 - Phase 2 complete (all interactive features and test suite)
-- PostgreSQL instance available (local or hosted)
+- Convex project available for local development and deployment
+- `CONVEX_DEPLOYMENT` and `NEXT_PUBLIC_CONVEX_URL` configured in local environment files
 
 ## Subphase Groups
 
 | Group | Folder | Subphases | Depends On | Description |
 |-------|--------|-----------|------------|-------------|
-| Database | `subphases/database/` | 5 | — | Prisma setup, schema, migration, query migration, validation bridge |
-| API | `subphases/api/` | 3 | Database | Route handlers, submission API, submit form wiring |
-| Auth | `subphases/auth/` | 3 | Database, API | NextAuth setup, admin routes, role guards |
+| Database | `subphases/database/` | 5 | - | Convex setup, schema, import, query migration, validation bridge |
+| API | `subphases/api/` | 3 | Database | Public route wrappers, submission API, submit form wiring |
+| Auth | `subphases/auth/` | 3 | Database, API | Convex-compatible auth setup, admin routes, role guards |
 
 ## Dependency Graph
 
-```
-database ──> api ──> auth
+```text
+database -> api -> auth
 ```
 
-## Key Decisions (to be made at phase start)
+## Key Decisions
 
-- PostgreSQL hosting provider (prefer Supabase or Neon unless the user chooses otherwise)
-- NextAuth v5 provider strategy (email/password for V1, OAuth later)
-- API response format and pagination strategy
-- Whether CSV/JSON export is implemented through an API endpoint, static generation, or both
+- Convex is the Phase 3 database and backend function layer.
+- Existing Zod schemas remain the validation layer for public data contracts.
+- Public read surfaces should be bounded, typed, and callable from Next.js without exposing private submission fields.
+- Submission writes should go through Convex mutations and never publish directly.
+- Authentication should integrate with Convex user identity and store app roles in Convex.
+- CSV/JSON export can be implemented through a Convex HTTP action, a Next.js route handler that calls Convex, or both.
 
 ## MVP Backend Cut Line
 
 Build only what the V1 PRD needs:
 
-- Actor, pillar, gap, submission, correction, and moderation decision models.
-- Read APIs for public actors, pillars, gaps, and health metrics.
-- Write APIs for new listing submissions, corrections, and gap flags.
-- Admin-only review APIs for approve, request more info, decline, and publish.
-- Validation bridge between Prisma models and existing Zod schemas.
+- Actor, pillar, gap, role, journey, submission, correction, gap flag, moderation decision, and admin user role tables.
+- Convex queries for public actors, pillars, gaps, journeys, roles, and health metrics.
+- Convex mutations for new listing submissions, corrections, and gap flags.
+- Admin-only Convex mutations for approve, request more info, decline, and publish.
+- Validation bridge between Convex documents and existing Zod schemas.
 - CSV or JSON export for open data access.
 
 Defer:
@@ -69,20 +89,21 @@ Defer:
 ## Gate Checks
 
 - After each subphase: `npx tsc --noEmit && npm run lint && npm run build && npm test`
-- After database subphases: add `npx prisma validate && npx prisma generate`
+- After database subphases: add `npx convex codegen`; when a Convex deployment is configured, run `npx convex dev` during development to push functions/schema and inspect logs
+- Before shipping Convex writes: inspect Convex dashboard/runtime logs for failed functions and schema errors
 
 ## Phase 3 Success Criteria
 
-- [ ] Database schema preserves all current actor, pillar, gap, journey, and governance data fields required by the PRD.
-- [ ] Database schema supports submissions, corrections, gap flags, moderation status, reviewer notes, and timestamps.
-- [ ] Existing static seed data migrates without data loss.
-- [ ] All actors pass Zod validation after migration.
-- [ ] Public read APIs are paginated or bounded and typed.
-- [ ] Submission APIs validate all user input and never publish directly.
+- [ ] Convex schema preserves all current actor, pillar, gap, journey, role, and governance data fields required by the PRD.
+- [ ] Convex schema supports submissions, corrections, gap flags, moderation status, reviewer notes, private submitter fields, and timestamps.
+- [ ] Existing static seed data imports into Convex without data loss.
+- [ ] All database-backed actors pass Zod validation after import.
+- [ ] Public read APIs/queries are paginated or bounded and typed.
+- [ ] Submission mutations validate all user input and never publish directly.
 - [ ] Submitter email is stored privately and is never exposed in public APIs.
-- [ ] Admin APIs require authentication and role checks.
+- [ ] Admin APIs/mutations require authentication and role checks.
 - [ ] Open data export is available as CSV or JSON.
-- [ ] `npx prisma validate`, `npx prisma generate`, `npm run lint`, `npx tsc --noEmit`, `npm run build`, and `npm test` pass.
+- [ ] `npx convex codegen`, `npx tsc --noEmit`, `npm run lint`, `npm run build`, and `npm test` pass.
 
 ## What Phase 3 Does NOT Include
 

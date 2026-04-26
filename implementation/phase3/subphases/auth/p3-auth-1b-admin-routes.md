@@ -1,13 +1,13 @@
 # p3-auth-1b-admin-routes
 
-> **Phase:** 3 — Backend & Persistence
+> **Phase:** 3 - Backend & Persistence
 > **Group:** Auth
-> **Status:** ⬜ Not Started
-> **Dependencies:** p3-auth-1a-nextauth-setup
+> **Status:** Not Started
+> **Dependencies:** p3-auth-1a-convex-auth-setup
 
 ## Objective
 
-Create protected admin routes with login page and minimal dashboard.
+Create protected admin routes with a login page and minimal dashboard backed by Convex queries.
 
 ## Scope
 
@@ -15,6 +15,14 @@ Create protected admin routes with login page and minimal dashboard.
 - `/admin/login` page
 - Minimal admin dashboard: submission count, actor count, pending reviews
 - Redirect unauthenticated users to login
+- Dashboard counts read from Convex through role-protected helpers
+
+## Acceptance Criteria
+
+- [ ] Unauthenticated users cannot access `/admin`.
+- [ ] Authenticated admin/moderator users can access the dashboard.
+- [ ] Dashboard metrics come from Convex and do not expose private submission payloads unnecessarily.
+- [ ] Login route matches the selected Convex-compatible auth provider.
 
 ## Preliminary Files
 
