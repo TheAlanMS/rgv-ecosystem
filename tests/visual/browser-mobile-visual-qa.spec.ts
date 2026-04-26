@@ -172,15 +172,7 @@ test.describe('Browser Smoke Checks', () => {
 
     await test.step('Switch back to List view', async () => {
       await page.getByRole('button', { name: 'List' }).first().click();
-      await page.waitForTimeout(500);
-      const url = page.url();
-      const isStillOnMapOrPillar = url.includes('view=map') || url.includes('view=pillar');
-      expect(
-        isStillOnMapOrPillar,
-        'URL still shows map/pillar view after clicking List.\n' +
-          'Defect: List view toggle does not update URL.\n' +
-          'Route: /map, Browser: Chromium, Severity: High.',
-      ).toBe(false);
+      await expect(page).not.toHaveURL(/view=map|view=pillar/, { timeout: 3000 });
     });
   });
 
