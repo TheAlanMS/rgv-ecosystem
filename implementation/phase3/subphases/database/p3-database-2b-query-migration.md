@@ -2,7 +2,7 @@
 
 > **Phase:** 3 - Backend & Persistence
 > **Group:** Database
-> **Status:** Not Started
+> **Status:** Completed
 > **Dependencies:** p3-database-2a-data-import
 
 ## Objective
@@ -19,11 +19,11 @@ Add Convex-backed query functions while preserving the existing synchronous stat
 
 ## Acceptance Criteria
 
-- [ ] Existing synchronous query tests continue to pass unless deliberately updated.
-- [ ] Convex query functions return bounded, ordered, typed results.
-- [ ] Missing slug/id lookups return `null` or `undefined` consistently at the adapter boundary.
-- [ ] Public queries never return private submitter fields.
-- [ ] Query helpers document whether they read static data or Convex data.
+- [x] Existing synchronous query tests continue to pass unless deliberately updated.
+- [x] Convex query functions return bounded, ordered, typed results.
+- [x] Missing slug/id lookups return `null` or `undefined` consistently at the adapter boundary.
+- [x] Public queries never return private submitter fields.
+- [x] Query helpers document whether they read static data or Convex data.
 
 ## Preliminary Files
 

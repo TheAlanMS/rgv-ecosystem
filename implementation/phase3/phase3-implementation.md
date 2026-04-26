@@ -1,9 +1,17 @@
 # Phase 3 - Backend & Persistence
 
-> **Status:** Not Started
-> **Started:** -
+> **Status:** In Progress
+> **Started:** 2026-04-26
 > **Completed:** -
 > **Executor:** TBD
+
+## Database Implementation Note
+
+The database subphases were implemented on 2026-04-26. `npx convex codegen`
+was attempted, but Convex requires `CONVEX_DEPLOYMENT` to be configured before
+codegen can run in this environment. The generated stubs are present so local
+TypeScript validation can resolve Convex APIs, and codegen should be rerun after
+the project is connected to a Convex deployment.
 
 ## Objective
 

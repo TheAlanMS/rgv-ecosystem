@@ -2,7 +2,7 @@
 
 > **Phase:** 3 - Backend & Persistence
 > **Group:** Database
-> **Status:** Not Started
+> **Status:** Completed
 > **Dependencies:** Phase 2 complete
 
 ## Objective
@@ -20,12 +20,18 @@ Install and initialize Convex, configure local environment variables, and create
 
 ## Acceptance Criteria
 
-- [ ] Convex package is installed and package scripts are documented.
-- [ ] `convex/` exists with a minimal schema/functions structure.
-- [ ] Environment variable requirements are documented without committing secrets.
+- [x] Convex package is installed and package scripts are documented.
+- [x] `convex/` exists with a minimal schema/functions structure.
+- [x] Environment variable requirements are documented without committing secrets.
 - [ ] `npx convex codegen` can run locally after initialization.
-- [ ] `convex/_generated/` exists and is tracked.
-- [ ] Existing app tests still run without requiring a live Convex deployment.
+- [x] `convex/_generated/` exists and is tracked.
+- [x] Existing app tests still run without requiring a live Convex deployment.
+
+## Completion Notes
+
+- Convex, `tsx`, package scripts, `convex/`, `.env.example`, and generated API
+  stubs were added.
+- `npx convex codegen` is blocked until `CONVEX_DEPLOYMENT` is configured.
 
 ## Preliminary Files
 

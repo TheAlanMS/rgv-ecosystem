@@ -2,7 +2,7 @@
 
 > **Phase:** 3 - Backend & Persistence
 > **Group:** Database
-> **Status:** Not Started
+> **Status:** Completed
 > **Dependencies:** p3-database-1b-convex-schema-models
 
 ## Objective
@@ -19,11 +19,11 @@ Create an idempotent Convex import path that loads the existing static seed data
 
 ## Acceptance Criteria
 
-- [ ] Import validates static source data before writing.
-- [ ] Import is idempotent and does not duplicate records.
-- [ ] Imported records preserve ordering where UI behavior depends on ordering.
-- [ ] Import reports counts for actors, pillars, gaps, roles, and journeys.
-- [ ] A failed import leaves enough logs/context to identify the bad record.
+- [x] Import validates static source data before writing.
+- [x] Import is idempotent and does not duplicate records.
+- [x] Imported records preserve ordering where UI behavior depends on ordering.
+- [x] Import reports counts for actors, pillars, gaps, roles, and journeys.
+- [x] A failed import leaves enough logs/context to identify the bad record.
 
 ## Preliminary Files
 

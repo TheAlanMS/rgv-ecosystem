@@ -2,7 +2,7 @@
 
 > **Phase:** 3 - Backend & Persistence
 > **Group:** Database
-> **Status:** Not Started
+> **Status:** Completed
 > **Dependencies:** p3-database-1a-convex-init
 
 ## Objective
@@ -20,11 +20,11 @@ Define Convex tables and validators that mirror the existing Zod schemas for Act
 
 ## Acceptance Criteria
 
-- [ ] Convex schema preserves all fields needed by existing Zod schemas.
-- [ ] Convex schema includes submission, correction, gap flag, moderation status, reviewer notes, and timestamps.
-- [ ] Public lookup fields have indexes.
-- [ ] Schema names and field names are aligned with existing TypeScript domain language.
-- [ ] Data that remains intentionally static is documented.
+- [x] Convex schema preserves all fields needed by existing Zod schemas.
+- [x] Convex schema includes submission, correction, gap flag, moderation status, reviewer notes, and timestamps.
+- [x] Public lookup fields have indexes.
+- [x] Schema names and field names are aligned with existing TypeScript domain language.
+- [x] Data that remains intentionally static is documented.
 
 ## Preliminary Files
 

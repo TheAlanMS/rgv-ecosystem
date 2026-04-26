@@ -2,7 +2,7 @@
 
 > **Phase:** 3 - Backend & Persistence
 > **Group:** Database
-> **Status:** Not Started
+> **Status:** Completed
 > **Dependencies:** p3-database-2b-query-migration
 
 ## Objective
@@ -19,12 +19,12 @@ Ensure Zod schemas remain the validation layer on top of Convex documents before
 
 ## Acceptance Criteria
 
-- [ ] Convex actor documents map to `Actor` and pass `ActorSchema`.
-- [ ] Convex pillar documents map to `Pillar` and pass `PillarSchema`.
-- [ ] Convex gap documents map to `Gap` and pass `GapSchema`.
-- [ ] Convex role and journey documents map to existing `Role` and `Journey` shapes.
-- [ ] Invalid Convex documents fail loudly at the validation bridge, not inside UI components.
-- [ ] Public exports and API wrappers use validated domain objects.
+- [x] Convex actor documents map to `Actor` and pass `ActorSchema`.
+- [x] Convex pillar documents map to `Pillar` and pass `PillarSchema`.
+- [x] Convex gap documents map to `Gap` and pass `GapSchema`.
+- [x] Convex role and journey documents map to existing `Role` and `Journey` shapes.
+- [x] Invalid Convex documents fail loudly at the validation bridge, not inside UI components.
+- [x] Public exports and API wrappers use validated domain objects.
 
 ## Preliminary Files
 
