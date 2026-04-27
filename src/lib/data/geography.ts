@@ -34,6 +34,7 @@ export const COUNTY_DATA: readonly CountyInfo[] = [
       "Edinburg",
       "Mission",
       "Pharr",
+      "Alton",
       "Weslaco",
       "Donna",
       "Alamo",

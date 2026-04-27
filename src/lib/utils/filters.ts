@@ -153,6 +153,9 @@ function compareActors(left: Actor, right: Actor, field: SortField): number {
     case "recentlyAdded":
       return left.dateAdded.localeCompare(right.dateAdded);
     case "pillar":
-      return Math.min(...left.pillars) - Math.min(...right.pillars);
+      return (
+        (left.pillars.length > 0 ? Math.min(...left.pillars) : 99) -
+        (right.pillars.length > 0 ? Math.min(...right.pillars) : 99)
+      );
   }
 }

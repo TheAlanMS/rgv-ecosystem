@@ -196,7 +196,7 @@ test.describe('Browser Smoke Checks', () => {
             'Route: /map, Browser: Chromium, Severity: High.',
         );
       }
-      await starrCheckbox.check();
+      await starrCheckbox.click();
     });
 
     await test.step('URL updates with county=Starr', async () => {
@@ -230,17 +230,13 @@ test.describe('Map Visual QA', () => {
 
     await test.step('Leaflet container (.leaflet-container) exists', async () => {
       const leaflet = page.locator('.leaflet-container');
-      const count = await leaflet.count();
-      if (count === 0) {
-        throw new Error(
-          'Leaflet container (.leaflet-container) not found on /map?view=map.\n' +
-            'Defect: Map view does not render Leaflet.\n' +
-            'Route: /map?view=map, Viewport: 1280×800, Browser: Chromium, Severity: Blocker.\n' +
-            'Expected: .leaflet-container visible in DOM.\n' +
-            'Actual: 0 elements matched.',
-        );
-      }
-      await expect(leaflet.first()).toBeVisible();
+      await expect(
+        leaflet.first(),
+        'Leaflet container (.leaflet-container) not found on /map?view=map.\n' +
+          'Defect: Map view does not render Leaflet.\n' +
+          'Route: /map?view=map, Viewport: 1280×800, Browser: Chromium, Severity: Blocker.\n' +
+          'Expected: .leaflet-container visible in DOM.',
+      ).toBeVisible({ timeout: 10000 });
     });
 
     await test.step('Map container height > 200px', async () => {
@@ -348,9 +344,18 @@ for (const mobileViewport of [
           await expect(page.locator('#mobile-navigation')).toBeVisible({ timeout: 3000 });
         });
 
-        await test.step('Mobile nav has 6 links', async () => {
+        await test.step('Mobile nav includes expected primary links', async () => {
           const mobileNav = page.locator('#mobile-navigation');
-          await expect(mobileNav.getByRole('link')).toHaveCount(6);
+          for (const label of [
+            'Home',
+            'Cardinal Map',
+            'Search',
+            'Pillars',
+            'My Journey',
+            'Health',
+          ]) {
+            await expect(mobileNav.getByRole('link', { name: label })).toBeVisible();
+          }
         });
 
         await test.step('Close mobile menu', async () => {

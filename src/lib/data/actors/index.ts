@@ -10,6 +10,7 @@ import { PILLAR_07_ACTORS } from "./pillar-07-incubators-accelerators";
 import { PILLAR_08_ACTORS } from "./pillar-08-advocacy-policy";
 import { PILLAR_09_ACTORS } from "./pillar-09-shared-platform";
 import { PILLAR_10_ACTORS } from "./pillar-10-governance-accountability";
+import { QA_UPDATE_ACTORS } from "./qa-update-actors";
 
 // Re-export per-pillar arrays
 export {
@@ -23,6 +24,7 @@ export {
   PILLAR_08_ACTORS,
   PILLAR_09_ACTORS,
   PILLAR_10_ACTORS,
+  QA_UPDATE_ACTORS,
 };
 
 // Merge all pillar arrays and deduplicate by id
@@ -37,6 +39,7 @@ const allPillarArrays: Actor[][] = [
   PILLAR_08_ACTORS,
   PILLAR_09_ACTORS,
   PILLAR_10_ACTORS,
+  QA_UPDATE_ACTORS,
 ];
 
 const seen = new Set<string>();

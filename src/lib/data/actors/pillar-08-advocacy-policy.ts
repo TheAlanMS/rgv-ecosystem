@@ -85,6 +85,7 @@ export const PILLAR_08_ACTORS: Actor[] = withActorCoordinates([
     ],
     whoTheyServe: ["Founders", "Policy leaders", "EDOs"],
     status: "Active",
+    websiteUrl: "https://www.cameroncountytx.gov/",
     dateAdded: "2026-04-22",
     lastVerified: "2026-04-22",
     verifiedBy: "system",

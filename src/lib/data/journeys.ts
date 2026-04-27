@@ -46,7 +46,7 @@ const journeys: Journey[] = [
         label: "Learn & find your people",
         pillars: [4, 6],
         strategy:
-          "UTRGV, STC, TSTC, and FLI are your starting points. Don't just take classes — join communities. Valley Young Professionals and the FLI Ambassador Program connect you to people who are building real things right now.",
+          "UTRGV, STC, TSTC, and FLI are your starting points. Don't just take classes — join communities. FLI Ambassador Program and founder peer groups connect you to people who are building real things right now.",
       },
       {
         base: "2nd Base",
@@ -216,7 +216,7 @@ const journeys: Journey[] = [
         label: "Show up before you pitch",
         pillars: [6, 9],
         strategy:
-          "Join the chambers, Valley Young Professionals, and FLI's community. Get listed on the ecosystem map. Earn trust by being present and useful long before you ask for business. The RGV ecosystem rewards consistent, visible contribution.",
+          "Join the chambers, FLI's community, and founder peer groups. Get listed on the ecosystem map. Earn trust by being present and useful long before you ask for business. The RGV ecosystem rewards consistent, visible contribution.",
       },
       {
         base: "2nd Base",

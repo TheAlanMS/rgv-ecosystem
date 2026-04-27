@@ -38,7 +38,7 @@ export function SiteHeader() {
       <Shell>
         <div className="flex items-end justify-between gap-3 pb-4">
           <div className="min-w-0">
-            <div className="font-heading text-[20px] font-bold tracking-tight text-gold sm:text-[22px]">
+            <div className="font-heading text-[20px] font-bold tracking-tight text-accent sm:text-[22px]">
               RGV Innovation Ecosystem
             </div>
             <div className="mt-0.5 text-xs leading-snug tracking-wide text-text-muted">
@@ -53,7 +53,9 @@ export function SiteHeader() {
         <div className="flex items-center justify-between gap-2">
           <button
             type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-border2 text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary md:hidden"
+            className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-border2 text-text-secondary transition-colors hover:bg-surface2 hover:text-text-primary md:hidden ${
+              isMenuOpen ? "relative z-50" : ""
+            }`}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation"
             aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
@@ -87,7 +89,7 @@ export function SiteHeader() {
                 <SignUpButton mode="modal">
                   <button
                     type="button"
-                    className="inline-flex min-h-9 items-center justify-center rounded-lg bg-gold px-3 text-xs font-semibold text-bg transition-colors hover:bg-gold2"
+                    className="inline-flex min-h-9 items-center justify-center rounded-lg bg-accent px-3 text-xs font-semibold text-ink transition-colors hover:bg-accent2"
                   >
                     Sign up
                   </button>
@@ -105,7 +107,8 @@ export function SiteHeader() {
             <button
               type="button"
               className="fixed inset-0 z-30 cursor-default bg-bg/70 md:hidden"
-              aria-label="Close navigation"
+              aria-hidden="true"
+              tabIndex={-1}
               onClick={() => setIsMenuOpen(false)}
             />
             <div
@@ -133,7 +136,7 @@ export function SiteHeader() {
                     <SignUpButton mode="modal">
                       <button
                         type="button"
-                        className="inline-flex min-h-10 items-center justify-center rounded-lg bg-gold px-3 text-xs font-semibold text-bg"
+                        className="inline-flex min-h-10 items-center justify-center rounded-lg bg-accent px-3 text-xs font-semibold text-ink"
                       >
                         Sign up
                       </button>

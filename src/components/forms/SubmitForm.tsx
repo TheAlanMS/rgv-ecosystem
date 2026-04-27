@@ -28,7 +28,7 @@ const submissionTypes: Array<{ value: SubmissionType; label: string }> = [
 ];
 
 const baseInput =
-  "w-full rounded-[8px] border border-border-default bg-background px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-gold";
+  "w-full rounded-[8px] border border-border-default bg-background px-3 py-2 text-sm text-text-primary outline-none transition-colors focus:border-accent";
 
 function lines(value: string) {
   return value
@@ -259,7 +259,7 @@ export function SubmitForm() {
         <button
           type="submit"
           disabled={status === "submitting" || status === "success"}
-          className="rounded-[8px] bg-text-primary px-4 py-2 text-sm font-semibold text-background transition-colors hover:bg-text-secondary disabled:cursor-not-allowed disabled:opacity-60"
+          className="rounded-[8px] bg-accent px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-accent2 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === "submitting" ? "Submitting..." : "Submit for review"}
         </button>

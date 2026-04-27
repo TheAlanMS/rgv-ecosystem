@@ -5,55 +5,58 @@
 
 :root {
   /* Backgrounds */
-  --bg: #0c1810;
-  --surface: #111f16;
-  --surface2: #172419;
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --surface2: #eef3f8;
 
   /* Borders */
-  --border: #1f3328;
-  --border2: #2a4437;
+  --border: #d8e2ec;
+  --border2: #b7c7d6;
 
   /* Accent */
-  --gold: #d4a84b;
-  --gold2: #f0c96a;
+  --gold: #b7791f;
+  --gold2: #8a5a10;
+  --accent: #0f6fae;
+  --accent2: #0b5688;
+  --ink: #ffffff;
 
   /* Ecosystem */
-  --green: #3d9e66;
-  --green2: #52c484;
-  --terra: #c4583a;
-  --terra2: #e07050;
+  --green: #047857;
+  --green2: #065f46;
+  --terra: #c2410c;
+  --terra2: #9a3412;
 
   /* Text hierarchy */
-  --text-primary: #f0ece0;
-  --text-secondary: #a8b8a0;
-  --text-muted: #607868;
+  --text-primary: #102033;
+  --text-secondary: #334d63;
+  --text-muted: #5f7184;
 
   /* Semantic */
-  --info: #4a9ed4;
-  --warn: #d4a84b;
-  --danger: #c45838;
-  --success: #3d9e66;
+  --info: #0f6fae;
+  --warn: #b7791f;
+  --danger: #b42318;
+  --success: #047857;
 
   /* Pillar group colors */
-  --supply-bg: rgba(74, 158, 212, 0.15);
-  --supply-fg: #6db8e4;
-  --supply-border: rgba(74, 158, 212, 0.25);
+  --supply-bg: #e6f2fb;
+  --supply-fg: #0b5688;
+  --supply-border: #9bc9e8;
 
-  --engine-bg: rgba(61, 158, 102, 0.15);
-  --engine-fg: #52c484;
-  --engine-border: rgba(61, 158, 102, 0.25);
+  --engine-bg: #e2f4ed;
+  --engine-fg: #065f46;
+  --engine-border: #8bcdb7;
 
-  --demand-bg: rgba(212, 168, 75, 0.15);
-  --demand-fg: #e8c070;
-  --demand-border: rgba(212, 168, 75, 0.25);
+  --demand-bg: #fff3d6;
+  --demand-fg: #8a5a10;
+  --demand-border: #e7c56e;
 
-  --infra-bg: rgba(96, 120, 104, 0.2);
-  --infra-fg: #a8b8a0;
-  --infra-border: rgba(96, 120, 104, 0.35);
+  --infra-bg: #eeeafb;
+  --infra-fg: #5b3fb0;
+  --infra-border: #b8a7ea;
 
-  --gap-bg: rgba(196, 88, 56, 0.18);
-  --gap-fg: #e07060;
-  --gap-border: rgba(196, 88, 56, 0.3);
+  --gap-bg: #fde8df;
+  --gap-fg: #9a3412;
+  --gap-border: #efaa91;
 }
 
 @theme inline {
@@ -64,6 +67,10 @@
   --color-border2: var(--border2);
   --color-gold: var(--gold);
   --color-gold2: var(--gold2);
+  --color-accent: var(--accent);
+  --color-accent2: var(--accent2);
+  --color-ink: var(--ink);
+  --color-background: var(--surface);
   --color-green: var(--green);
   --color-green2: var(--green2);
   --color-terra: var(--terra);
@@ -106,9 +113,9 @@ input {
 }
 
 .ecosystem-marker span {
-  border: 2px solid #f8fafc;
+  border: 2px solid #ffffff;
   border-radius: 999px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 18px rgba(16, 32, 51, 0.28);
   display: block;
 }
 
@@ -125,9 +132,9 @@ input {
 .ecosystem-gap-marker span {
   align-items: center;
   background: var(--terra);
-  border: 2px dashed #f8fafc;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
-  color: #f8fafc;
+  border: 2px dashed #ffffff;
+  box-shadow: 0 8px 18px rgba(16, 32, 51, 0.28);
+  color: #ffffff;
   display: flex;
   font-size: 0.75rem;
   font-weight: 700;
@@ -142,6 +149,6 @@ input {
 
 .ecosystem-popup .leaflet-popup-content-wrapper,
 .ecosystem-popup .leaflet-popup-tip {
-  background: #111827;
-  color: #f8fafc;
+  background: #ffffff;
+  color: var(--text-primary);
 }

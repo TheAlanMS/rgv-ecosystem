@@ -13,16 +13,20 @@ import {
 import { ActorSchema } from "@/lib/types";
 
 describe("actor queries", () => {
+  const publicActors = ALL_ACTORS.filter(
+    (actor) => actor.publicVisibility !== "internal",
+  );
+
   it("returns all actors and counts from the canonical dataset", () => {
-    expect(getAllActors()).toBe(ALL_ACTORS);
-    expect(getActorCount()).toBe(ALL_ACTORS.length);
+    expect(getAllActors()).toEqual(publicActors);
+    expect(getActorCount()).toBe(publicActors.length);
     expect(getActiveActorCount()).toBe(
-      ALL_ACTORS.filter((actor) => actor.status === "Active").length,
+      publicActors.filter((actor) => actor.status === "Active").length,
     );
   });
 
   it("looks up actors by slug", () => {
-    const actor = ALL_ACTORS[0];
+    const actor = publicActors[0];
 
     expect(actor).toBeDefined();
     expect(getActorBySlug(actor!.slug)).toBe(actor);
@@ -31,21 +35,34 @@ describe("actor queries", () => {
 
   it("filters actors by pillar, county, and status", () => {
     expect(getActorsByPillar(1)).toEqual(
-      ALL_ACTORS.filter((actor) => actor.pillars.includes(1)),
+      publicActors.filter((actor) => actor.pillars.includes(1)),
     );
     expect(getActorsByPillar(999)).toEqual([]);
     expect(getActorsByCounty("Hidalgo")).toEqual(
-      ALL_ACTORS.filter((actor) => actor.county === "Hidalgo"),
+      publicActors.filter((actor) => actor.county === "Hidalgo"),
     );
     expect(getActorsByStatus("Active")).toEqual(
-      ALL_ACTORS.filter((actor) => actor.status === "Active"),
+      publicActors.filter((actor) => actor.status === "Active"),
     );
+  });
+
+  it("hides internal placeholder-heavy QA actors from public actor queries", () => {
+    expect(getAllActors().every((actor) => actor.publicVisibility !== "internal")).toBe(
+      true,
+    );
+    expect(
+      getActorBySlug("qa-001-ebridge-center-for-business-and-commercialization"),
+    ).toBeUndefined();
+    expect(getAllActors().some((actor) => actor.name === "RGV Partnership")).toBe(
+      true,
+    );
+    expect(getAllActors().some((actor) => actor.name === "Fem City")).toBe(true);
   });
 
   it("returns gap actors as schema-valid actor records", () => {
     const gaps = getGapActors();
 
-    expect(gaps).toEqual(ALL_ACTORS.filter((actor) => actor.status === "Gap"));
+    expect(gaps).toEqual(publicActors.filter((actor) => actor.status === "Gap"));
     expect(gaps.every((actor) => ActorSchema.safeParse(actor).success)).toBe(true);
   });
 });

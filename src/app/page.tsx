@@ -16,7 +16,7 @@ export default function HomePage() {
       <Shell>
         {/* Hero */}
         <div className="text-center py-10 mb-8">
-          <h1 className="font-heading text-3xl font-bold text-gold mb-3 tracking-tight">
+          <h1 className="font-heading text-3xl font-bold text-accent mb-3 tracking-tight">
             RGV Innovation Ecosystem
           </h1>
           <p className="text-text-secondary text-sm mb-1">
@@ -29,7 +29,7 @@ export default function HomePage() {
           <div className="flex flex-col justify-center gap-3 sm:flex-row">
             <Link
               href="/map"
-              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-gold px-7 text-[13px] font-semibold tracking-wide text-bg transition-colors hover:bg-gold2 font-heading"
+              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-accent px-7 text-[13px] font-semibold tracking-wide text-ink transition-colors hover:bg-accent2 font-heading"
             >
               Explore the Map
             </Link>

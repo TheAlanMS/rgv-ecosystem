@@ -86,6 +86,11 @@ function getActorSearchFields(actor: Actor): string[] {
     actor.stagesServed?.join(" ") ?? "",
     actor.industryFocus?.join(" ") ?? "",
     actor.rgvConnection ?? "",
+    actor.websiteUrl ?? "",
+    actor.thumbnailUrl ?? "",
+    actor.pillarAssignments?.join(" ") ?? "",
+    actor.internalNotes ?? "",
+    actor.qaStatus ?? "",
     actorPillars
       .map((pillar) =>
         [

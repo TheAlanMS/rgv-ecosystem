@@ -40,6 +40,26 @@ describe("actor seed data", () => {
     expect(new Set(ALL_ACTORS.map((actor) => actor.slug)).size).toBe(
       ALL_ACTORS.length,
     );
+    expect(new Set(ALL_ACTORS.map((actor) => actor.name)).size).toBe(
+      ALL_ACTORS.length,
+    );
+  });
+
+  it("excludes actors explicitly removed by the QA update", () => {
+    const actorNames = new Set(ALL_ACTORS.map((actor) => actor.name));
+
+    expect(actorNames.has("CBP / Border Operations")).toBe(false);
+    expect(actorNames.has("1909 Community")).toBe(false);
+    expect(actorNames.has("Valley Young Professionals")).toBe(false);
+  });
+
+  it("keeps user-confirmed canonical duplicate names only", () => {
+    const actorNames = new Set(ALL_ACTORS.map((actor) => actor.name));
+
+    expect(actorNames.has("RGV Partnership")).toBe(true);
+    expect(actorNames.has("Rio Grande Valley Partnership")).toBe(false);
+    expect(actorNames.has("Business Development Fund of Texas")).toBe(true);
+    expect(actorNames.has("Business Development Fund")).toBe(false);
   });
 
   it("uses valid counties and pillar references", () => {

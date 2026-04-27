@@ -7,6 +7,15 @@ const CoordinatesSchema = z.object({
 });
 
 const CoordinateSourceSchema = z.enum(["exact", "city-center", "representative"]);
+const PublicVisibilitySchema = z.enum(["public", "internal"]);
+const QaStatusSchema = z.enum([
+  "active",
+  "needs_url",
+  "needs_pillar_review",
+  "needs_thumbnail",
+  "future_contact_data_needed",
+  "needs_removal_review",
+]);
 
 export const ActorSchema = z
   .object({
@@ -15,7 +24,7 @@ export const ActorSchema = z
     name: z.string().min(1),
     slug: z.string().min(1),
     orgType: OrgTypeSchema,
-    pillars: z.array(z.number().int().min(1).max(10)).min(1),
+    pillars: z.array(z.number().int().min(1).max(10)),
     city: z.string().min(1),
     county: CountySchema,
     description: z.string().min(1),
@@ -27,9 +36,34 @@ export const ActorSchema = z
     stagesServed: z.array(StageSchema).optional(),
 
     // Optional
-    websiteUrl: z.string().url().optional(),
+    pillarAssignments: z.array(z.string()).optional(),
+    websiteUrl: z.string().min(1).optional(),
     applyUrl: z.string().url().optional(),
+    thumbnailUrl: z.string().min(1).optional(),
+    internalNotes: z.string().optional(),
+    qaStatus: QaStatusSchema.optional(),
+    publicVisibility: PublicVisibilitySchema.optional(),
     contactEmail: z.string().email().optional(),
+    primaryContactName: z.string().optional(),
+    primaryContactTitle: z.string().optional(),
+    primaryContactEmail: z.string().optional(),
+    primaryContactPhone: z.string().optional(),
+    organizationAddress: z.string().optional(),
+    region: z.string().optional(),
+    state: z.string().optional(),
+    country: z.string().optional(),
+    contactSourceUrl: z.string().optional(),
+    relationshipOwner: z.string().optional(),
+    ecosystemRole: z.string().optional(),
+    servicesOffered: z.array(z.string()).optional(),
+    audienceServed: z.array(z.string()).optional(),
+    eligibilityRequirements: z.string().optional(),
+    programsOffered: z.array(z.string()).optional(),
+    eventsHosted: z.array(z.string()).optional(),
+    fundingAvailable: z.string().optional(),
+    partnershipOpportunities: z.string().optional(),
+    dataConfidenceScore: z.number().min(0).max(1).optional(),
+    verificationStatus: z.string().optional(),
     industryFocus: z.array(z.string()).optional(),
     coordinates: CoordinatesSchema.optional(),
     coordinateSource: CoordinateSourceSchema.optional(),

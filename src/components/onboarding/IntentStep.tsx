@@ -12,6 +12,7 @@ export function IntentStep({ intents, onSelectIntent }: IntentStepProps) {
         <button
           key={intent.id}
           type="button"
+          aria-pressed="false"
           onClick={() => onSelectIntent(intent.id)}
           className="min-h-28 rounded-lg border border-border-default bg-surface p-3 text-left transition-colors hover:border-border2 hover:bg-surface2"
         >
