@@ -86,7 +86,7 @@ Check both visual appearance and interaction. A page that looks correct but cann
 
 | Route | Desktop | Tablet | 390px | 320px | Notes |
 |-------|---------|--------|-------|-------|-------|
-| `/` |  |  |  |  | Role + intent onboarding, header, footer |
+| `/` |  |  |  | Pass | Role + intent onboarding, header, footer |
 | `/search` |  |  |  |  | Blank-query prompt |
 | `/search?q=capital` |  |  |  |  | Actor/pillar/gap grouped results |
 | `/search?q=starr` |  |  |  |  | Gap result visibility |
@@ -298,3 +298,58 @@ Phase 2 browser/mobile visual QA can be marked complete when:
 - blocking and high-severity visual defects are fixed and rechecked
 - the final results are summarized in `implementation/phase2/phase2-progress.md`
 
+## Defects Found — 2026-04-26 Playwright Run
+
+The following defects were surfaced by the automated Playwright visual QA run.
+
+---
+
+### [/map?view=map] Leaflet map container does not render
+
+- Viewport: 1280 x 800
+- Browser: Chromium
+- Route: `/map?view=map`
+- Severity: Blocker
+- Screenshot: `implementation/phase2/audits/screenshots/laptop-map_view_map.png`
+- Expected: `.leaflet-container` element visible in DOM when `?view=map` query param is set.
+- Actual: 0 elements matching `.leaflet-container` found. Map view renders without the Leaflet container.
+- Notes: Likely a Next.js SSR/dynamic-import issue. Wrap the Leaflet map component in `next/dynamic` with `{ ssr: false }`.
+
+---
+
+### [/] Onboarding intent step does not expose `button[aria-pressed]`
+
+- Viewport: 1280 x 800
+- Browser: Chromium
+- Route: `/`
+- Severity: High
+- Screenshot: `implementation/phase2/audits/screenshots/laptop-index.png`
+- Expected: After selecting a role, the intent step renders `<button aria-pressed>` elements inside the onboarding region.
+- Actual: `button[aria-pressed]` not found within the onboarding region after role selection.
+- Notes: `IntentStep` component likely does not apply `aria-pressed` to its option buttons. Add `aria-pressed` for accessibility and automation.
+
+---
+
+### [/map] County checkbox click does not change state
+
+- Viewport: 1280 x 800
+- Browser: Chromium
+- Route: `/map`
+- Severity: High
+- Screenshot: `implementation/phase2/audits/screenshots/laptop-map.png`
+- Expected: Checking the Starr county checkbox appends `county=Starr` to the URL.
+- Actual: Playwright's `locator.check()` reported "Clicking the checkbox did not change its state." The checkbox is visible and enabled but toggling has no effect.
+- Notes: The `<input type="checkbox">` in FilterBar is a controlled component. Check that the `onChange` handler correctly fires and the router push is called.
+
+---
+
+### [/] Mobile nav backdrop shares "Close navigation" label with X button
+
+- Viewport: 390 x 844 and 320 x 720
+- Browser: Chromium
+- Route: `/`
+- Severity: Medium
+- Screenshot: `implementation/phase2/audits/screenshots/mobile-390-index.png`
+- Expected: Exactly one element matches `aria-label="Close navigation"` when the mobile menu is open.
+- Actual: Two elements match — the X icon button and the full-screen backdrop overlay both carry `aria-label="Close navigation"`. Playwright strict mode rejects the ambiguous locator.
+- Notes: The backdrop overlay is a visual affordance that closes the drawer. It should use `aria-hidden="true"` or a different label (e.g., `aria-label="Dismiss navigation"`) to avoid the ambiguity.
