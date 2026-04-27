@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Syne, DM_Sans } from "next/font/google";
+import { ConvexClerkProvider } from "@/components/auth/ConvexClerkProvider";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import "./globals.css";
@@ -33,9 +35,13 @@ export default function RootLayout({
       className={`${syne.variable} ${dmSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-text-primary font-body">
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+        <ClerkProvider>
+          <ConvexClerkProvider>
+            <SiteHeader />
+            {children}
+            <SiteFooter />
+          </ConvexClerkProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

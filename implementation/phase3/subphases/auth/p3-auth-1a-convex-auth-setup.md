@@ -2,7 +2,7 @@
 
 > **Phase:** 3 - Backend & Persistence
 > **Group:** Auth
-> **Status:** Not Started
+> **Status:** In Progress
 > **Dependencies:** p3-api-2a-submit-form
 
 ## Objective
@@ -20,10 +20,16 @@ Install and configure authentication for admin/moderator access, with user ident
 
 ## Acceptance Criteria
 
-- [ ] Auth provider is compatible with Convex function authorization.
-- [ ] Admin and moderator roles are represented in Convex.
-- [ ] Unauthenticated users cannot access admin routes.
+- [x] Auth provider is compatible with Convex function authorization.
+- [x] Admin and moderator roles are represented in Convex.
+- [x] Unauthenticated users cannot access admin routes.
 - [ ] Convex admin mutations can assert user role server-side.
+
+## Implementation Notes
+
+- V1 uses Clerk with the Convex Clerk integration.
+- Clerk app keys belong in `.env.local`; `CLERK_JWT_ISSUER_DOMAIN` must also be set on the Convex development deployment so `convex/auth.config.ts` can validate Clerk tokens.
+- The first admin account is `thealanms@gmail.com`; role seeding and Convex-side role assertions remain for `p3-auth-2a-role-guards`.
 
 ## Preliminary Files
 

@@ -39,10 +39,10 @@ api  ####################  3 / 3
 
 | Subphase | Status | Agent | Commit |
 |----------|--------|-------|--------|
-| p3-auth-1a-convex-auth-setup | Not Started | - | - |
-| p3-auth-1b-admin-routes | Not Started | - | - |
+| p3-auth-1a-convex-auth-setup | In Progress | Codex | - |
+| p3-auth-1b-admin-routes | In Progress | Codex | - |
 | p3-auth-2a-role-guards | Not Started | - | - |
 
 ```text
-auth  --------------------  0 / 3
+auth  --------------------  0 / 3 complete
 ```

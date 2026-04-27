@@ -1,17 +1,20 @@
 "use client";
 
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { HeaderSearch } from "@/components/search/HeaderSearch";
 import { NavLink } from "./NavLink";
 import { Shell } from "./Shell";
 
 const NAV_LINKS = [
+  { href: "/", label: "Home" },
   { href: "/map", label: "Cardinal Map" },
   { href: "/search", label: "Search" },
   { href: "/pillars", label: "Pillars" },
   { href: "/journeys", label: "My Journey" },
   { href: "/ecosystem-health", label: "Health" },
   { href: "/governance", label: "Governance" },
+  { href: "/admin", label: "Admin" },
 ];
 
 export function SiteHeader() {
@@ -69,7 +72,32 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <HeaderSearch />
+          <div className="flex items-center gap-2">
+            <HeaderSearch />
+            <div className="hidden items-center gap-2 sm:flex">
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <button
+                    type="button"
+                    className="inline-flex min-h-9 items-center justify-center rounded-lg border border-border2 px-3 text-xs font-medium text-text-muted transition-colors hover:border-text-muted hover:text-text-primary"
+                  >
+                    Sign in
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button
+                    type="button"
+                    className="inline-flex min-h-9 items-center justify-center rounded-lg bg-gold px-3 text-xs font-semibold text-bg transition-colors hover:bg-gold2"
+                  >
+                    Sign up
+                  </button>
+                </SignUpButton>
+              </Show>
+              <Show when="signed-in">
+                <UserButton />
+              </Show>
+            </div>
+          </div>
         </div>
 
         {isMenuOpen ? (
@@ -91,6 +119,33 @@ export function SiteHeader() {
                   </div>
                 ))}
               </nav>
+              <div className="mt-2 border-t border-border-default pt-2">
+                <Show when="signed-out">
+                  <div className="grid grid-cols-2 gap-2">
+                    <SignInButton mode="modal">
+                      <button
+                        type="button"
+                        className="inline-flex min-h-10 items-center justify-center rounded-lg border border-border2 px-3 text-xs font-medium text-text-muted"
+                      >
+                        Sign in
+                      </button>
+                    </SignInButton>
+                    <SignUpButton mode="modal">
+                      <button
+                        type="button"
+                        className="inline-flex min-h-10 items-center justify-center rounded-lg bg-gold px-3 text-xs font-semibold text-bg"
+                      >
+                        Sign up
+                      </button>
+                    </SignUpButton>
+                  </div>
+                </Show>
+                <Show when="signed-in">
+                  <div className="flex items-center justify-end">
+                    <UserButton />
+                  </div>
+                </Show>
+              </div>
             </div>
           </>
         ) : null}
