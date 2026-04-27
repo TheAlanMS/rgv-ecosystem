@@ -1,5 +1,5 @@
 import { ConvexHttpClient } from "convex/browser";
-import { internal } from "../convex/_generated/api";
+import { api } from "../convex/_generated/api";
 import {
   ActorSchema,
   GapSchema,
@@ -29,12 +29,8 @@ const journeys = ALL_JOURNEYS.map((journey) => JourneySchema.parse(journey));
 
 const client = new ConvexHttpClient(convexUrl);
 
-const importMutation = internal.importSeedData.upsertSeedData as unknown as Parameters<
-  ConvexHttpClient["mutation"]
->[0];
-
 void (async () => {
-  const result = await client.mutation(importMutation, {
+  const result = await client.mutation(api.importSeedData.upsertSeedData, {
     actors,
     pillars,
     gaps,

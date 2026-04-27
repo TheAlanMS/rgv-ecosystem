@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { internalMutation } from "./_generated/server";
+import { internalMutation, mutation } from "./_generated/server";
 import type { MutationCtx } from "./_generated/server";
 
 const actorValidator = v.any();
@@ -43,7 +43,7 @@ async function replaceByNaturalKey(
   await ctx.db.insert(tableName, document as never);
 }
 
-export const upsertSeedData = internalMutation({
+export const upsertSeedData = mutation({
   args: {
     actors: v.array(actorValidator),
     pillars: v.array(pillarValidator),
