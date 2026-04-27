@@ -33,12 +33,13 @@ const importMutation = internal.importSeedData.upsertSeedData as unknown as Para
   ConvexHttpClient["mutation"]
 >[0];
 
-const result = await client.mutation(importMutation, {
-  actors,
-  pillars,
-  gaps,
-  roles,
-  journeys,
-});
-
-console.log("Imported Convex seed data:", result);
+void (async () => {
+  const result = await client.mutation(importMutation, {
+    actors,
+    pillars,
+    gaps,
+    roles,
+    journeys,
+  });
+  console.log("Imported Convex seed data:", result);
+})();

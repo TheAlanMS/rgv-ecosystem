@@ -116,7 +116,7 @@ export const upsertSeedData = internalMutation({
 const ACTOR_URL_MAP: { name: string; url: string }[] = [
   { name: "eBridge Center for Business & Commercialization", url: "https://ebridgecenter.com/" },
   { name: "Brownsville Community Improvement Corporation", url: "https://brownsvillecic.com/" },
-  { name: "Greater Brownsville Incentives Corporation", url: "https://greaterbrownsville.com/" },
+  // "Greater Brownsville Incentives Corporation" — no matching actor in source files; URL retained for future data entry
   { name: "UTRGV Center for Innovation & Commercialization", url: "https://www.utrgv.edu/rcvcobe/center-for-innovation-and-commercialization/" },
   { name: "Brownsville Chamber", url: "https://brownsvillechamber.com/" },
   { name: "COSTEP", url: "https://riosouthtexasregion.com/" },
@@ -124,8 +124,8 @@ const ACTOR_URL_MAP: { name: string; url: string }[] = [
   { name: "Leadership Brownsville", url: "https://brownsvillechamber.com/leadership-brownsville/" },
   { name: "RGV Startup Week", url: "https://www.rgvstartup.com/" },
   { name: "StartUp Texas", url: "https://www.rgvstartup.com/" },
-  { name: "City of Brownsville, TX - Municipal Government", url: "https://www.brownsvilletx.gov/" },
-  { name: "Port of Brownsville, TX", url: "https://www.portofbrownsville.com/" },
+  { name: "City of Brownsville", url: "https://www.brownsvilletx.gov/" },
+  // "Port of Brownsville, TX" — no matching actor in source files; URL retained for future data entry
   { name: "Mitte Cultural District", url: "https://mitteculturaldistrict.org/" },
   { name: "RGV LEAD - Rio Grande Valley Linking Economic and Academic Development", url: "https://www.rgvlead.org/" },
   { name: "RGV FOCUS", url: "https://edtx.org/program/rgv-focus/" },
@@ -147,7 +147,7 @@ const ACTOR_URL_MAP: { name: string; url: string }[] = [
   { name: "ProMexico Industry", url: "https://www.promexicoindustry.com/" },
   { name: "Asociacion de Maquiladoras de Matamoros", url: "https://www.indexmatamoros.org.mx/" },
   { name: "South Texas Manufacturers Association", url: "https://stma-tx.org/" },
-  { name: "Rio Grande Valley Partnership", url: "https://rgvpartnership.com/" },
+  { name: "RGV Partnership", url: "https://rgvpartnership.com/" },
   { name: "Rio South Texas Economic Council", url: "https://riosouthtexasregion.com/" },
   { name: "Rio-South Texas Education & Community Develop", url: "https://rstef.org/" },
   { name: "Collaborative Action Board", url: "https://sph.uth.edu/research/centers/hispanic-health/tu-salud-si-cuenta/our-initiatives/collaborative-action-board" },
@@ -155,7 +155,7 @@ const ACTOR_URL_MAP: { name: string; url: string }[] = [
   { name: "Business Development Fund", url: "https://www.bdfoftexas.com/" },
   { name: "Texas Border Business", url: "https://texasborderbusiness.com/" },
   { name: "RGV Builders Association", url: "https://rgvba.org/" },
-  { name: "Brownsville SpaceX", url: "https://www.spacex.com/vehicles/starship" },
+  { name: "SpaceX / Starbase", url: "https://www.spacex.com/vehicles/starship" },
   { name: "Brownsville Public Utilities Board", url: "https://www.brownsville-pub.com/" },
   { name: "Brownsville Parks & Recreation Department", url: "https://www.brownsvilletx.gov/308/Parks-Recreation" },
   { name: "Brownsville Historical Association", url: "https://www.brownsvillehistory.org/" },
